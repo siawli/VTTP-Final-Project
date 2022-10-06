@@ -1,0 +1,32 @@
+.notLoggedIn {
+    /* border: 1px solid red; */
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px 48px 10px 35px;
+}
+
+.left {
+    display: flex;
+    align-items: center;
+}
+
+img {
+    width: 20%;
+    cursor: pointer;
+}
+
+button {
+    margin: auto 5px;
+}
+
+.loggedIn {
+    border: 1px solid red;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 48px 10px 35px;
+}
+
+
+

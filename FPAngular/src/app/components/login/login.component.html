@@ -1,0 +1,28 @@
+<div class="container">
+
+    <div id="left" class="sub-container">
+        <img src="/assets/login.jpeg">
+    </div>
+
+    <div id="right" class="sub-container">
+        <mat-card>
+            <mat-card-title>
+                Welcome back to  Master Kitchen
+            </mat-card-title>
+            <form [formGroup]="form" (ngSubmit)="processForm()">
+                <mat-form-field>
+                    <input matInput placeholder="Email" formControlName="email" required>
+                    <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                </mat-form-field>
+                <mat-form-field>
+                    <input matInput placeholder="Password" [type]="hide ? 'password' : 'text'"
+                        formControlName="password">
+                    <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                </mat-form-field>
+                <mat-error *ngIf="!userExists">Your email or password is incorrect. Please try again.</mat-error>
+                <p>New user? <span><a [routerLink]="['/signUp']">Sign up</a> here.</span></p>
+                <button mat-raised-button color="primary" [disabled]="form.invalid">Login</button>
+            </form>
+        </mat-card>
+    </div>
+</div>
