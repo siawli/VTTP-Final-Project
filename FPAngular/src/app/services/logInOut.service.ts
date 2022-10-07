@@ -33,15 +33,10 @@ export class LoginService {
       )
     }
 
-    successLogin(user: User, token: string) {
+    setCookie(user: User, token: string) {
       this.cookieSvc.set("username", user.username)
       this.cookieSvc.set("email", user.email)
       this.cookieSvc.set("token", token)
-      this.getLandingExplorePage()
-        .then(result => {
-          this.route.navigate([`masterKitchen/${user.username}/explore`])
-        })
-        .catch(error => console.info(">>>> error login in to explore page: " + error))
     }
 
     /*

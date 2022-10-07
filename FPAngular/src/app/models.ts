@@ -4,3 +4,16 @@ export interface User {
     password: string
 }
 
+export interface Post {
+    title: string,
+    description: string,
+    id: string,
+    likes: number
+    // image will be uploaded on spaces
+}
+
+export interface Ingredients {
+    quantity: string,
+    ingredient: string
+}
+

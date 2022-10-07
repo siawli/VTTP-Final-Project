@@ -1,3 +1,7 @@
+* {
+    font-size: 1rem;
+}
+
 .notLoggedIn {
     /* border: 1px solid red; */
     display: flex;
@@ -11,8 +15,12 @@
     align-items: center;
 }
 
+nav {
+    height: 70px;
+}
+
 img {
-    width: 20%;
+    width: 250px;
     cursor: pointer;
 }
 
@@ -21,7 +29,6 @@ button {
 }
 
 .loggedIn {
-    border: 1px solid red;
     display: flex;
     justify-content: space-between;
     align-items: center;

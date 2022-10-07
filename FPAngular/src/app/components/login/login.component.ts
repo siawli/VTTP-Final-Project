@@ -46,7 +46,14 @@ export class LoginComponent implements OnInit {
       .then(response => {
         let token = response.body?.token as string
         user.username = response.body.username;
-        this.loginSvc.successLogin(user, token)
+        this.cookieSvc.set("username", user.username)
+        this.cookieSvc.set("email", user.email)
+        this.cookieSvc.set("token", token)
+        this.loginSvc.getLandingExplorePage()
+        .then(result => {
+          this.route.navigate([`masterKitchen/explore`])
+        })
+        .catch(error => console.info(">>>> error login in to explore page: " + error))
       })
       .catch(error => {
         this.userExists = false;

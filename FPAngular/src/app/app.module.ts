@@ -22,6 +22,8 @@ import { JWTTokenService } from './services/jwt.service';
 import { AppCookieService } from './services/cookie.service';
 import { AuthorizeGuard } from './services/authorizeguard.service';
 import { UniversalAppInterceptor } from './services/httpinterceptor.service';
+import { SuccessComponent } from './components/login/success.component';
+import { UploadComponent } from './components/upload/upload.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { UniversalAppInterceptor } from './services/httpinterceptor.service';
     RegisterComponent,
     NavbarComponent,
     LandingComponent,
-    ExploreComponent
+    ExploreComponent,
+    SuccessComponent,
+    UploadComponent
   ],
   imports: [
     BrowserModule,

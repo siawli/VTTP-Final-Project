@@ -37,21 +37,12 @@ public class JwtAuthenticateRestController {
     @Autowired
     private UserService userSvc;
 
-    @GetMapping("/authenticate")
     @PostMapping("/authenticate")
-    public ResponseEntity<?> createAuthentication(@RequestBody Optional<JwtRequest> jwtRequest, HttpSession sess)
+    public ResponseEntity<?> createAuthentication(@RequestBody JwtRequest jwtRequest)
             throws Exception {
-        String email;
-        String password;
 
-        if (jwtRequest.isEmpty()) {
-            System.err.println(">>>>>empty request");
-            email = (String) sess.getAttribute("email");
-            password = (String) sess.getAttribute("password");
-        } else {
-            email = jwtRequest.get().getEmail();
-            password = jwtRequest.get().getPassword();
-        }
+        String email = jwtRequest.getEmail();
+        String password = jwtRequest.getPassword();
 
         try {
             System.out.println(">>>>> in /authenticate");

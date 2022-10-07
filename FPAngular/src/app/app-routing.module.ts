@@ -4,14 +4,34 @@ import { ExploreComponent } from './components/explore/explore.component';
 import { LandingComponent } from './components/login/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/login/register.component';
+import { FindRecipesComponent } from './components/search/find-recipes.component';
+import { ListRecipesComponent } from './components/search/list-recipes.component';
+import { RecipeDetailsComponent } from './components/search/recipe-details.component';
+import { UploadComponent } from './components/upload/upload.component';
 import { AuthorizeGuard } from './services/authorizeguard.service';
 
 const routes: Routes = [
   {path: '', component: LandingComponent},
   {path: 'signUp', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'masterKitchen/:username/explore', component: ExploreComponent, canActivate: [AuthorizeGuard]
-}
+  {path: 'masterKitchen/explore', component: ExploreComponent, canActivate: [AuthorizeGuard]},
+  {path: 'masterKitchen/upload', component: UploadComponent, canActivate: [AuthorizeGuard]},
+  {
+    path: 'masterKitchen/search',
+    component: FindRecipesComponent,
+    children: [
+      {
+        path: ':query',
+        component: ListRecipesComponent,
+        canActivate: [AuthorizeGuard]
+      },
+      {
+        path: 'recipe/:id',
+        component: RecipeDetailsComponent,
+        canActivate: [AuthorizeGuard]
+      }
+    ]
+  }
 ];
 
 @NgModule({

@@ -1,20 +1,18 @@
 package VTTP.FinalProject.controllers;
 
-import java.io.Console;
 import java.util.Optional;
 
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import org.springframework.web.servlet.view.RedirectView;
 
 import VTTP.FinalProject.exceptions.UserNotCreatedException;
 import VTTP.FinalProject.models.FoodieUser;
@@ -32,17 +30,12 @@ public class LoginRestController {
         return ResponseEntity.ok(null);
     }
 
-    @PostMapping("/signUp")
-    public RedirectView createUser(
-            @RequestBody FoodieUser user, RedirectAttributes redirectAttributes, HttpSession sess) 
+    @PostMapping(path="/signUp", produces=MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<String> createUser(@RequestBody FoodieUser user) 
             throws UserNotCreatedException {
 
         System.out.println(">>> user: " 
             + user.getUsername() + user.getEmail() + user.getPassword());
-        
-            sess.setAttribute("username", user.getUsername());
-            sess.setAttribute("email", user.getEmail());
-            sess.setAttribute("password", user.getPassword());
         
         Optional<String> userCreatedMsgOpt;
         try {
@@ -58,8 +51,7 @@ public class LoginRestController {
         String userCreatedMsg = userCreatedMsgOpt.get();
 
         if (userCreatedMsg.contains("created")) {
-            System.out.println(">>> user created");
-            return new RedirectView("/authenticate", false);
+            return ResponseEntity.status(HttpStatus.CREATED).body("\"User Created!\"");
         } else {
             throw new UserNotCreatedException(userCreatedMsg);
         }        

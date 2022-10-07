@@ -1,12 +1,13 @@
 <nav *ngIf="loggedIn()" class="loggedIn">
     <div class="left">
         <img src="/assets/logo.png" (click)="routeLandingPage()">
-        <button mat-button>Explore</button>
-        <button mat-button>Search Recipes</button>
+        <button mat-button [routerLink]="['/masterKitchen/explore']">Explore</button>
+        <button mat-button [routerLink]="['/masterKitchen/search']">Search Recipes</button>
+        <button mat-button [routerLink]="['/masterKitchen/upload']">Upload Recipe</button>
         <button mat-button>My Profile</button>
     </div>
     <div>
-        <button mat-raised-button color="primary" (click)="logout()">Logout</button>
+        <button mat-flat-button color="primary" (click)="logout()">Logout</button>
     </div>
     <!-- <button mat-button [matMenuTriggerFor]="profile">My Profile</button>
         <mat-menu #profile="matMenu">
@@ -16,7 +17,7 @@
         </mat-menu> -->
 </nav>
 <nav *ngIf="!loggedIn()" class="notLoggedIn">
-    <img src="/assets/logo.png"  (click)="routeLandingPage()">
+    <img src="/assets/logo.png" (click)="routeLandingPage()">
     <div>
         <button mat-button [routerLink]="['/login']">Login</button>
         <button mat-flat-button color="primary" [routerLink]="['/signUp']">Sign Up</button>

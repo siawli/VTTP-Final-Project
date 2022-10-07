@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { User } from 'src/app/models';
 import { LoginService } from 'src/app/services/logInOut.service';
+import { SuccessComponent } from './success.component';
+import {MatDialog, MatDialogConfig} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-register',
@@ -16,7 +18,8 @@ export class RegisterComponent implements OnInit {
   userAlrExists = false;
   createErrorMsg = "";
 
-  constructor(private fb: FormBuilder, private loginSvc: LoginService) { }
+  constructor(private fb: FormBuilder, private loginSvc: LoginService,
+              private dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.form = this.createForm();
@@ -43,9 +46,8 @@ export class RegisterComponent implements OnInit {
       .then(response => {
         this.userAlrExists = false;
         console.info("response: " + response.body)
-        let token = response.body?.token as string
-        user.username = response.body.username;
-        this.loginSvc.successLogin(user, token)
+        this.openDialog();
+        this.form.reset();
       })
       .catch(error => {
         console.info(error)
@@ -54,5 +56,18 @@ export class RegisterComponent implements OnInit {
       })
 
   }
+
+  openDialog() {
+
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.height = '300px';
+    dialogConfig.width = '800px'
+    dialogConfig.hasBackdrop = true;
+
+    this.dialog.open(SuccessComponent, dialogConfig);
+}
 
 }
