@@ -15,7 +15,6 @@ export class ListRecipesComponent implements OnInit {
     private route: Router,
     private ar: ActivatedRoute) { }
 
-  recipeSub$!: Subscription
   querySub$!: Subscription
   nextURL = ""
   noNext = true
@@ -23,7 +22,8 @@ export class ListRecipesComponent implements OnInit {
   query!: string
   prevURL = ""
   noPrev = true
-  numPage = 1
+  numPage!: number
+  numPage$!: Subscription
 
   ngOnInit(): void {
     console.info('>>>> in ngOnInit = ', this.ar.snapshot.params['query'])
@@ -35,7 +35,15 @@ export class ListRecipesComponent implements OnInit {
         this.query = v.query
       })
     }
-    this.callGetRecipesSvc()
+    if (this.ar.snapshot.params['num']) {
+      this.numPage = this.ar.snapshot.params['num']
+      this.numPage$ = this.ar.params.subscribe(v => {
+        console.info('>subscribe: ', v)
+        // @ts-ignore
+        this.numPage = v.num
+      })
+      this.callGetRecipesSvc()
+    }
   }
 
   getRecipeDetails(recipe_id: string) {
@@ -48,7 +56,7 @@ export class ListRecipesComponent implements OnInit {
   }
 
   callGetRecipesSvc() {
-    this.recipeSvc.getRecipes(this.query)
+    this.recipeSvc.getRecipes(this.query, this.numPage)
     .then(result => {
       console.info(">>> result: " + result)
       this.nextURL = result.nextURL

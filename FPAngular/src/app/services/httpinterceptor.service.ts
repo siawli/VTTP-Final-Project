@@ -16,10 +16,10 @@ export class UniversalAppInterceptor implements HttpInterceptor {
     intercept(req: HttpRequest<any>, next: HttpHandler) {
         if (req.headers.get("skip"))
             return next.handle(req);
-        console.info(">>>> in interceptor")
+        // console.info(">>>> in interceptor")
 
         this._jwtToken = this.cookieSvc.get("token")
-        console.info(">>>> interceptor jwtToken: " + this._jwtToken)
+        // console.info(">>>> interceptor jwtToken: " + this._jwtToken)
         req = req.clone({
             url: req.url,
             setHeaders: {

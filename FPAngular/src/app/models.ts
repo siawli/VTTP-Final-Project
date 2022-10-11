@@ -19,3 +19,13 @@ export interface Recipe {
     ingredientLines: string[],
     calories: number
 }
+
+export interface Post {
+    post_id: number,
+    title: string,
+    description: string,
+    rating: number,
+    likes: number,
+    date: string
+    // file
+}

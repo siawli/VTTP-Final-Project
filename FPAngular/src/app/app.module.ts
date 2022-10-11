@@ -23,8 +23,11 @@ import { AppCookieService } from './services/cookie.service';
 import { AuthorizeGuard } from './services/authorizeguard.service';
 import { UniversalAppInterceptor } from './services/httpinterceptor.service';
 import { SuccessComponent } from './components/login/success.component';
-import { UploadComponent } from './components/upload/upload.component';
 import { RecipeService } from './services/recipe.services';
+import { WebcamModule } from 'ngx-webcam';
+import { UploadService } from './services/upload.service';
+import { SnapComponent } from './components/upload/snap.component';
+import { FormComponent } from './components/upload/form.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +43,8 @@ import { RecipeService } from './services/recipe.services';
     LandingComponent,
     ExploreComponent,
     SuccessComponent,
-    UploadComponent
+    SnapComponent,
+    FormComponent,
   ],
   imports: [
     BrowserModule,
@@ -49,9 +53,10 @@ import { RecipeService } from './services/recipe.services';
     MaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpClientModule
+    HttpClientModule,
+    WebcamModule
   ],
-  providers: [LoginService, JWTTokenService, 
+  providers: [LoginService, JWTTokenService, UploadService,
     AppCookieService, AuthorizeGuard, RecipeService,
     { provide: HTTP_INTERCEPTORS, useClass: UniversalAppInterceptor, multi: true }],
   bootstrap: [AppComponent]

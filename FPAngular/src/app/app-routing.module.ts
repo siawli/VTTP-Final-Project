@@ -7,7 +7,8 @@ import { RegisterComponent } from './components/login/register.component';
 import { FindRecipesComponent } from './components/search/find-recipes.component';
 import { ListRecipesComponent } from './components/search/list-recipes.component';
 import { RecipeDetailsComponent } from './components/search/recipe-details.component';
-import { UploadComponent } from './components/upload/upload.component';
+import { FormComponent } from './components/upload/form.component';
+import { SnapComponent } from './components/upload/snap.component';
 import { AuthorizeGuard } from './services/authorizeguard.service';
 
 const routes: Routes = [
@@ -15,7 +16,8 @@ const routes: Routes = [
   {path: 'signUp', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
   {path: 'masterKitchen/explore', component: ExploreComponent, canActivate: [AuthorizeGuard]},
-  {path: 'masterKitchen/upload', component: UploadComponent, canActivate: [AuthorizeGuard]},
+  {path: 'masterKitchen/upload/snap', component: SnapComponent, canActivate: [AuthorizeGuard]},
+  {path: 'masterKitchen/upload/form', component: FormComponent, canActivate: [AuthorizeGuard]},
   {
     path: 'masterKitchen/search',
     component: FindRecipesComponent,

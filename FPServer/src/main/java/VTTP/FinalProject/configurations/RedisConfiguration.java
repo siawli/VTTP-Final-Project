@@ -25,7 +25,6 @@
 //     private String redisPassword;
 
 //     @Bean(name="recipes")
-//     @Scope("singleton")
 //     public RedisTemplate<String, Object> createRedisTemplate() {
 
 //         final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
@@ -41,8 +40,10 @@
 
 //         final RedisTemplate<String, Object> template = new RedisTemplate<>();
 //         template.setConnectionFactory(jedisFac);
-//         template.setKeySerializer(new StringRedisSerializer());
-//         template.setValueSerializer(new StringRedisSerializer());
+// 		template.setKeySerializer(new StringRedisSerializer());
+// 		template.setValueSerializer(new StringRedisSerializer());
+// 		template.setHashKeySerializer(new StringRedisSerializer());
+// 		template.setHashValueSerializer(new StringRedisSerializer());
 
 //         return template;
 //     }

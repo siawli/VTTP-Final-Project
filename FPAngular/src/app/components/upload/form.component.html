@@ -1,0 +1,32 @@
+<div class="body">
+    <h1>~ Share what's cooking ~</h1>
+    <form [formGroup]="form" (ngSubmit)="shareIt()" class="body">
+    <mat-card class="body example-card">
+        <div>
+            <img [src]="imageData" [width]="imageWidth">
+        </div>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Title</mat-label>
+                <input matInput placeholder="Title">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Caption</mat-label>
+                <textarea matInput placeholder="Caption"></textarea>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Rating</mat-label>
+                <input matInput placeholder="Rating out of 10">
+            </mat-form-field>
+
+            <div>
+                <button mat-raised-button type="button" [routerLink]="['/masterKitchen/upload/snap']">Cancel</button>
+                <button mat-raised-button color="primary" type="submit">Upload your masterpiece</button>
+            </div>
+            
+        </mat-card>
+    </form>
+
+</div>

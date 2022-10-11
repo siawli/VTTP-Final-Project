@@ -10,12 +10,14 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import VTTP.FinalProject.models.Recipe;
 import VTTP.FinalProject.models.RecipeResponse;
+// import VTTP.FinalProject.repositories.RecipesCacheRepository;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
@@ -31,9 +33,12 @@ public class EdamamService {
     @Value("${eda.app.key}")
     private String app_key;
 
+    // @Autowired
+    // private RecipesCacheRepository recipesCacheRepo;
+
     private final String DEFAULT_URL = "https://api.edamam.com/api/recipes/v2";
 
-    public Optional<?> getRecipesId(String query) {
+    public Optional<?> getRecipesId(String query, int pageNum) {
 
         String url = buildUrl(DEFAULT_URL)
                 .queryParam("q", query)
@@ -68,6 +73,8 @@ public class EdamamService {
         }
 
         recipeResponse.setRecipes(recipes);
+
+        // recipesCacheRepo.storeQueryByPage(query, pageNum, recipeResponse);
 
         return Optional.of(recipeResponse);
     }
@@ -120,7 +127,6 @@ public class EdamamService {
                 .queryParam("type", "public");
 
         return urlB;
-
     }
 
     private Recipe getSimilarData(JsonObject recipe) {

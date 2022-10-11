@@ -37,7 +37,7 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         // TODO Auto-generated method stub
 
         final String requestTokenHeader = request.getHeader("Authorization");
-        System.out.println(">> requestTokenHeader filter: " + requestTokenHeader);
+        // System.out.println(">> requestTokenHeader filter: " + requestTokenHeader);
 
         String username = null;
         String jwtToken = null;
@@ -46,9 +46,9 @@ public class JwtRequestFilter extends OncePerRequestFilter {
         // Remove Bearer word and get only the token
         // System.out.println("Bearer exists? " + requestTokenHeader.startsWith("Bearer "));
         if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
-            System.out.println(">>>> in filter: ");
+            // System.out.println(">>>> in filter: ");
             jwtToken = requestTokenHeader.substring(7);
-            System.out.println(">>>> filter jwt token: " + jwtToken);
+            // System.out.println(">>>> filter jwt token: " + jwtToken);
             try {
                 username = jwtUtil.getUsernameFromToken(jwtToken);
             } catch (IllegalArgumentException ex) {
