@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/logInOut.service';
 
 @Component({
   selector: 'app-saved-recipes',
@@ -7,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class SavedRecipesComponent implements OnInit {
 
-  constructor() { }
+  constructor(private loginSvc: LoginService) { }
 
   ngOnInit(): void {
+
   }
 
 }

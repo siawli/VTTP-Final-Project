@@ -9,7 +9,7 @@ export class AppCookieService {
     }
 
     public parseCookies(cookies = document.cookie) {
-        this.cookieStore = {};
+        this.cookieStore = {}
         if (!!cookies === false) { return; }
         const cookiesArr = cookies.split(';');
         for (const cookie of cookiesArr) {

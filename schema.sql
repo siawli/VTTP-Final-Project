@@ -24,6 +24,7 @@ create table post (
     recipe_id varchar(32) not null,
     title varchar(128) not null,
     description (254) not null,
+    rating float not null,
     likes int not null,
     date Date not null,
     constraint fk_email

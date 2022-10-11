@@ -1,1 +1,9 @@
-<p>recipe-details works!</p>
+<h3>{{ recipe.label }}</h3>
+<img src="{{ recipe.image }}" alt="recipe image">
+<p>{{ recipe.calories }} calories</p>
+<p>{{ recipe.servings }} servings</p>
+<ul>
+    <li *ngFor="let step of recipe.ingredientLines">{{ step }}</li>
+</ul>
+
+<button mat-flat-button color="primary" [routerLink]="['/masterKitchen/search', query, num]">Back</button>

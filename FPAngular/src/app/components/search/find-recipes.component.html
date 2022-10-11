@@ -1,9 +1,9 @@
 <div class="container">
     <h1>Find a Recipe</h1>
-    <form>
+    <form [formGroup]="form" (ngSubmit)="processForm()">
         <mat-form-field appearance="outline">
             <mat-label></mat-label>
-            <input matInput placeholder="What's cooking...">
+            <input matInput placeholder="What's cooking..." formControlName="query">
             <button mat-button matSuffix mat-icon-button 
                 color="primary" aria-label="search">
                 <mat-icon>search</mat-icon> 
@@ -12,7 +12,6 @@
     </form>
 </div>
 
-<button routerLink="/masterKitchen/search/abc">List</button>
-<button routerLink="/masterKitchen/search/recipe/1234">Recipe</button>
+<!-- <button routerLink="/masterKitchen/search/recipe/1234">Recipe</button> -->
 
 <router-outlet></router-outlet>

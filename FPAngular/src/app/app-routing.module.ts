@@ -21,12 +21,17 @@ const routes: Routes = [
     component: FindRecipesComponent,
     children: [
       {
-        path: ':query',
+        path: '',
         component: ListRecipesComponent,
         canActivate: [AuthorizeGuard]
       },
       {
-        path: 'recipe/:id',
+        path: ':query/:num',
+        component: ListRecipesComponent,
+        canActivate: [AuthorizeGuard]
+      },
+      {
+        path: ':query/:num/:id',
         component: RecipeDetailsComponent,
         canActivate: [AuthorizeGuard]
       }

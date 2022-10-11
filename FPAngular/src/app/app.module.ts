@@ -24,6 +24,7 @@ import { AuthorizeGuard } from './services/authorizeguard.service';
 import { UniversalAppInterceptor } from './services/httpinterceptor.service';
 import { SuccessComponent } from './components/login/success.component';
 import { UploadComponent } from './components/upload/upload.component';
+import { RecipeService } from './services/recipe.services';
 
 @NgModule({
   declarations: [
@@ -51,7 +52,7 @@ import { UploadComponent } from './components/upload/upload.component';
     HttpClientModule
   ],
   providers: [LoginService, JWTTokenService, 
-    AppCookieService, AuthorizeGuard,
+    AppCookieService, AuthorizeGuard, RecipeService,
     { provide: HTTP_INTERCEPTORS, useClass: UniversalAppInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

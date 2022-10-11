@@ -4,16 +4,18 @@ export interface User {
     password: string
 }
 
-export interface Post {
-    title: string,
-    description: string,
-    id: string,
-    likes: number
-    // image will be uploaded on spaces
+export interface RecipeResponse {
+    recipes: Recipe[],
+    nextURL: string
 }
 
-export interface Ingredients {
-    quantity: string,
-    ingredient: string
+export interface Recipe {
+    recipe_id: string,
+    storedUUID: string,
+    label: string,
+    image: string,
+    link: string,
+    servings: number,
+    ingredientLines: string[],
+    calories: number
 }
-
