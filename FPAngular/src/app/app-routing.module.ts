@@ -31,14 +31,10 @@ const routes: Routes = [
         path: ':query/:num',
         component: ListRecipesComponent,
         canActivate: [AuthorizeGuard]
-      },
-      {
-        path: ':query/:num/:id',
-        component: RecipeDetailsComponent,
-        canActivate: [AuthorizeGuard]
       }
     ]
-  }
+  },
+  {path: 'masterKitchen/search/:query/:num/:id', component: RecipeDetailsComponent, canActivate: [AuthorizeGuard]}
 ];
 
 @NgModule({

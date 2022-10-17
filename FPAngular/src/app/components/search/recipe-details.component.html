@@ -1,9 +1,24 @@
-<h3>{{ recipe.label }}</h3>
-<img src="{{ recipe.image }}" alt="recipe image">
-<p>{{ recipe.calories }} calories</p>
-<p>{{ recipe.servings }} servings</p>
-<ul>
-    <li *ngFor="let step of recipe.ingredientLines">{{ step }}</li>
-</ul>
+<div class=main>
+<mat-card class=container>
+    <h1>{{ recipe.label }}</h1>
+    <div class="main">
+        <div class="section-one">
+            <img src="{{ recipe.image }}" alt="recipe image">
+        </div>
+        <div class="section-two">
+            <p>Recipe ID: <span>{{ recipe.recipe_id }}</span></p>
+            <p>Calories: <span>{{ recipe.calories }} kcal</span></p>
+            <p>Serving(s): <span>{{ recipe.servings }}</span></p>
+            <p>Ingredients required:</p>
+            <ul>
+                <li *ngFor="let step of recipe.ingredientLines">{{ step }}</li>
+            </ul>
+            <a href="{{ recipe.link }}" target="_blank">Recipe instructions</a>
+        </div>
+    </div>  
+</mat-card>
+</div>
+<!-- <hr> -->
+<app-explore></app-explore>
 
 <button mat-flat-button color="primary" [routerLink]="['/masterKitchen/search', query, num]">Back</button>

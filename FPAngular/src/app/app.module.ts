@@ -28,6 +28,10 @@ import { WebcamModule } from 'ngx-webcam';
 import { UploadService } from './services/upload.service';
 import { SnapComponent } from './components/upload/snap.component';
 import { FormComponent } from './components/upload/form.component';
+import { ExploreService } from './services/explore.service';
+import { PopularComponent } from './components/explore/popular.component';
+import { LatestComponent } from './components/explore/latest.component';
+import { IdComponent } from './components/explore/id.component';
 
 @NgModule({
   declarations: [
@@ -45,6 +49,9 @@ import { FormComponent } from './components/upload/form.component';
     SuccessComponent,
     SnapComponent,
     FormComponent,
+    PopularComponent,
+    LatestComponent,
+    IdComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,7 +64,7 @@ import { FormComponent } from './components/upload/form.component';
     WebcamModule
   ],
   providers: [LoginService, JWTTokenService, UploadService,
-    AppCookieService, AuthorizeGuard, RecipeService,
+    AppCookieService, AuthorizeGuard, RecipeService, ExploreService,
     { provide: HTTP_INTERCEPTORS, useClass: UniversalAppInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

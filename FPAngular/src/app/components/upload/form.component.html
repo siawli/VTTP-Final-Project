@@ -8,22 +8,27 @@
 
             <mat-form-field appearance="outline">
                 <mat-label>Title</mat-label>
-                <input matInput placeholder="Title">
+                <input matInput placeholder="Title" formControlName="title">
             </mat-form-field>
     
             <mat-form-field appearance="outline">
                 <mat-label>Caption</mat-label>
-                <textarea matInput placeholder="Caption"></textarea>
+                <textarea matInput placeholder="Caption" formControlName="caption"></textarea>
             </mat-form-field>
 
             <mat-form-field appearance="outline">
-                <mat-label>Rating</mat-label>
-                <input matInput placeholder="Rating out of 10">
+                <mat-label>Recipe ID</mat-label>
+                <input matInput placeholder="Recipe ID" formControlName="recipe_id">
+            </mat-form-field>
+
+            <mat-form-field appearance="outline">
+                <mat-label>Rating out of 10</mat-label>
+                <input matInput placeholder="Rating out of 10" formControlName="ratings">
             </mat-form-field>
 
             <div class="buttons">
                 <button mat-raised-button type="button" [routerLink]="['/masterKitchen/upload/snap']">Cancel</button>
-                <button mat-raised-button color="primary" type="submit">Upload your masterpiece</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Upload your masterpiece</button>
             </div>
             
         </mat-card>

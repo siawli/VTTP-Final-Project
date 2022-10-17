@@ -18,16 +18,26 @@ create table savedRecipes (
         references users(email)
 )
 
-create table post (
-    post_id int auto increment not null primary key,
+ create table posts (
+    post_id int auto_increment not null primary key,
     email varchar(128) not null,
-    recipe_id varchar(32) not null,
     title varchar(128) not null,
-    description (254) not null,
-    rating float not null,
+    caption varchar(254) not null,
+    recipe_id varchar(32) not null,
+    ratings float not null,
     likes int not null,
-    date Date not null,
+    date varchar(16) not null,
+    imageUUID varchar(8) not null,
     constraint fk_email
         foreign key(email)
         references users(email)
+        on delete cascade
+        on update restrict
+)
+
+create table likedPosts (
+    email varchar(128) not null,
+    post_id int not null,
+    liked boolean not null,
+    primary key(email, post_id)
 )

@@ -28,8 +28,8 @@ public class EdamamRestController {
     public ResponseEntity<?> getRecipes(@RequestParam("query") String query,
             @PathVariable("numPage") int numPage) {
 
-        System.out.println(">>> query obtained: " + query);
-        System.out.println(">>> numPage obtained: " + numPage);
+        // System.out.println(">>> query obtained: " + query);
+        // System.out.println(">>> numPage obtained: " + numPage);
 
         Optional<?> getRecipesOtp = edaSvc.getRecipesId(query, numPage);
 
@@ -48,7 +48,7 @@ public class EdamamRestController {
     @GetMapping("/recipe/{id}")
     public ResponseEntity<?> getRecipeDetails(@PathVariable("id") String id) {
 
-        System.out.println(">>> recipeId: " + id);
+        // System.out.println(">>> recipeId: " + id);
 
         Optional<?> getRecipeDetailOpt = edaSvc.getRecipeDetails(id);
         if (getRecipeDetailOpt.isEmpty()) {
