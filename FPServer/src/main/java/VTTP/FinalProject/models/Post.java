@@ -7,14 +7,29 @@ import org.springframework.jdbc.support.rowset.SqlRowSet;
 public class Post {
     private int post_id;
     private String email;
+    private String username;
     private String title;
     private String caption;
+    private String recipe_label;
     private String recipe_id;
     private Float ratings;
     private int likes;
     private String date;
     private String imageUUID;
+    private boolean liked = false;
 
+    public String getUsername() {
+        return username;
+    }
+    public void setUsername(String username) {
+        this.username = username;
+    }
+    public String getRecipe_label() {
+        return recipe_label;
+    }
+    public void setRecipe_label(String recipe_label) {
+        this.recipe_label = recipe_label;
+    }
     public String getTitle() {
         return title;
     }
@@ -74,6 +89,16 @@ public class Post {
     public void setEmail(String email) {
         this.email = email;
     }
+    public boolean isLiked() {
+        return this.liked;
+    }
+    public void likedPost() {
+        this.liked = true;
+    }
+    public void unlikedPost() {
+        this.liked = false;
+    }
+
 
     public static Post createPost(SqlRowSet result) {
         Post post = new Post();
@@ -86,8 +111,14 @@ public class Post {
         post.setPost_id(result.getInt("post_id"));
         post.setRatings(result.getFloat("ratings"));
         post.setRecipe_id(result.getString("recipe_id"));
+        post.setRecipe_label(result.getString("recipe_label"));
+        post.setUsername(result.getString("username"));
 
         // System.out.println("in model post: " + post.toString());
+        if (result.getString("likedPostsEmail") != null) {
+            post.likedPost();
+            System.out.println(">>>> post is liked: " + post.post_id + " " + post.isLiked());
+        }
 
         return post;
     }

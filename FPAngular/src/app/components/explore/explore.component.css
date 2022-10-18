@@ -1,0 +1,7 @@
+:host ::ng-deep .mat-tab-header {
+    top: 80px;
+    z-index: 1000; 
+    position: sticky;
+    position: -webkit-sticky; /* macOS/iOS Safari */   
+    background-color: white; 
+}

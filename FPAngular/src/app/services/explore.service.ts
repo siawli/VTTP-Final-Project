@@ -1,15 +1,19 @@
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { firstValueFrom } from "rxjs";
+import { AppCookieService } from "./cookie.service";
 
 @Injectable()
 export class ExploreService {
 
-    constructor(private httpClient: HttpClient) { }
+    constructor(private httpClient: HttpClient,
+                private cookieSvc: AppCookieService) { }
 
     getAllPost() {
+        const params = new HttpParams()
+                .set("email", this.cookieSvc.get("email"))
         return firstValueFrom(
-            this.httpClient.get<any>("/explore/all")
+            this.httpClient.get<any>("/explore/all", {params})
         )
     }
 
@@ -20,10 +24,16 @@ export class ExploreService {
             this.httpClient.get<any>(`/amazonS3/${uuid}`, { headers: headers, responseType: 'blob' as 'json' })
         )
     }
+
+    updateLikesOnPost(post_id: number, alteration: string) {
+        const params = new HttpParams()
+            .set("email", this.cookieSvc.get("email"))
+            .set("post_id", post_id)
+            .set("alteration", alteration)
+
+        return firstValueFrom(
+            this.httpClient.get<any>("/explore/updateLikes", {params}) 
+        )
+        // @GetMapping("/updateLikes/{post_id}/{alteration}")
+    }
 }
-// const reader = new FileReader();
-// reader.readAsDataURL(data); //FileStream response from .NET core backend
-// reader.onload = _event => {
-//     url = reader.result; //url declared earlier
-//     image.nativeElement.src = url; //image declared earlier
-// };

@@ -32,6 +32,7 @@ import { ExploreService } from './services/explore.service';
 import { PopularComponent } from './components/explore/popular.component';
 import { LatestComponent } from './components/explore/latest.component';
 import { IdComponent } from './components/explore/id.component';
+import { UploadSuccessComponent } from './components/upload/success.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { IdComponent } from './components/explore/id.component';
     PopularComponent,
     LatestComponent,
     IdComponent,
+    UploadSuccessComponent
   ],
   imports: [
     BrowserModule,

@@ -17,7 +17,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import VTTP.FinalProject.models.Recipe;
 import VTTP.FinalProject.models.RecipeResponse;
-// import VTTP.FinalProject.repositories.RecipesCacheRepository;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
@@ -114,6 +113,34 @@ public class EdamamService {
             recipeModel.setCalories((int)Math.ceil(totalCal/yield));
 
             return Optional.of(recipeModel);
+        } catch (Exception ex) {
+            return Optional.empty();
+        }
+    }
+
+    public Optional<String> getRecipeLabelById(String id) {
+        System.out.println(">>>>> in get RecipeLabelById");
+        String url = buildUrl(DEFAULT_URL + "/" + id)
+                .queryParam("id", id)
+                .toUriString();
+
+        JsonObject data = null;
+
+        try {
+            data = getDataFromAPI(url);
+        } catch (Exception ex) {
+            System.out.println(">>> API error");
+            return Optional.of("API error!");
+        }
+
+        String recipe_label = "";
+
+        try {
+            System.out.println(">>>>>>>> here");
+            JsonObject recipe = data.getJsonObject("recipe");
+            recipe_label = recipe.getString("label");
+            System.out.println(">>>> recipe_label: " + recipe_label);
+            return Optional.of(recipe_label);
         } catch (Exception ex) {
             return Optional.empty();
         }

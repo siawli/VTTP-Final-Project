@@ -60,5 +60,18 @@ public class EdamamRestController {
         }
     }
 
-    
+    @GetMapping("/recipe/label/{id}")
+    public ResponseEntity<String> getRecipeLabel(@PathVariable("id") String id) {
+        Optional<?> getRecipeLabelOpt = edaSvc.getRecipeLabelById(id);
+        if (getRecipeLabelOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("No results found");
+        } else if (getRecipeLabelOpt.get().toString().contains("error")) {
+            // System.out.println(">>>> internal error");
+            return ResponseEntity.internalServerError().body("Internal error!");
+        } else {
+            // System.out.println(">>>> success!   ");
+            String label = getRecipeLabelOpt.get().toString();
+            return ResponseEntity.ok(label); 
+        }
+    } 
 }

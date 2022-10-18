@@ -27,6 +27,13 @@ export class UploadService {
         return firstValueFrom(this.httpClient.post("/amazonS3", formData))
     }
 
+    getRecipeLabel(id: string) {
+        // @GetMapping("/recipe/label/{id}")
+        return firstValueFrom(
+            this.httpClient.get<string>(`/search/recipe/label/${id}`,  {responseType: 'text' as 'json'})
+        )
+    }
+
     dataURIToBlob(dataURI: string) {
         // convert base64 to raw binary data held in a string
         // doesn't handle URLEncoded DataURIs - see SO answer #6850276 for code that does this

@@ -23,13 +23,15 @@ export interface Recipe {
 export interface Post {
     post_id: number,
     email: string,
+    username: string,
     title: string,
     caption: string,
     recipe_id: string,
+    recipe_label: string,
     ratings: number,
     likes: number,
     date: string,
     imageUUID: string,
     // file
-    isLiked: boolean
+    liked: boolean
 }

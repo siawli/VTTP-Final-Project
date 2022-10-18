@@ -58,7 +58,6 @@ export class RegisterComponent implements OnInit {
   }
 
   openDialog() {
-
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;

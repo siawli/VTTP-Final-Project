@@ -32,12 +32,10 @@ create table savedRecipes (
         foreign key(email)
         references users(email)
         on delete cascade
-        on update restrict
 )
 
 create table likedPosts (
     email varchar(128) not null,
     post_id int not null,
-    liked boolean not null,
     primary key(email, post_id)
 )

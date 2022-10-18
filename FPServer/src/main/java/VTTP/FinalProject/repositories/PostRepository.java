@@ -16,9 +16,9 @@ public class PostRepository {
 
     public boolean uploadPost(Post post) {
         int added = template.update(SQL_NEW_POST,
-            post.getEmail(), post.getTitle(),
-            post.getCaption(), post.getRecipe_id(),
-            post.getRatings(), 0,
+            post.getEmail(), post.getUsername(),
+            post.getTitle(), post.getCaption(), post.getRecipe_id(),
+            post.getRecipe_label(), post.getRatings(), 0,
             post.getDate(), post.getImageUUID());
             // email, title, caption, recipe_id, ratings, likes, date, imageUUID
         

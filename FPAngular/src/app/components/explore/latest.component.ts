@@ -27,6 +27,7 @@ export class LatestComponent implements OnInit {
 
   getImageFromS3(posts: Post[]) {
     for (let post of posts) {
+      console.info(">>> post is liked?: " + post.post_id + " " + post.liked)
       this.exploreSvc.getImageFromS3(post.imageUUID)
         .then(result => {
           console.info("result from getImageAmazonS3: " + result)
@@ -34,7 +35,6 @@ export class LatestComponent implements OnInit {
           reader.readAsDataURL(result);
           reader.onload = _event => {
           post.imageUUID = reader.result as string
-          post.isLiked = false
           }
         })
         .catch(error => {
@@ -44,12 +44,26 @@ export class LatestComponent implements OnInit {
   }
 
   likedPost(post: Post) {
-    if (post.isLiked) {
+    if (post.liked) {
       post.likes -= 1
-      post.isLiked = false
+      post.liked = false
+      this.exploreSvc.updateLikesOnPost(post.post_id, "unlike")
+        .then(result => {
+          console.info(">>> unliked: " + result)
+        })
+        .catch(error => {
+          console.info(">>> error unliked: " + error)
+        })
     } else {
       post.likes += 1
-      post.isLiked = true
+      post.liked = true
+      this.exploreSvc.updateLikesOnPost(post.post_id, "add")
+        .then(result => {
+          console.info(">>> liked: " + result)
+        })
+        .catch(error => {
+          console.info(">>> error liked: " + error)
+        })
     }
   }
 
