@@ -10,10 +10,17 @@ export class RecipeService {
 
     getRecipeDetailsObs = new Subject<Recipe>();
 
-    getRecipes(query: string, numPage: number) {
-        const params = new HttpParams().set("query", query);
-        console.info("query: " + query)
-
+    getRecipes(query: string, numPage: number, _contValue?: string) {
+        
+        let params;
+        if (_contValue) {
+            params = new HttpParams()
+                .set("query", query)
+                .set("_contValue", _contValue)
+        } else {
+            params = new HttpParams()
+                    .set("query", query)
+        }
         return firstValueFrom(this.httpClient.get<RecipeResponse>(`/search/recipes/${numPage.toString()}`, {params}))
     }
 

@@ -50,24 +50,26 @@ export class ListRecipesComponent implements OnInit {
     this.route.navigate(["/masterKitchen/search", this.query, this.numPage, recipe_id])
   }
 
-  getNext() {
-    this.numPage += 1
+  getNext(contValue: string) {
+    this.numPage = Number(this.numPage) + 1
+    // console.info(">>> numPage: " + this.numPage)
     this.prevURL = "first page"
+    // console.info(">>> contValue: " + contValue)
+    this.callGetRecipesSvc()
+    // KIV on contValue
   }
 
   callGetRecipesSvc() {
-    this.recipeSvc.getRecipes(this.query, this.numPage)
-    .then(result => {
-      console.info(">>> result: " + result)
-      this.nextURL = result.nextURL
-      this.noNext = false
-      this.recipes = result.recipes;
-      console.info(">>>> recipesListLength: " + this.recipes.length)
-      console.info(">>>> nextURL: " + this.nextURL)
-    })
-    .catch(error => {
-      console.info(">>>> error: " + error)
-    })
+    this.recipeSvc.getRecipes(this.query, this.numPage, this.nextURL)
+      .then(result => {
+        this.nextURL = result.nextURL
+        this.noNext = false
+        this.recipes = result.recipes;
+        // console.info(">>>> nextURL: " + this.nextURL)
+      })
+      .catch(error => {
+        console.info(">>>> error: " + error)
+      })
   }
 
 

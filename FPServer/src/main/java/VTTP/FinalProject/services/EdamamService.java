@@ -2,9 +2,12 @@ package VTTP.FinalProject.services;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.lang.StackWalker.Option;
 import java.math.BigDecimal;
 import java.net.URL;
+import java.net.URLEncoder;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +15,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -24,7 +28,7 @@ import jakarta.json.JsonReader;
 import jakarta.json.JsonValue;
 
 @Service
-public class EdamamService {
+public class EdamamService implements Serializable {
 
     @Value("${eda.app.id}")
     private String app_id;
@@ -32,18 +36,30 @@ public class EdamamService {
     @Value("${eda.app.key}")
     private String app_key;
 
+    @Autowired
+    private CachingService cacheSvc;
+
     // @Autowired
     // private RecipesCacheRepository recipesCacheRepo;
 
     private final String DEFAULT_URL = "https://api.edamam.com/api/recipes/v2";
 
-    public Optional<?> getRecipesId(String query, int pageNum) {
-
-        String url = buildUrl(DEFAULT_URL)
+    public Optional<?> getRecipesId(String query, int pageNum, String contValue) {
+        
+        String url = null;
+        System.out.println(">>> contValue in EdaSvc: " + contValue);
+        if (contValue == null) {
+            url = buildUrl(DEFAULT_URL)
                 .queryParam("q", query)
                 .toUriString();
+        } else {
+                url = buildUrl(DEFAULT_URL)
+                .queryParam("q", query)
+                .toUriString();
+                url += "&_cont=" + contValue;
+                System.out.println(">>> url: " + url);
+        }
 
-        List<Recipe> recipes = new LinkedList<>();
         RecipeResponse recipeResponse = new RecipeResponse();
         JsonObject data = null;
 
@@ -61,16 +77,13 @@ public class EdamamService {
         String NEXT_URL = data.getJsonObject("_links")
                 .getJsonObject("next")
                 .getString("href");
-        recipeResponse.setNextURL(NEXT_URL);
+        String _contValue = NEXT_URL.split("&")[2].substring(6);
+        // System.out.println(">>> _cont: " + _contValue);
+        recipeResponse.setNextURL(_contValue);
 
         // get recipe_id
-        JsonArray hits = data.getJsonArray("hits");
-        for (JsonValue jsonObj : hits) {
-            JsonObject recipe = jsonObj.asJsonObject().getJsonObject("recipe");
-
-            recipes.add(getSimilarData(recipe));
-        }
-
+        List<Recipe> recipes = new LinkedList<>();
+        recipes = cacheSvc.getListOfRecipesId(data, query, pageNum);
         recipeResponse.setRecipes(recipes);
 
         // recipesCacheRepo.storeQueryByPage(query, pageNum, recipeResponse);
@@ -156,7 +169,7 @@ public class EdamamService {
         return urlB;
     }
 
-    private Recipe getSimilarData(JsonObject recipe) {
+    public static Recipe getSimilarData(JsonObject recipe) {
         Recipe recipeModel = new Recipe();
 
         // get recipe_id

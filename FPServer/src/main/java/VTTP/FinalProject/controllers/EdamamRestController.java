@@ -23,15 +23,17 @@ public class EdamamRestController {
     @Autowired
     private EdamamService edaSvc;
 
-    // @Cacheable(value="#query", key = "#numPage", unless = "#result == null")
     @GetMapping("/recipes/{numPage}")
+    // @Cacheable(value="#query", key = "#numPage  ")
     public ResponseEntity<?> getRecipes(@RequestParam("query") String query,
-            @PathVariable("numPage") int numPage) {
+            @PathVariable("numPage") int numPage, 
+            @RequestParam(required = false) String _contValue) {
 
-        // System.out.println(">>> query obtained: " + query);
-        // System.out.println(">>> numPage obtained: " + numPage);
+        System.out.println(">>> query obtained: " + query);
+        System.out.println(">>> numPage obtained: " + numPage);
+        System.out.println(">>>> _contValue in controller: " + _contValue);
 
-        Optional<?> getRecipesOtp = edaSvc.getRecipesId(query, numPage);
+        Optional<?> getRecipesOtp = edaSvc.getRecipesId(query, numPage, _contValue);
 
         if (getRecipesOtp.isEmpty()) {
             return ResponseEntity.badRequest().body("No results found");

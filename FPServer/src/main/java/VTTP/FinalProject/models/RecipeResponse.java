@@ -1,8 +1,9 @@
 package VTTP.FinalProject.models;
 
+import java.io.Serializable;
 import java.util.List;
 
-public class RecipeResponse {
+public class RecipeResponse implements Serializable {
     private List<Recipe> recipes;
     private String nextURL;
 
