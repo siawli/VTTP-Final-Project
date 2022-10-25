@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Recipe } from 'src/app/models';
-import { RecipeService } from 'src/app/services/recipe.services';
+import { RecipeService } from 'src/app/services/recipe.service';
 
 @Component({
   selector: 'app-list-recipes',
@@ -20,7 +20,6 @@ export class ListRecipesComponent implements OnInit {
   noNext = true
   recipes: Recipe[] = []
   query!: string
-  prevURL = ""
   noPrev = true
   numPage!: number
   numPage$!: Subscription
@@ -41,6 +40,9 @@ export class ListRecipesComponent implements OnInit {
         console.info('>subscribe: ', v)
         // @ts-ignore
         this.numPage = v.num
+        if (this.numPage != 1) {
+          this.noPrev = false;
+        }
       })
       this.callGetRecipesSvc()
     }
@@ -51,12 +53,22 @@ export class ListRecipesComponent implements OnInit {
   }
 
   getNext(contValue: string) {
+    this.recipes = [];
     this.numPage = Number(this.numPage) + 1
-    // console.info(">>> numPage: " + this.numPage)
-    this.prevURL = "first page"
-    // console.info(">>> contValue: " + contValue)
+    this.route.navigate(["/masterKitchen/search", this.query, this.numPage])
     this.callGetRecipesSvc()
+    this.noPrev = false;
     // KIV on contValue
+  }
+
+  getPrev() {
+    this.numPage = Number(this.numPage) - 1;
+    this.recipes = [];
+    if (this.numPage == 1) {
+      this.noPrev = true;
+    }
+    this.route.navigate(["/masterKitchen/search", this.query, this.numPage])
+    this.callGetRecipesSvc();
   }
 
   callGetRecipesSvc() {

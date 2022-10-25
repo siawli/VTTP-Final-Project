@@ -25,4 +25,13 @@ public interface Queries {
         // delete from likedPosts where post_id = 22 and email = 'tiosiawlilili@gmail.com';
     public static final String SQL_ADD_LIKED_POST = 
         "insert into likedPosts(email, post_id) values (?, ?)";
+
+    public static final String SQL_DELETE_SAVED_RECIPE = 
+        "delete from savedRecipes where recipe_id = ? and email = ?";
+    
+    public static final String SQL_ADD_SAVED_RECIPE = 
+        "insert into savedRecipes(email, recipe_id) values (?, ?)";
+
+    public static final String SQL_IS_RECIPE_SAVED = 
+        "select * from savedRecipes where email = ? and recipe_id = ?";
 }

@@ -5,16 +5,13 @@
     /* border: 1px solid blue */
 }
 
-/* img {
-    width: auto;
-    height: auto;
-} */
-
 .section-one {
     width: 40%;
     /* border: 1px solid red; */
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
 }
 
 .section-two {
@@ -32,6 +29,7 @@ p {
 }
 
 mat-card {
+    margin-top: 10px;
     padding-top: 30px;
     padding-bottom: 30px;
     width: 70%;
@@ -42,4 +40,23 @@ mat-card {
 
 h1 {
     text-align: center;
+}
+
+
+.example-button {
+    display: block;
+    margin: 80px auto 400px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+    /* border: 1px solid red;   */
+    margin-top: 15px;
+}
+
+mat-icon {
+    margin-right: 4px;
 }

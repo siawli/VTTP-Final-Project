@@ -4,9 +4,14 @@ export interface User {
     password: string
 }
 
-export interface RecipeResponse {
+export interface RecipeListResponse {
     recipes: Recipe[],
     nextURL: string
+}
+
+export interface RecipeDetailsResponse {
+    recipe: Recipe,
+    saved: boolean
 }
 
 export interface Recipe {

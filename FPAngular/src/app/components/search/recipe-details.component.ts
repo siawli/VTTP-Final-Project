@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Recipe } from 'src/app/models';
-import { RecipeService } from 'src/app/services/recipe.services';
+import { RecipeService } from 'src/app/services/recipe.service';
+import { SavedRecipesService } from 'src/app/services/savedrecipes.service';
 
 @Component({
   selector: 'app-recipe-details',
@@ -11,7 +12,8 @@ import { RecipeService } from 'src/app/services/recipe.services';
 })
 export class RecipeDetailsComponent implements OnInit {
 
-  constructor(private ar: ActivatedRoute, private recipeSvc: RecipeService) { }
+  constructor(private ar: ActivatedRoute, private recipeSvc: RecipeService,
+              private savedRecipeSvc: SavedRecipesService) { }
 
   query!: string
   querySub$!: Subscription
@@ -21,8 +23,18 @@ export class RecipeDetailsComponent implements OnInit {
 
   num!: string
   numSub$!: Subscription
+  isSaved!: boolean;
 
-  recipe!: Recipe
+  recipe: Recipe = {
+    recipe_id: '',
+    storedUUID: '',
+    label: '',
+    image: '',
+    link: '',
+    servings: 0,
+    ingredientLines: [],
+    calories: 0
+  }
 
   ngOnInit(): void {
     if (this.ar.snapshot.params['query']) {
@@ -46,14 +58,29 @@ export class RecipeDetailsComponent implements OnInit {
       this.numSub$ = this.ar.params.subscribe(n => {
         console.info('>subscribe: ', n)
         // @ts-ignore
-        this.num = b.num
+        this.num = n.num
       })
     }
-    console.info(">>>> this.recipeId: " + this.id);
 
     this.recipeSvc.getRecipeDetails(this.id)
-      .then(result => this.recipe = result)
+      .then(result => {
+        this.recipe = result.recipe
+        this.isSaved = result.saved
+      })
       .catch(error => console.info("error in get recipe details: " + error))
+  }
+
+  alterSavedRecipes(recipe_id: string, alteration: string) {
+    this.savedRecipeSvc.alterSavedRecipes(recipe_id, alteration)
+      .then(result => {
+        console.info("result of saving recipe:" + result)
+      })
+      .catch()
+    if (alteration.includes('add')) {
+      this.isSaved = true;
+    } else {
+      this.isSaved = false;
+    }
   }
 
 }

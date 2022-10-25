@@ -4,7 +4,6 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { SavedRecipesComponent } from './components/profile/saved-recipes.component';
-import { MyRecipesComponent } from './components/profile/my-recipes.component';
 import { FindRecipesComponent } from './components/search/find-recipes.component';
 import { ListRecipesComponent } from './components/search/list-recipes.component';
 import { RecipeDetailsComponent } from './components/search/recipe-details.component';
@@ -23,7 +22,7 @@ import { AppCookieService } from './services/cookie.service';
 import { AuthorizeGuard } from './services/authorizeguard.service';
 import { UniversalAppInterceptor } from './services/httpinterceptor.service';
 import { SuccessComponent } from './components/login/success.component';
-import { RecipeService } from './services/recipe.services';
+import { RecipeService } from './services/recipe.service';
 import { WebcamModule } from 'ngx-webcam';
 import { UploadService } from './services/upload.service';
 import { SnapComponent } from './components/upload/snap.component';
@@ -33,12 +32,14 @@ import { PopularComponent } from './components/explore/popular.component';
 import { LatestComponent } from './components/explore/latest.component';
 import { IdComponent } from './components/explore/id.component';
 import { UploadSuccessComponent } from './components/upload/success.component';
+import { SavedRecipesService } from './services/savedrecipes.service';
+import { LikedPostsComponent } from './components/profile/liked-posts.component';
+import { MyPostsComponent } from './components/profile/my-posts.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     SavedRecipesComponent,
-    MyRecipesComponent,
     FindRecipesComponent,
     ListRecipesComponent,
     RecipeDetailsComponent,
@@ -53,7 +54,9 @@ import { UploadSuccessComponent } from './components/upload/success.component';
     PopularComponent,
     LatestComponent,
     IdComponent,
-    UploadSuccessComponent
+    UploadSuccessComponent,
+    LikedPostsComponent,
+    MyPostsComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,6 +70,7 @@ import { UploadSuccessComponent } from './components/upload/success.component';
   ],
   providers: [LoginService, JWTTokenService, UploadService,
     AppCookieService, AuthorizeGuard, RecipeService, ExploreService,
+    SavedRecipesService,
     { provide: HTTP_INTERCEPTORS, useClass: UniversalAppInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })

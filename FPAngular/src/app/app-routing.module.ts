@@ -22,11 +22,11 @@ const routes: Routes = [
     path: 'masterKitchen/search',
     component: FindRecipesComponent,
     children: [
-      {
-        path: '',
-        component: ListRecipesComponent,
-        canActivate: [AuthorizeGuard]
-      },
+      // {
+      //   path: '',
+      //   component: ListRecipesComponent,
+      //   canActivate: [AuthorizeGuard]
+      // },
       {
         path: ':query/:num',
         component: ListRecipesComponent,
@@ -34,7 +34,8 @@ const routes: Routes = [
       }
     ]
   },
-  {path: 'masterKitchen/search/:query/:num/:id', component: RecipeDetailsComponent, canActivate: [AuthorizeGuard]}
+  {path: 'masterKitchen/search/:query/:num/:id', component: RecipeDetailsComponent, canActivate: [AuthorizeGuard]},
+  // {path: 'masterKitchen/profile/myPosts', component: }
 ];
 
 @NgModule({

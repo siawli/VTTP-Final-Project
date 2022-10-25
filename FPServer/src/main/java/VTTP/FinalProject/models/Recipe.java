@@ -8,11 +8,7 @@ import java.util.concurrent.TimeUnit;
 import org.springframework.data.redis.core.RedisHash;
 import org.springframework.data.redis.core.TimeToLive;
 
-@RedisHash(timeToLive = 60*15)
 public class Recipe implements Serializable {
-
-    @TimeToLive(unit = TimeUnit.SECONDS)
-    private int ttl = 60*15;
 
     private String recipe_id;
     private String storedUUID;

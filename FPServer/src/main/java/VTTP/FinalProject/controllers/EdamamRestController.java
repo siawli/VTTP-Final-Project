@@ -13,8 +13,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import VTTP.FinalProject.models.RecipeResponse;
+import VTTP.FinalProject.models.Recipe;
+import VTTP.FinalProject.models.RecipeDetailsResponse;
+import VTTP.FinalProject.models.RecipeListResponse;
 import VTTP.FinalProject.services.EdamamService;
+import VTTP.FinalProject.services.SavedRecipesService;
 
 @RestController
 @RequestMapping("/search")
@@ -22,6 +25,9 @@ public class EdamamRestController {
 
     @Autowired
     private EdamamService edaSvc;
+
+    @Autowired
+    private SavedRecipesService savedRecipesSvc;
 
     @GetMapping("/recipes/{numPage}")
     // @Cacheable(value="#query", key = "#numPage  ")
@@ -40,15 +46,13 @@ public class EdamamRestController {
         } else if (getRecipesOtp.get() instanceof String == true) {
             return ResponseEntity.internalServerError().body("Internal error!");
         } else {
-            RecipeResponse response = (RecipeResponse)getRecipesOtp.get();
-            // System.out.println(">>>> recipes length: " + response.getRecipes().size());
-            // System.out.println(">>>> next URL: " + response.getNextURL());
             return ResponseEntity.ok(getRecipesOtp.get());
         }
     }
 
     @GetMapping("/recipe/{id}")
-    public ResponseEntity<?> getRecipeDetails(@PathVariable("id") String id) {
+    public ResponseEntity<?> getRecipeDetails(@PathVariable("id") String id,
+            @RequestParam String email) {
 
         // System.out.println(">>> recipeId: " + id);
 
@@ -58,7 +62,14 @@ public class EdamamRestController {
         } else if (getRecipeDetailOpt.get() instanceof String == true) {
             return ResponseEntity.internalServerError().body("Internal error!");
         } else {
-            return ResponseEntity.ok(getRecipeDetailOpt.get()); 
+            RecipeDetailsResponse recipeDetResp = new RecipeDetailsResponse();
+            recipeDetResp.setRecipe((Recipe)getRecipeDetailOpt.get());
+            Boolean isSaved = savedRecipesSvc.isRecipeSaved(email, id);
+            System.out.println(">>>> controller isSaved: " + isSaved);
+            recipeDetResp.setSaved(isSaved);
+            System.out.println(">>>> recipeDetResp isSaved: " + recipeDetResp.isSaved());
+            System.out.println(">>>>> recipeDetResp: " + recipeDetResp.toString());
+            return ResponseEntity.ok(recipeDetResp); 
         }
     }
 

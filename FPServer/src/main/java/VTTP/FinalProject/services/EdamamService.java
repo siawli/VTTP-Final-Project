@@ -20,7 +20,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import VTTP.FinalProject.models.Recipe;
-import VTTP.FinalProject.models.RecipeResponse;
+import VTTP.FinalProject.models.RecipeListResponse;
 import jakarta.json.Json;
 import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
@@ -60,79 +60,37 @@ public class EdamamService implements Serializable {
                 System.out.println(">>> url: " + url);
         }
 
-        RecipeResponse recipeResponse = new RecipeResponse();
-        JsonObject data = null;
-
         try {
-            data = getDataFromAPI(url);
+            RecipeListResponse recipeResp = cacheSvc.getListOfRecipesId(url, query, pageNum);
+            return Optional.of(recipeResp);
         } catch (Exception ex) {
-            return Optional.of("API error!");
+            ex.printStackTrace();
+            if (ex.getMessage().contains("No recipes")) {
+                return Optional.empty();
+            } else {
+                return Optional.of("Internal error");
+            }
         }
-
-        if (data.getInt("to") == 0) {
-            return Optional.empty();
-        }
-
-        // get next recipes link
-        String NEXT_URL = data.getJsonObject("_links")
-                .getJsonObject("next")
-                .getString("href");
-        String _contValue = NEXT_URL.split("&")[2].substring(6);
-        // System.out.println(">>> _cont: " + _contValue);
-        recipeResponse.setNextURL(_contValue);
-
-        // get recipe_id
-        List<Recipe> recipes = new LinkedList<>();
-        recipes = cacheSvc.getListOfRecipesId(data, query, pageNum);
-        recipeResponse.setRecipes(recipes);
-
-        // recipesCacheRepo.storeQueryByPage(query, pageNum, recipeResponse);
-
-        return Optional.of(recipeResponse);
     }
 
     public Optional<?> getRecipeDetails(String id) {
         String url = buildUrl(DEFAULT_URL + "/" + id)
-                .queryParam("id", id)
-                .toUriString();
-
-        JsonObject data = null;
-
+            .queryParam("id", id)
+            .toUriString();
         try {
-            data = getDataFromAPI(url);
+            Recipe recipe = cacheSvc.getRecipeDetails(url, id);
+            return Optional.of(recipe);
         } catch (Exception ex) {
-            return Optional.of("API error!");
-        }
-
-        try {
-            JsonObject recipe = data.getJsonObject("recipe");
-            Recipe recipeModel = getSimilarData(recipe);
-            // get source link
-            recipeModel.setLink(recipe.getString("url"));
-
-            // get servings
-            int yield = recipe.getInt("yield");
-            recipeModel.setServings(yield);
-
-            // get ingredientLines
-            JsonArray ingredientLines = recipe.getJsonArray("ingredientLines");
-            for (JsonValue ingredient: ingredientLines) {
-                String ingred = ingredient.toString().substring(1, ingredient.toString().length()-1);
-                recipeModel.addIngredientLines(ingred);
+            ex.printStackTrace();
+            if (ex.getMessage().contains("No recipe")) {
+                return Optional.empty();
+            } else {
+                return Optional.of("Internal error");
             }
-
-            // get calories
-            Float totalCal = Float.valueOf(recipe.get("calories").toString());
-            recipeModel.setCalories((int)Math.ceil(totalCal/yield));
-
-            return Optional.of(recipeModel);
-        } catch (Exception ex) {
-            return Optional.empty();
-        }
+        }            
     }
 
     public Optional<String> getRecipeLabelById(String id) {
-        System.out.println(">>>>> in get RecipeLabelById");
         String url = buildUrl(DEFAULT_URL + "/" + id)
                 .queryParam("id", id)
                 .toUriString();
@@ -142,24 +100,21 @@ public class EdamamService implements Serializable {
         try {
             data = getDataFromAPI(url);
         } catch (Exception ex) {
-            System.out.println(">>> API error");
             return Optional.of("API error!");
         }
 
         String recipe_label = "";
 
         try {
-            System.out.println(">>>>>>>> here");
             JsonObject recipe = data.getJsonObject("recipe");
             recipe_label = recipe.getString("label");
-            System.out.println(">>>> recipe_label: " + recipe_label);
             return Optional.of(recipe_label);
         } catch (Exception ex) {
             return Optional.empty();
         }
     }
 
-    private UriComponentsBuilder buildUrl(String url) {
+    public UriComponentsBuilder buildUrl(String url) {
         UriComponentsBuilder urlB = UriComponentsBuilder
                 .fromUriString(url)
                 .queryParam("app_id", app_id)
@@ -193,7 +148,7 @@ public class EdamamService implements Serializable {
         return recipeModel;
     }
 
-    private JsonObject getDataFromAPI(String url) throws IOException {
+    public static JsonObject getDataFromAPI(String url) throws IOException {
         InputStream is = null;
         try {
             is = new URL(url).openStream();

@@ -39,3 +39,9 @@ create table likedPosts (
     post_id int not null,
     primary key(email, post_id)
 )
+
+create table savedRecipes (
+    email varchar(128) not null,
+    recipe_id varchar(32) not null,
+    primary key(email, recipe_id)
+)

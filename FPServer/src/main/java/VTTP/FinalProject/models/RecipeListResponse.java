@@ -3,7 +3,7 @@ package VTTP.FinalProject.models;
 import java.io.Serializable;
 import java.util.List;
 
-public class RecipeResponse implements Serializable {
+public class RecipeListResponse implements Serializable {
     private List<Recipe> recipes;
     private String nextURL;
 

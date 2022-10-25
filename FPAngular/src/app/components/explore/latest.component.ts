@@ -27,10 +27,10 @@ export class LatestComponent implements OnInit {
 
   getImageFromS3(posts: Post[]) {
     for (let post of posts) {
-      console.info(">>> post is liked?: " + post.post_id + " " + post.liked)
+      // console.info(">>> post is liked?: " + post.post_id + " " + post.liked)
       this.exploreSvc.getImageFromS3(post.imageUUID)
         .then(result => {
-          console.info("result from getImageAmazonS3: " + result)
+          // console.info("result from getImageAmazonS3: " + result)
           const reader = new FileReader();
           reader.readAsDataURL(result);
           reader.onload = _event => {
