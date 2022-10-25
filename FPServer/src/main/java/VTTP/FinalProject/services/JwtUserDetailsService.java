@@ -16,13 +16,13 @@ import VTTP.FinalProject.models.FoodieUser;
 @Service
 public class JwtUserDetailsService implements UserDetailsService {
 
-    private UserService userSvc;
+    private ProfileService userSvc;
     
     @Autowired
-    public void setUserSvc(UserService userSvc) {
+    public void setUserSvc(ProfileService userSvc) {
         this.userSvc = userSvc;
     }
-    public UserService getUserSvc() {
+    public ProfileService getUserSvc() {
         return this.userSvc;
     }
 

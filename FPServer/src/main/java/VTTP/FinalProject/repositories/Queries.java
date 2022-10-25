@@ -34,4 +34,10 @@ public interface Queries {
 
     public static final String SQL_IS_RECIPE_SAVED = 
         "select * from savedRecipes where email = ? and recipe_id = ?";
-}
+
+    public static final String SQL_GET_ALL_LIKED_POSTS = 
+        "select posts.username, posts.recipe_label, posts.post_id, posts.title, posts.caption, posts.recipe_id, posts.likes, posts.ratings, posts.imageUUID, posts.date, likedPosts.email as likedPostsEmail from posts right join (select * from likedPosts where email = ?)  as likedPosts on posts.post_id = likedPosts.post_id where posts.date > NOW() - INTERVAL 60 DAY ORDER BY date ASC";
+
+    public static final String SQL_GET_POPULAR_POSTS = 
+        "select posts.username, posts.recipe_label, posts.post_id, posts.title, posts.caption, posts.recipe_id, posts.likes, posts.ratings, posts.imageUUID, posts.date, likedPosts.email as likedPostsEmail from posts left join (select * from likedPosts where email = ?)  as likedPosts on posts.post_id = likedPosts.post_id order by posts.likes DESC limit 100";
+    }

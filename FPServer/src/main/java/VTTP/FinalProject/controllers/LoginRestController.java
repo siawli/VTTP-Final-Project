@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RestController;
 
 import VTTP.FinalProject.exceptions.UserNotCreatedException;
 import VTTP.FinalProject.models.FoodieUser;
-import VTTP.FinalProject.services.UserService;
+import VTTP.FinalProject.services.ProfileService;
 
 @RestController
 public class LoginRestController {
 
     @Autowired
-    private UserService userSvc;
+    private ProfileService userSvc;
 
     @GetMapping("/explore")
     public ResponseEntity<String> login() {

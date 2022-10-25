@@ -9,11 +9,27 @@ export class ExploreService {
     constructor(private httpClient: HttpClient,
                 private cookieSvc: AppCookieService) { }
 
-    getAllPost() {
-        const params = new HttpParams()
-                .set("email", this.cookieSvc.get("email"))
+    email = this.cookieSvc.get("email")
+    _params = new HttpParams().set("email", this.email)
+
+    getAllLikedPost() {
+        const params = this._params
         return firstValueFrom(
-            this.httpClient.get<any>("/explore/all", {params})
+            this.httpClient.get<any>("/post/allLikedPosts", {params})
+        )
+    }
+
+    getPopularPost() {
+        const params = this._params
+        return firstValueFrom(
+            this.httpClient.get<any>("/post/popular", {params})
+        )
+    }
+
+    getAllPost() {
+        const params = this._params
+        return firstValueFrom(
+            this.httpClient.get<any>("/post/all", {params})
         )
     }
 
@@ -27,12 +43,12 @@ export class ExploreService {
 
     updateLikesOnPost(post_id: number, alteration: string) {
         const params = new HttpParams()
-            .set("email", this.cookieSvc.get("email"))
+            .set("email", this.email)
             .set("post_id", post_id)
             .set("alteration", alteration)
 
         return firstValueFrom(
-            this.httpClient.get<any>("/explore/updateLikes", {params}) 
+            this.httpClient.get<any>("/post/updateLikes", {params}) 
         )
         // @GetMapping("/updateLikes/{post_id}/{alteration}")
     }

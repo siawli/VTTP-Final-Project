@@ -35,6 +35,7 @@ import { UploadSuccessComponent } from './components/upload/success.component';
 import { SavedRecipesService } from './services/savedrecipes.service';
 import { LikedPostsComponent } from './components/profile/liked-posts.component';
 import { MyPostsComponent } from './components/profile/my-posts.component';
+import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -57,6 +58,7 @@ import { MyPostsComponent } from './components/profile/my-posts.component';
     UploadSuccessComponent,
     LikedPostsComponent,
     MyPostsComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,

@@ -43,3 +43,8 @@ p {
 img {
     height: 300px;
 }
+
+.id {
+    font-size: small;
+    font-style: italic;
+}

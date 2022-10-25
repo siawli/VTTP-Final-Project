@@ -14,7 +14,7 @@ export class UploadService {
     uploadPostSB(post: Post) {
         this.imageUUID = post.imageUUID
         return firstValueFrom(
-            this.httpClient.post<any>("/upload/post", post))
+            this.httpClient.post<any>("/post/upload", post))
     }
 
     uploadPostAmazon() {

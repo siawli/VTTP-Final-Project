@@ -9,7 +9,7 @@ import VTTP.FinalProject.models.FoodieUser;
 import VTTP.FinalProject.repositories.UserRepository;
 
 @Service
-public class UserService {
+public class ProfileService {
 
     private UserRepository userRepo;
     @Autowired
@@ -35,5 +35,4 @@ public class UserService {
             return Optional.of("Internal error! User not created. Please try again.");
         }
     }
-
 }

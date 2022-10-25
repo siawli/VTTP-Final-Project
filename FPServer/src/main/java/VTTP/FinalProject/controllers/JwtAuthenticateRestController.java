@@ -15,7 +15,7 @@ import VTTP.FinalProject.configurations.JwtUtil;
 import VTTP.FinalProject.models.JwtRequest;
 import VTTP.FinalProject.models.JwtResponse;
 import VTTP.FinalProject.services.JwtUserDetailsService;
-import VTTP.FinalProject.services.UserService;
+import VTTP.FinalProject.services.ProfileService;
 
 @RestController
 public class JwtAuthenticateRestController {
@@ -30,7 +30,7 @@ public class JwtAuthenticateRestController {
     private JwtUserDetailsService jwtUserDetailsSvc;
 
     @Autowired
-    private UserService userSvc;
+    private ProfileService userSvc;
 
     @PostMapping("/authenticate")
     public ResponseEntity<?> createAuthentication(@RequestBody JwtRequest jwtRequest)

@@ -1,9 +1,12 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ExploreComponent } from './components/explore/explore.component';
+import { LatestComponent } from './components/explore/latest.component';
 import { LandingComponent } from './components/login/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/login/register.component';
+import { MyPostsComponent } from './components/profile/my-posts.component';
+import { ProfileComponent } from './components/profile/profile.component';
 import { FindRecipesComponent } from './components/search/find-recipes.component';
 import { ListRecipesComponent } from './components/search/list-recipes.component';
 import { RecipeDetailsComponent } from './components/search/recipe-details.component';
@@ -15,7 +18,23 @@ const routes: Routes = [
   {path: '', component: LandingComponent},
   {path: 'signUp', component: RegisterComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'masterKitchen/explore', component: ExploreComponent, canActivate: [AuthorizeGuard]},
+  {
+    path: 'masterKitchen/explore',
+    component: ExploreComponent,
+    canActivate: [AuthorizeGuard],
+    children: [
+      {
+        path: '',
+        component: LatestComponent,
+        canActivate: [AuthorizeGuard]
+      },
+      {
+        path: ':page',
+        component: LatestComponent,
+        canActivate: [AuthorizeGuard]
+      },
+    ]},
+  
   {path: 'masterKitchen/upload/snap', component: SnapComponent, canActivate: [AuthorizeGuard]},
   {path: 'masterKitchen/upload/form', component: FormComponent, canActivate: [AuthorizeGuard]},
   {
@@ -35,7 +54,19 @@ const routes: Routes = [
     ]
   },
   {path: 'masterKitchen/search/:query/:num/:id', component: RecipeDetailsComponent, canActivate: [AuthorizeGuard]},
-  // {path: 'masterKitchen/profile/myPosts', component: }
+  {
+    path: 'masterKitchen/profile',
+    component: ExploreComponent,
+    canActivate: [AuthorizeGuard],
+    children: [
+      {
+        path: ':page',
+        component: LatestComponent,
+        canActivate: [AuthorizeGuard]
+      }
+    ]}
+  
+  // {path: 'masterKitchen/explore/popular', component: LatestComponent, canActivate: [AuthorizeGuard]}
 ];
 
 @NgModule({

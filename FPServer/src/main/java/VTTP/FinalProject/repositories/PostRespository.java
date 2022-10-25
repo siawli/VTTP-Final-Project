@@ -5,23 +5,21 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
+import VTTP.FinalProject.models.Post;
+
 import static VTTP.FinalProject.repositories.Queries.*;
 
 import java.util.Optional;
 
 @Repository
-public class ExploreRespository {
+public class PostRespository {
 
     @Autowired
     private JdbcTemplate template;
 
     public Optional<SqlRowSet> getAllPostsDateAsc(String email) {
         SqlRowSet result = template.queryForRowSet(SQL_GET_ALL_POSTS, email);
-        if (!result.next()) {
-            return Optional.empty();
-        }
-        result.previous();
-        return Optional.of(result);
+        return getResultFromDatabase(result);
     }
 
     public boolean updateLikesOnPost(int post_id, String alteration) {
@@ -48,8 +46,32 @@ public class ExploreRespository {
         return added == 1;
     }
 
-    public void getPopularPost() {
-
+    public Optional<SqlRowSet> getPopularPost(String email) {
+        SqlRowSet result = template.queryForRowSet(SQL_GET_POPULAR_POSTS, email);
+        return getResultFromDatabase(result);
     }
-    
+
+    public boolean uploadPost(Post post) {
+        int added = template.update(SQL_NEW_POST,
+            post.getEmail(), post.getUsername(),
+            post.getTitle(), post.getCaption(), post.getRecipe_id(),
+            post.getRecipe_label(), post.getRatings(), 0,
+            post.getDate(), post.getImageUUID());
+            // email, title, caption, recipe_id, ratings, likes, date, imageUUID
+        
+        return added == 1;
+    }
+
+    public Optional<SqlRowSet> getAllLikedPosts(String email) {
+        SqlRowSet result = template.queryForRowSet(SQL_GET_ALL_LIKED_POSTS, email);
+        return getResultFromDatabase(result);
+    }
+
+    private Optional<SqlRowSet> getResultFromDatabase(SqlRowSet result) {
+        if (!result.next()) {
+            return Optional.empty();
+        }
+        result.previous();
+        return Optional.of(result);
+    }
 }
