@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ExploreComponent } from './components/explore/explore.component';
+import { IdComponent } from './components/explore/id.component';
 import { LatestComponent } from './components/explore/latest.component';
 import { LandingComponent } from './components/login/landing.component';
 import { LoginComponent } from './components/login/login.component';
@@ -23,9 +24,16 @@ const routes: Routes = [
     canActivate: [AuthorizeGuard],
     children: [
       {
-        path: '',
-        component: LatestComponent,
-        canActivate: [AuthorizeGuard]
+        path: 'byRecipeId',
+        component: IdComponent,
+        canActivate: [AuthorizeGuard],
+        children: [
+          {
+            path: ':id',
+            component: LatestComponent,
+            canActivate: [AuthorizeGuard]
+          }
+        ]
       },
       {
         path: ':page',

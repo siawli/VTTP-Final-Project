@@ -1,6 +1,7 @@
-<div>
-    <button mat-stroked-button *ngFor="let recipe of savedRecipes"
-        (click)="getRecipeDetails(recipe.recipe_id)">
-        <h3>{{ recipe.recipe_label }}</h3>
-    </button>
+<div class="body">
+    <div class="card">
+        <button mat-stroked-button *ngFor="let recipe of savedRecipes" (click)="getRecipeDetails(recipe.recipe_id)">
+            <h3>{{ recipe.recipe_label }}</h3>
+        </button>
+    </div>
 </div>

@@ -1,0 +1,19 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 30px;
+}
+
+form {
+    /* border: 1px solid red; */
+    width: 45%;
+}
+
+mat-form-field {
+    width: 100%;
+}
+
+h2 {
+    text-align: center;
+}

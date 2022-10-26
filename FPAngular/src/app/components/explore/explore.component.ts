@@ -39,7 +39,7 @@ export class ExploreComponent implements OnInit {
       this.links = [
         { label: 'Latest', path: '/masterKitchen/explore/latest' },
         { label: 'Popular', path: '/masterKitchen/explore/popular' },
-        { label: 'Search by ID', path: 'masterKitchen/explore/byRecipe' }
+        { label: 'Search by Recipe ID', path: '/masterKitchen/explore/byRecipeId' }
       ]
     } else if (page.includes("profile")) {
       this.links = [

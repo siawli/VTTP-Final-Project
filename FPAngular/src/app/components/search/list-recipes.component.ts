@@ -15,36 +15,30 @@ export class ListRecipesComponent implements OnInit {
     private route: Router,
     private ar: ActivatedRoute) { }
 
-  querySub$!: Subscription
+  linkSub$!: Subscription
   nextURL = ""
   noNext = true
   recipes: Recipe[] = []
   query!: string
   noPrev = true
   numPage!: number
-  numPage$!: Subscription
 
   ngOnInit(): void {
-    console.info('>>>> in ngOnInit = ', this.ar.snapshot.params['query'])
-    if (this.ar.snapshot.params['query']) {
+    this.recipes = []
+    if (this.ar.snapshot.params['query'] && this.ar.snapshot.params['num']) {
       this.query = this.ar.snapshot.params['query']
-      this.querySub$ = this.ar.params.subscribe(v => {
+      this.numPage = this.ar.snapshot.params['num']
+      this.linkSub$ = this.ar.params.subscribe(v => {
         console.info('>subscribe: ', v)
         // @ts-ignore
         this.query = v.query
-      })
-    }
-    if (this.ar.snapshot.params['num']) {
-      this.numPage = this.ar.snapshot.params['num']
-      this.numPage$ = this.ar.params.subscribe(v => {
-        console.info('>subscribe: ', v)
-        // @ts-ignore
+        //@ts-ignore
         this.numPage = v.num
         if (this.numPage != 1) {
-          this.noPrev = false;
+          this.noPrev = false
         }
+        this.callGetRecipesSvc()
       })
-      this.callGetRecipesSvc()
     }
   }
 
@@ -77,7 +71,6 @@ export class ListRecipesComponent implements OnInit {
         this.nextURL = result.nextURL
         this.noNext = false
         this.recipes = result.recipes;
-        // console.info(">>>> nextURL: " + this.nextURL)
       })
       .catch(error => {
         console.info(">>>> error: " + error)

@@ -12,6 +12,15 @@ export class ExploreService {
     email = this.cookieSvc.get("email")
     _params = new HttpParams().set("email", this.email)
 
+    getPostsByRecipeId(recipe_id: string) {
+        const params = new HttpParams()
+                        .set("email", this.email)
+                        .set("recipe_id", recipe_id)
+        return firstValueFrom(
+            this.httpClient.get<any>("/post/byRecipeId", {params})
+        )
+    }
+
     getMyPost() {
         const params = this._params;
         return firstValueFrom(

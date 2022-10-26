@@ -42,6 +42,11 @@ public class PostService {
         return createListPost(resultOpt);
     }
 
+    public Optional<List<Post>> getPostsByRecipeId(String email, String recipe_id) {
+        Optional<SqlRowSet> resultOpt = postRepo.getPostByRecipeId(email, recipe_id);
+        return createListPost(resultOpt);
+    }
+
     @Transactional(rollbackFor = Exception.class)
     public void alterLikes(String alteration, int post_id, String email) throws Exception {
         if (!postRepo.updateLikesOnPost(post_id, alteration)) {
@@ -65,5 +70,4 @@ public class PostService {
         }
         return Optional.of(allPosts);
     }
-    
 }

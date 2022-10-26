@@ -1,1 +1,17 @@
-<p>id works!</p>
+<div class="container">
+    <!-- <h1>Find</h1> -->
+    <form [formGroup]="form" (ngSubmit)="processForm()">
+        <mat-form-field appearance="outline">
+            <!-- <mat-label>Enter recipe ID...</mat-label> -->
+            <input matInput placeholder="Enter recipe ID..." formControlName="id">
+            <button mat-button matSuffix mat-icon-button 
+                color="primary" aria-label="search">
+                <mat-icon>search</mat-icon> 
+            </button>
+        </mat-form-field>
+    </form>
+</div>
+
+<!-- <button routerLink="/masterKitchen/search/recipe/1234">Recipe</button> -->
+
+<router-outlet></router-outlet>

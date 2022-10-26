@@ -72,6 +72,12 @@ public class PostRespository {
         return getResultFromDatabase(result);
     }
 
+    public Optional<SqlRowSet> getPostByRecipeId(String email, String recipe_id) {
+        SqlRowSet result = template.queryForRowSet
+            (SQL_GET_POSTS_BY_RECIPE_ID, email, recipe_id);
+        return getResultFromDatabase(result);
+    }
+
     private Optional<SqlRowSet> getResultFromDatabase(SqlRowSet result) {
         if (!result.next()) {
             return Optional.empty();

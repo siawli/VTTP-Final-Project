@@ -52,8 +52,19 @@ export class LatestComponent implements OnInit {
           console.info('>subscribe: ', b)
           // @ts-ignore
           console.info(">>>>> under search")
+          this.getPostsByRecipeId(b['id'])
         })
       }
+    }
+
+    getPostsByRecipeId(recipe_id: string) {
+      this.exploreSvc.getPostsByRecipeId(recipe_id)
+        .then(result => {
+          console.info(">>>>> result from getPostsByRecipeId: " + result.length)
+          this.allPosts = result
+          this.getImageFromS3(this.allPosts)
+        })
+        .catch(error => console.info("error in getPostsyRecipeId: " + error))
     }
 
     getMyPosts() {

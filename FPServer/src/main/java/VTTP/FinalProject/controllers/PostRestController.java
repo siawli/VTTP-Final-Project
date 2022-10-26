@@ -96,4 +96,18 @@ public class PostRestController {
 
         return ResponseEntity.ok(myPostsOpt.get());
     }
+
+    @GetMapping("/byRecipeId")
+    public ResponseEntity<?> getPostsByRecipeId(@RequestParam String email,
+            @RequestParam String recipe_id) {
+
+        Optional<List<Post>> postsByRecipeIdOpt = 
+            postSvc.getPostsByRecipeId(email, recipe_id);
+        
+        if (postsByRecipeIdOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(postsByRecipeIdOpt.get());
+    }
 }
