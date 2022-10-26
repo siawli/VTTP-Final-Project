@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import VTTP.FinalProject.exceptions.UserNotCreatedException;
 import VTTP.FinalProject.models.FoodieUser;
+import VTTP.FinalProject.services.EmailService;
 import VTTP.FinalProject.services.ProfileService;
 
 @RestController
@@ -21,6 +22,9 @@ public class LoginRestController {
 
     @Autowired
     private ProfileService userSvc;
+
+    @Autowired
+    private EmailService emailSvc;
 
     @GetMapping("/explore")
     public ResponseEntity<String> login() {
@@ -49,6 +53,7 @@ public class LoginRestController {
         String userCreatedMsg = userCreatedMsgOpt.get();
 
         if (userCreatedMsg.contains("created")) {
+            emailSvc.sendEmailUponSignUp(user.getEmail());
             return ResponseEntity.status(HttpStatus.CREATED).body("\"User Created!\"");
         } else {
             throw new UserNotCreatedException(userCreatedMsg);
