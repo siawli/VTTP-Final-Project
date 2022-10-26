@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Recipe } from 'src/app/models';
 import { RecipeService } from 'src/app/services/recipe.service';
@@ -12,8 +12,10 @@ import { SavedRecipesService } from 'src/app/services/savedrecipes.service';
 })
 export class RecipeDetailsComponent implements OnInit {
 
-  constructor(private ar: ActivatedRoute, private recipeSvc: RecipeService,
-              private savedRecipeSvc: SavedRecipesService) { }
+  constructor(private ar: ActivatedRoute,
+              private recipeSvc: RecipeService,
+              private savedRecipeSvc: SavedRecipesService,
+              private route: Router) { }
 
   query!: string
   querySub$!: Subscription
@@ -70,8 +72,9 @@ export class RecipeDetailsComponent implements OnInit {
       .catch(error => console.info("error in get recipe details: " + error))
   }
 
-  alterSavedRecipes(recipe_id: string, alteration: string) {
-    this.savedRecipeSvc.alterSavedRecipes(recipe_id, alteration)
+  alterSavedRecipes(recipe_id: string, recipe_label: string, alteration: string) {
+    console.info(">>>> recipe_label: " + recipe_label)
+    this.savedRecipeSvc.alterSavedRecipes(recipe_id, recipe_label, alteration)
       .then(result => {
         console.info("result of saving recipe:" + result)
       })
@@ -80,6 +83,15 @@ export class RecipeDetailsComponent implements OnInit {
       this.isSaved = true;
     } else {
       this.isSaved = false;
+    }
+  }
+
+  reRouteBack(){
+    // [routerLink]="['/masterKitchen/search', query, num]"
+    if (!this.query && ! this.num) {
+      this.route.navigate(['/masterKitchen/profile/savedRecipes'])
+    } else {
+      this.route.navigate(['/masterKitchen/search', this.query, this.num])
     }
   }
 

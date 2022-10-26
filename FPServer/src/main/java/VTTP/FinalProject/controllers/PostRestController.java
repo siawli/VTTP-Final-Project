@@ -85,4 +85,15 @@ public class PostRestController {
 
         return ResponseEntity.ok(popularPostsOpt.get());
     }
+
+    @GetMapping("/myPosts")
+    public ResponseEntity<?> getMyPosts(@RequestParam String email) {
+        Optional<List<Post>> myPostsOpt = postSvc.getMyPosts(email);
+        
+        if (myPostsOpt.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(myPostsOpt.get());
+    }
 }

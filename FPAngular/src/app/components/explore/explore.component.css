@@ -8,8 +8,6 @@
 
 .mat-tab-link {
     opacity: 1;
+    /* color: grey; */
   }
   
-  .mat-tab-link:focus {
-    color: black; 
-  }

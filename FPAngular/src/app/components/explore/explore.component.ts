@@ -45,7 +45,7 @@ export class ExploreComponent implements OnInit {
       this.links = [
         { label: 'My Posts', path: '/masterKitchen/profile/myPosts' },
         { label: 'Liked Posts', path: '/masterKitchen/profile/likedPosts' },
-        { label: 'Saved Recipes', path: 'masterKitchen/profile/savedRecipes' }
+        { label: 'Saved Recipes', path: '/masterKitchen/profile/savedRecipes' }
       ]
       // this.links = ['My Posts', 'Liked Posts', 'Saved Recipes']
     }

@@ -42,7 +42,9 @@ export class LatestComponent implements OnInit {
           this.getPopularPosts()
         } else if (this.page.includes("likedPosts")) {
           this.getLikedPosts();
-        } 
+        } else if (this.page.includes("myPosts")) {
+          this.getMyPosts();
+        }
       })
     } else if (this.ar.snapshot.params['id']) {
         this.id = this.ar.snapshot.params['id']
@@ -52,6 +54,15 @@ export class LatestComponent implements OnInit {
           console.info(">>>>> under search")
         })
       }
+    }
+
+    getMyPosts() {
+      this.exploreSvc.getMyPost()
+        .then(result => {
+          this.allPosts = result
+          this.getImageFromS3(this.allPosts)
+        })
+        .catch(error => console.info("error in getMyPosts: " + error))
     }
 
     getLikedPosts() {

@@ -1,5 +1,8 @@
 package VTTP.FinalProject.controllers;
 
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -8,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import VTTP.FinalProject.models.SavedRecipe;
 import VTTP.FinalProject.services.SavedRecipesService;
 
 @RestController
@@ -19,15 +23,20 @@ public class SavedRecipesController {
 
     @GetMapping("/allRecipes")
     public ResponseEntity<?> getAllSavedRecipes(@RequestParam String email) {
+        Optional<List<SavedRecipe>> savedRecipesOpt = savedRecipesSvc.getSavedRecipes(email);
+        if (savedRecipesOpt.isEmpty()) {
+            return ResponseEntity.badRequest().body("No recipes saved");
+        }
 
-        return null;
+        return ResponseEntity.ok(savedRecipesOpt.get());
     }
 
     @GetMapping("/alterSaved")
-    public ResponseEntity<?> alterSavedRecipe(@RequestParam String email, 
+    public ResponseEntity<?> alterSavedRecipe(
+            @RequestParam String email, @RequestParam String recipe_label,
             @RequestParam String recipe_id, @RequestParam String alteration) {
 
-        boolean added = savedRecipesSvc.updateSavedRecipe(email, alteration, recipe_id);
+        boolean added = savedRecipesSvc.updateSavedRecipe(email, recipe_label, alteration, recipe_id);
         if (added) {
             return ResponseEntity.ok("\"Successful saved recipes\"");
         } else {

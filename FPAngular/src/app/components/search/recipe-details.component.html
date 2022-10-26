@@ -23,14 +23,14 @@
         <div class="buttons">
             <div>
                 <button mat-flat-button color="primary"
-                    [routerLink]="['/masterKitchen/search', query, num]">Back</button>
+                    (click)="reRouteBack(query, num)">Back</button>
             </div>
             <div>
-                <button *ngIf="!isSaved" class="example.button" mat-button matSuffix mat-stroked-button color="secondary" aria-label="save" (click)="alterSavedRecipes(recipe.recipe_id, 'add')">
+                <button *ngIf="!isSaved" class="example.button" mat-button matSuffix mat-stroked-button color="secondary" aria-label="save" (click)="alterSavedRecipes(recipe.recipe_id, recipe.label, 'add')">
                     <mat-icon>save</mat-icon><span>Save recipe</span>
                 </button>
                 <button *ngIf="isSaved" class="example.button" mat-button matSuffix mat-raised-button color="accent" aria-label="save"
-                (click)="alterSavedRecipes(recipe.recipe_id, 'remove')">
+                (click)="alterSavedRecipes(recipe.recipe_id, recipe.label, 'remove')">
                     <mat-icon>save</mat-icon><span>Recipe saved</span>
                 </button>
             </div>

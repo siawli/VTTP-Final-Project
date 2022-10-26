@@ -40,3 +40,8 @@ export interface Post {
     // file
     liked: boolean
 }
+
+export interface SavedRecipe {
+    recipe_label: string,
+    recipe_id: string
+}

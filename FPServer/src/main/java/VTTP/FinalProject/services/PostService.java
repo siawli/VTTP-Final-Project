@@ -37,6 +37,11 @@ public class PostService {
         return createListPost(resultOpt);
     }
 
+    public Optional<List<Post>> getMyPosts(String email) {
+        Optional<SqlRowSet> resultOpt = postRepo.getMyPosts(email);
+        return createListPost(resultOpt);
+    }
+
     @Transactional(rollbackFor = Exception.class)
     public void alterLikes(String alteration, int post_id, String email) throws Exception {
         if (!postRepo.updateLikesOnPost(post_id, alteration)) {

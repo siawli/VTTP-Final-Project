@@ -67,6 +67,11 @@ public class PostRespository {
         return getResultFromDatabase(result);
     }
 
+    public Optional<SqlRowSet> getMyPosts(String email) {
+        SqlRowSet result = template.queryForRowSet(SQL_GET_MY_POSTS, email, email);
+        return getResultFromDatabase(result);
+    }
+
     private Optional<SqlRowSet> getResultFromDatabase(SqlRowSet result) {
         if (!result.next()) {
             return Optional.empty();

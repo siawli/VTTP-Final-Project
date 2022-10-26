@@ -12,6 +12,13 @@ export class ExploreService {
     email = this.cookieSvc.get("email")
     _params = new HttpParams().set("email", this.email)
 
+    getMyPost() {
+        const params = this._params;
+        return firstValueFrom(
+            this.httpClient.get<any>("/post/myPosts", {params})
+        )
+    }
+
     getAllLikedPost() {
         const params = this._params
         return firstValueFrom(

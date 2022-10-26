@@ -28,14 +28,10 @@ import { UploadService } from './services/upload.service';
 import { SnapComponent } from './components/upload/snap.component';
 import { FormComponent } from './components/upload/form.component';
 import { ExploreService } from './services/explore.service';
-import { PopularComponent } from './components/explore/popular.component';
 import { LatestComponent } from './components/explore/latest.component';
 import { IdComponent } from './components/explore/id.component';
 import { UploadSuccessComponent } from './components/upload/success.component';
 import { SavedRecipesService } from './services/savedrecipes.service';
-import { LikedPostsComponent } from './components/profile/liked-posts.component';
-import { MyPostsComponent } from './components/profile/my-posts.component';
-import { ProfileComponent } from './components/profile/profile.component';
 
 @NgModule({
   declarations: [
@@ -52,13 +48,9 @@ import { ProfileComponent } from './components/profile/profile.component';
     SuccessComponent,
     SnapComponent,
     FormComponent,
-    PopularComponent,
     LatestComponent,
     IdComponent,
     UploadSuccessComponent,
-    LikedPostsComponent,
-    MyPostsComponent,
-    ProfileComponent,
   ],
   imports: [
     BrowserModule,
