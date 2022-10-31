@@ -60,7 +60,7 @@ import { SavedRecipesService } from './services/savedrecipes.service';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    WebcamModule
+    WebcamModule,
   ],
   providers: [LoginService, JWTTokenService, UploadService,
     AppCookieService, AuthorizeGuard, RecipeService, PostService,

@@ -1,0 +1,40 @@
+/* .body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid hotpink
+}
+
+.car {
+    height: 500px;
+}
+
+carousel {
+    width: 80%;
+    height: 1%;
+    border: 1px solid red;
+}
+
+img {
+    border: 3px solid blue;
+    height: 10000;
+} */
+
+.body {
+    height: auto;
+    /* border: 1px solid red; */
+    padding: 40px;
+}
+
+.container {
+    border: 1px solid #3F51B5;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+
+}
+
+img {
+    height: auto
+}
