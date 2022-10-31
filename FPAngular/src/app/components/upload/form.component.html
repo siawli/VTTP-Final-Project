@@ -27,12 +27,6 @@
                 <input matInput formControlName="recipe_label" [value]="placeholder">
             </mat-form-field>
 
-            <mat-form-field appearance="outline">
-                <mat-label>Rating out of 10</mat-label>
-                <input matInput placeholder="Rating out of 10" formControlName="ratings">
-            </mat-form-field>
-
-
             <div class="buttons">
                 <button mat-raised-button type="button" [routerLink]="['/masterKitchen/upload/snap']">Cancel</button>
                 <button mat-raised-button color="primary" type="submit" [disabled]="form.invalid">Upload your

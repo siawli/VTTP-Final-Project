@@ -13,7 +13,7 @@ public class Post {
     private String caption;
     private String recipe_label;
     private String recipe_id;
-    private Float ratings;
+    // private Float ratings;
     private int likes;
     private String date;
     private String imageUUID;
@@ -59,13 +59,13 @@ public class Post {
         this.recipe_id = recipe_id;
     }
 
-    public Float getRatings() {
-        return ratings;
-    }
+    // public Float getRatings() {
+    //     return ratings;
+    // }
 
-    public void setRatings(Float ratings) {
-        this.ratings = ratings;
-    }
+    // public void setRatings(Float ratings) {
+    //     this.ratings = ratings;
+    // }
 
     public int getLikes() {
         return likes;
@@ -102,7 +102,7 @@ public class Post {
     @Override
     public String toString() {
         return "Post [post_id=" + post_id + ", title=" + title + ", caption=" + caption + ", recipe_id=" + recipe_id
-                + ", ratings=" + ratings + ", likes=" + likes + ", date=" + date + ", imageUUID=" + imageUUID + "]";
+                + ", likes=" + likes + ", date=" + date + ", imageUUID=" + imageUUID + "]";
     }
 
     public String getEmail() {
@@ -134,7 +134,7 @@ public class Post {
         post.setImageUUID(result.getString("imageUUID"));
         post.setLikes(result.getInt("likes"));
         post.setPost_id(result.getInt("post_id"));
-        post.setRatings(result.getFloat("ratings"));
+        // post.setRatings(result.getFloat("ratings"));
         post.setRecipe_id(result.getString("recipe_id"));
         post.setRecipe_label(result.getString("recipe_label"));
         post.setUsername(result.getString("username"));

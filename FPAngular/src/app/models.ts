@@ -33,7 +33,7 @@ export interface Post {
     caption: string,
     recipe_id: string,
     recipe_label: string,
-    ratings: number,
+    // ratings: number,
     likes: number,
     date: string,
     imageUUID: string,

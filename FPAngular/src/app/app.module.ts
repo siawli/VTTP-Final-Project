@@ -27,8 +27,8 @@ import { WebcamModule } from 'ngx-webcam';
 import { UploadService } from './services/upload.service';
 import { SnapComponent } from './components/upload/snap.component';
 import { FormComponent } from './components/upload/form.component';
-import { ExploreService } from './services/explore.service';
-import { LatestComponent } from './components/explore/latest.component';
+import { PostService } from './services/post.service';
+import { PostComponent } from './components/explore/post.component';
 import { IdComponent } from './components/explore/id.component';
 import { UploadSuccessComponent } from './components/upload/success.component';
 import { SavedRecipesService } from './services/savedrecipes.service';
@@ -48,7 +48,7 @@ import { SavedRecipesService } from './services/savedrecipes.service';
     SuccessComponent,
     SnapComponent,
     FormComponent,
-    LatestComponent,
+    PostComponent,
     IdComponent,
     UploadSuccessComponent,
   ],
@@ -63,7 +63,7 @@ import { SavedRecipesService } from './services/savedrecipes.service';
     WebcamModule
   ],
   providers: [LoginService, JWTTokenService, UploadService,
-    AppCookieService, AuthorizeGuard, RecipeService, ExploreService,
+    AppCookieService, AuthorizeGuard, RecipeService, PostService,
     SavedRecipesService,
     { provide: HTTP_INTERCEPTORS, useClass: UniversalAppInterceptor, multi: true }],
   bootstrap: [AppComponent]

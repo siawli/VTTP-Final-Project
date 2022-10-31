@@ -66,6 +66,7 @@ public class PostService {
         List<Post> allPosts = new LinkedList<>();
         while (result.next()) {
             Post post = Post.createPost(result);
+            System.out.println(">>>> post date: " + post.getDate());
             allPosts.add(post);
         }
         return Optional.of(allPosts);

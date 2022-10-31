@@ -51,7 +51,7 @@ export class LoginComponent implements OnInit {
         this.cookieSvc.set("token", token)
         this.loginSvc.getLandingExplorePage()
         .then(result => {
-          this.route.navigate([`masterKitchen/explore`])
+          this.route.navigate([`masterKitchen/explore/latest`])
         })
         .catch(error => console.info(">>>> error login in to explore page: " + error))
       })

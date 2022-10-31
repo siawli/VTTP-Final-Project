@@ -10,10 +10,9 @@ export class RecipeService {
     constructor(private httpClient: HttpClient,
                 private cookieSvc: AppCookieService) { }
 
-    getRecipeDetailsObs = new Subject<Recipe>();
+    
 
     getRecipes(query: string, numPage: number, _contValue?: string) {
-        
         let params;
         if (_contValue) {
             params = new HttpParams()

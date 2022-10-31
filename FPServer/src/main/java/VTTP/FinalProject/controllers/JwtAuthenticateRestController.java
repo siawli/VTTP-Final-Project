@@ -41,9 +41,6 @@ public class JwtAuthenticateRestController {
 
         try {
             System.out.println(">>>>> in /authenticate");
-            // System.out.println(">>>> in autenticate RC");
-            // System.out.println(">>>>> password: " + request.getPassword());
-            // System.out.println(">>>> email: " + request.getEmail());
             authenticate(email, password);
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,6 +53,7 @@ public class JwtAuthenticateRestController {
         final String token = jwtUtil.generateToken(userDetails);
 
         System.out.println(">>> jwtToken: " + token);
+        System.out.println(">>> jwtTokenExpiryDate: " + jwtUtil.getExpirationDateFromToken(token));
 
         return ResponseEntity.ok(new JwtResponse(token, userSvc.getUser(email).get().getUsername()));
     }

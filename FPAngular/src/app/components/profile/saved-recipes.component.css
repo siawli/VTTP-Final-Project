@@ -17,3 +17,14 @@ button {
     /* border: 1px solid red; */
     /* margin-left: 20px; */
 }
+
+.none {
+    display: flex;
+    margin-left: 40px;
+    margin-top: 20px;   
+    /* border: 1px solid red; */
+}
+
+h3 {
+    margin-right: 10px;
+}

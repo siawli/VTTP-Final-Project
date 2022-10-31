@@ -22,13 +22,14 @@ export class ListRecipesComponent implements OnInit {
   query!: string
   noPrev = true
   numPage!: number
+  serviceCalledButError = false;
 
   ngOnInit(): void {
-    this.recipes = []
     if (this.ar.snapshot.params['query'] && this.ar.snapshot.params['num']) {
       this.query = this.ar.snapshot.params['query']
       this.numPage = this.ar.snapshot.params['num']
       this.linkSub$ = this.ar.params.subscribe(v => {
+        this.recipes = []
         console.info('>subscribe: ', v)
         // @ts-ignore
         this.query = v.query
@@ -73,9 +74,9 @@ export class ListRecipesComponent implements OnInit {
         this.recipes = result.recipes;
       })
       .catch(error => {
+        this.serviceCalledButError = true
+        this.noNext = true;
         console.info(">>>> error: " + error)
       })
   }
-
-
 }

@@ -1,7 +1,16 @@
-<div class="body">
+<div class="body" *ngIf="savedRecipes.length > 0">
     <div class="card">
         <button mat-stroked-button *ngFor="let recipe of savedRecipes" (click)="getRecipeDetails(recipe.recipe_id)">
             <h3>{{ recipe.recipe_label }}</h3>
+        </button>
+    </div>
+</div>
+
+<div class="body" *ngIf="savedRecipes.length == 0">
+    <div class="none">
+        <h3>No recipes saved</h3>
+        <button mat-raised-button color="primary" [routerLink]="['/masterKitchen/search']">
+            Search for Recipes
         </button>
     </div>
 </div>

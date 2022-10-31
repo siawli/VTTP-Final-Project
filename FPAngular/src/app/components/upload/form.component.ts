@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Post } from 'src/app/models';
 import { UploadService } from 'src/app/services/upload.service';
 import { formatDate } from '@angular/common'
@@ -8,6 +8,7 @@ import { v4 as uuid } from 'uuid';
 import { AppCookieService } from 'src/app/services/cookie.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UploadSuccessComponent } from './success.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-form',
@@ -20,13 +21,25 @@ export class FormComponent implements OnInit {
   imageWidth!: string
   form!: FormGroup
   placeholder = "Getting recipe label..."
-  recipe_id_control = this.fb.control<string>('', [Validators.required, Validators.minLength(32)])
+  recipe_id_control = this.fb.control('', [Validators.required, Validators.minLength(32)])
+  // reicpe_label_control!: FormControl
 
   constructor(private router: Router, private uploadSvc: UploadService,
-              private fb: FormBuilder, private cookieSvc: AppCookieService,
-              private dialog: MatDialog) { }
+    private fb: FormBuilder, private cookieSvc: AppCookieService,
+    private dialog: MatDialog, private ar: ActivatedRoute) { }
+
+  id!: string
+  idSub$!: Subscription
 
   ngOnInit(): void {
+    if (this.ar.snapshot.params['id']) {
+      this.id = this.ar.snapshot.params['id']
+      this.idSub$ = this.ar.params.subscribe(v => {
+        console.info('>subscribe: ', v)
+        // @ts-ignore
+        this.id = v.id
+      })
+    }
     if (!this.uploadSvc.dataUrl) {
       this.router.navigate(['/masterKitchen/upload/snap'])
       return
@@ -37,35 +50,50 @@ export class FormComponent implements OnInit {
 
     this.imageData = this.uploadSvc.dataUrl
 
-    this.form = this.fb.group({
-      title: this.fb.control<string>('', [Validators.required]),
-      caption: this.fb.control<string>('', [Validators.required]),
-      recipe_id: this.recipe_id_control,
-      recipe_label: [{value: 'Getting recipe label...', disabled: true}],
-      // recipe_label: this.fb.control<string>('', [Validators.required]),
-      ratings: this.fb.control<number>(1, [Validators.required])
-    })
+    if (this.id) {
+      this.getRecipeLabel(this.id)
+      this.form = this.fb.group({
+        title: this.fb.control<string>('', [Validators.required]),
+        caption: this.fb.control<string>('', [Validators.required]),
+        recipe_id: [{ value: this.id, disabled: true }],
+        recipe_label: [{ value: this.placeholder, disabled: true }],
+        // recipe_label: this.fb.control<string>('', [Validators.required]),
+        // ratings: this.fb.control<number>(1, [Validators.required])
+      })
+    } else {
+      this.recipe_id_control = this.fb.control("", [Validators.required, Validators.minLength(32)])
+      this.form = this.fb.group({
+        title: this.fb.control<string>('', [Validators.required]),
+        caption: this.fb.control<string>('', [Validators.required]),
+        recipe_id: this.recipe_id_control,
+        recipe_label: [{ value: "Getting recipe label...", disabled: true }],
+        // recipe_label: this.fb.control<string>('', [Validators.required]),
+        // ratings: this.fb.control<number>(1, [Validators.required])
+      })
+    }
   }
 
   getLabel(event: any) {
     if (event.target.value.length === 32) {
-      this.uploadSvc.getRecipeLabel(event.target.value)
-        .then(result => {
-          console.info("recipe_label: " + result)
-          this.placeholder = result
-        })
-        .catch(error => {
-          console.info("error in get recipe_label: " + error)
-        })
+      this.getRecipeLabel(event.target.value)
     }
   }
+
+  getRecipeLabel(id: string) {
+    this.uploadSvc.getRecipeLabel(id)
+      .then(result => {
+        console.info("recipe_label: " + result)
+        this.placeholder = result
+      })
+      .catch(error => {
+        console.info("error in get recipe_label: " + error)
+      })
+  }
+
 
   shareIt() {
     console.info('>>>> data: ', this.form.value)
     const post: Post = this.form.getRawValue() as Post;
-    // console.info(">>>> title: " + post.title)
-    // console.info(">>>> caption: " + post.caption)
-    // console.info(">>>> rating: " + post.rating)
     post.date = formatDate(new Date(), 'yyyy-MM-dd', 'en')
     const imageUUID = uuid().toString().substring(0, 8);
     post.imageUUID = imageUUID;
@@ -87,10 +115,6 @@ export class FormComponent implements OnInit {
       .catch(error => {
         console.info("error in uploadPostSB: " + error)
       })
-    // console.info("imageDataToUrl: " + this.uploadSvc.dataUrl)
-    // this.uploadSvc.uploadPost(post)
-    //   .then(result => console.info(result))
-    //   .catch(error => console.info(error))
   }
 
   uploadImgAmazon() {
@@ -113,6 +137,6 @@ export class FormComponent implements OnInit {
     dialogConfig.hasBackdrop = true;
 
     this.dialog.open(UploadSuccessComponent, dialogConfig);
-}
+  }
 
 }

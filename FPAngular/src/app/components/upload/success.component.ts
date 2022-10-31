@@ -17,7 +17,7 @@ export class UploadSuccessComponent implements OnInit {
 
   toExplore() {
     this.dialogRef.close();
-    this.route.navigate(['/masterKitchen/explore'])
+    this.route.navigate(['/masterKitchen/explore/latest'])
   }
 
   toNewPost() {

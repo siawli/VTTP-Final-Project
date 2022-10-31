@@ -40,6 +40,7 @@ mat-card {
 
 h1 {
     text-align: center;
+    margin-top: 5px;
 }
 
 
@@ -55,6 +56,13 @@ h1 {
     padding-right: 20px;
     /* border: 1px solid red;   */
     margin-top: 15px;
+}
+
+
+
+.right-buttons button {
+    /* display: flex; */
+    margin-left: 10px;
 }
 
 mat-icon {

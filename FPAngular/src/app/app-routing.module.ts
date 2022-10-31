@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { ExploreComponent } from './components/explore/explore.component';
 import { IdComponent } from './components/explore/id.component';
-import { LatestComponent } from './components/explore/latest.component';
+import { PostComponent } from './components/explore/post.component';
 import { LandingComponent } from './components/login/landing.component';
 import { LoginComponent } from './components/login/login.component';
 import { RegisterComponent } from './components/login/register.component';
@@ -30,20 +30,22 @@ const routes: Routes = [
         children: [
           {
             path: ':id',
-            component: LatestComponent,
+            component: PostComponent,
             canActivate: [AuthorizeGuard]
           }
         ]
       },
       {
         path: ':page',
-        component: LatestComponent,
+        component: PostComponent,
         canActivate: [AuthorizeGuard]
       },
     ]},
   
   {path: 'masterKitchen/upload/snap', component: SnapComponent, canActivate: [AuthorizeGuard]},
+  {path: 'masterKitchen/upload/snap/:id', component: SnapComponent, canActivate: [AuthorizeGuard]},
   {path: 'masterKitchen/upload/form', component: FormComponent, canActivate: [AuthorizeGuard]},
+  {path: 'masterKitchen/upload/form/:id', component: FormComponent, canActivate: [AuthorizeGuard]},
   {
     path: 'masterKitchen/search',
     component: FindRecipesComponent,
@@ -74,12 +76,12 @@ const routes: Routes = [
       },
       {
         path: ':page',
-        component: LatestComponent,
+        component: PostComponent,
         canActivate: [AuthorizeGuard]
       }
     ]}
   
-  // {path: 'masterKitchen/explore/popular', component: LatestComponent, canActivate: [AuthorizeGuard]}
+  // {path: 'masterKitchen/explore/popular', component: PostComponent, canActivate: [AuthorizeGuard]}
 ];
 
 @NgModule({

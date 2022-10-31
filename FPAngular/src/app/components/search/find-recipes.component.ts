@@ -22,15 +22,11 @@ export class FindRecipesComponent implements OnInit {
               private ar: ActivatedRoute) { }
 
   ngOnInit(): void {
-    this.form = this.createForm();
-    if (this.ar.snapshot.params['query']) {
-      this.queryLink = this.ar.snapshot.params['query']
-      this.query$ = this.ar.params.subscribe(v => {
-        console.info('>subscribe: ', v)
-        // @ts-ignore
-        this.queryLink = v.query
-      })
+    const href = window.location.href.split("/")
+    if (href.length > 6) {
+      this.queryLink = href[6].split("%20").join(" ")
     }
+    this.form = this.createForm();
   }
 
   createForm() {

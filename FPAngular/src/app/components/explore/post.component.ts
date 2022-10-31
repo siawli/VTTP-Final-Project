@@ -2,25 +2,17 @@ import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Post } from 'src/app/models';
-import { ExploreService } from 'src/app/services/explore.service';
+import { PostService } from 'src/app/services/post.service';
 
 @Component({
-  selector: 'app-latest',
-  templateUrl: './latest.component.html',
-  styleUrls: ['./latest.component.css']
+  selector: 'app-post',
+  templateUrl: './post.component.html',
+  styleUrls: ['./post.component.css']
 })
-export class LatestComponent implements OnInit {
+export class PostComponent implements OnInit {
 
-  constructor(private exploreSvc: ExploreService,
+  constructor(private postSvc: PostService,
     private ar: ActivatedRoute) { }
-
-  // @Input()
-  // set _label(label: string) {
-  //   this._label = label;
-  // }
-  // get _label(): string {
-  //   return this._label;
-  // }
 
   page!: string
   pageSub$!: Subscription
@@ -28,6 +20,7 @@ export class LatestComponent implements OnInit {
   idSub$!: Subscription
 
   allPosts: Post[] = []
+  noPosts = false;
 
   ngOnInit(): void {
     if (this.ar.snapshot.params['page']) {
@@ -37,12 +30,16 @@ export class LatestComponent implements OnInit {
         // @ts-ignore
         this.page = v.page
         if (this.page.includes("latest")) {
+          this.allPosts = []
           this.getAllPosts()
         } else if (this.page.includes("popular")) {
+          this.allPosts = []
           this.getPopularPosts()
         } else if (this.page.includes("likedPosts")) {
+          this.allPosts = []
           this.getLikedPosts();
         } else if (this.page.includes("myPosts")) {
+          this.allPosts = []
           this.getMyPosts();
         }
       })
@@ -58,57 +55,70 @@ export class LatestComponent implements OnInit {
     }
 
     getPostsByRecipeId(recipe_id: string) {
-      this.exploreSvc.getPostsByRecipeId(recipe_id)
+      this.postSvc.getPostsByRecipeId(recipe_id)
         .then(result => {
           console.info(">>>>> result from getPostsByRecipeId: " + result.length)
           this.allPosts = result
           this.getImageFromS3(this.allPosts)
         })
-        .catch(error => console.info("error in getPostsyRecipeId: " + error))
+        .catch(error => {
+          this.noPosts = true;
+          console.info("error in getPostsyRecipeId: " + error)
+      })
     }
 
     getMyPosts() {
-      this.exploreSvc.getMyPost()
+      this.postSvc.getMyPost()
         .then(result => {
           this.allPosts = result
           this.getImageFromS3(this.allPosts)
         })
-        .catch(error => console.info("error in getMyPosts: " + error))
+        .catch(error => {
+          this.noPosts = true;
+          console.info("error in getMyPosts: " + error)
+        })
     }
 
     getLikedPosts() {
-      this.exploreSvc.getAllLikedPost()
+      this.postSvc.getAllLikedPost()
         .then(result => {
           this.allPosts = result
           this.getImageFromS3(this.allPosts)
         })
-        .catch(error => console.info("error in getPopularPosts: " + error))
+        .catch(error => {
+          this.noPosts = true;
+          console.info("error in getPopularPosts: " + error)
+        })
     }
 
     getAllPosts() {
-      this.exploreSvc.getAllPost()
+      this.postSvc.getAllPost()
       .then(result => {
         this.allPosts = result
         this.getImageFromS3(this.allPosts)
       })
       .catch(error => {
+        this.noPosts = true;
         console.info("error in getAllPosts: " + error)
       })
     }
 
     getPopularPosts() {
-      this.exploreSvc.getPopularPost()
+      this.postSvc.getPopularPost()
       .then(result => {
         this.allPosts = result;
         this.getImageFromS3(this.allPosts)
       })
-      .catch(error => console.info("error in getPopularPosts: " + error))
+      .catch(error => {
+        this.noPosts = true;
+        console.info("error in getPopularPosts: " + error)
+      })
 
     }
 
     getImageFromS3(posts: Post[]) {
       for (let post of posts) {
-        this.exploreSvc.getImageFromS3(post.imageUUID)
+        this.postSvc.getImageFromS3(post.imageUUID)
           .then(result => {
             const reader = new FileReader();
             reader.readAsDataURL(result);
@@ -126,7 +136,7 @@ export class LatestComponent implements OnInit {
       if (post.liked) {
         post.likes -= 1
         post.liked = false
-        this.exploreSvc.updateLikesOnPost(post.post_id, "unlike")
+        this.postSvc.updateLikesOnPost(post.post_id, "unlike")
           .then(result => {
             console.info(">>> unliked: " + result)
           })
@@ -136,7 +146,7 @@ export class LatestComponent implements OnInit {
       } else {
         post.likes += 1
         post.liked = true
-        this.exploreSvc.updateLikesOnPost(post.post_id, "add")
+        this.postSvc.updateLikesOnPost(post.post_id, "add")
           .then(result => {
             console.info(">>> liked: " + result)
           })

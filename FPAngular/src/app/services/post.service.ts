@@ -4,7 +4,7 @@ import { firstValueFrom } from "rxjs";
 import { AppCookieService } from "./cookie.service";
 
 @Injectable()
-export class ExploreService {
+export class PostService {
 
     constructor(private httpClient: HttpClient,
                 private cookieSvc: AppCookieService) { }

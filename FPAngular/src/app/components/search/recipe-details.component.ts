@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -15,7 +16,8 @@ export class RecipeDetailsComponent implements OnInit {
   constructor(private ar: ActivatedRoute,
               private recipeSvc: RecipeService,
               private savedRecipeSvc: SavedRecipesService,
-              private route: Router) { }
+              private route: Router,
+              private location: Location) { }
 
   query!: string
   querySub$!: Subscription
@@ -88,11 +90,12 @@ export class RecipeDetailsComponent implements OnInit {
 
   reRouteBack(){
     // [routerLink]="['/masterKitchen/search', query, num]"
-    if (!this.query && ! this.num) {
-      this.route.navigate(['/masterKitchen/profile/savedRecipes'])
-    } else {
-      this.route.navigate(['/masterKitchen/search', this.query, this.num])
-    }
+    // if (!this.query && ! this.num) {
+    //   this.route.navigate(['/masterKitchen/profile/savedRecipes'])
+    // } else {
+    //   this.route.navigate(['/masterKitchen/search', this.query, this.num])
+    // }
+    this.location.back()
   }
 
 }

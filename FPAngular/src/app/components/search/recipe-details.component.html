@@ -22,21 +22,27 @@
         </div>
         <div class="buttons">
             <div>
-                <button mat-flat-button color="primary"
-                    (click)="reRouteBack(query, num)">Back</button>
+                <button mat-flat-button color="primary" (click)="reRouteBack(query, num)">Back</button>
             </div>
-            <div>
-                <button *ngIf="!isSaved" class="example.button" mat-button matSuffix mat-stroked-button color="secondary" aria-label="save" (click)="alterSavedRecipes(recipe.recipe_id, recipe.label, 'add')">
-                    <mat-icon>save</mat-icon><span>Save recipe</span>
+            <div class="right-buttons">
+                <button mat-stroked-button color="primary" [routerLink]="['/masterKitchen/upload/snap', recipe.recipe_id]">
+                    Upload post
                 </button>
-                <button *ngIf="isSaved" class="example.button" mat-button matSuffix mat-raised-button color="accent" aria-label="save"
-                (click)="alterSavedRecipes(recipe.recipe_id, recipe.label, 'remove')">
-                    <mat-icon>save</mat-icon><span>Recipe saved</span>
-                </button>
+                <!-- <div> -->
+                    <button *ngIf="!isSaved" class="example.button" mat-button matSuffix mat-stroked-button
+                        color="secondary" aria-label="save"
+                        (click)="alterSavedRecipes(recipe.recipe_id, recipe.label, 'add')">
+                        <mat-icon>save</mat-icon><span>Save recipe</span>
+                    </button>
+                    <button *ngIf="isSaved" class="example.button" mat-button matSuffix mat-raised-button color="accent"
+                        aria-label="save" (click)="alterSavedRecipes(recipe.recipe_id, recipe.label, 'remove')">
+                        <mat-icon>save</mat-icon><span>Recipe saved</span>
+                    </button>
+                <!-- </div> -->
             </div>
         </div>
     </mat-card>
 </div>
 
 <!-- <hr> -->
-<app-latest></app-latest>
+<app-post></app-post>
