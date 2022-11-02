@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, Output, ViewChild } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
+import { Subject } from 'rxjs';
 import { AppCookieService } from '../services/cookie.service';
 import { LoginService } from '../services/logInOut.service';
 
@@ -14,6 +15,12 @@ export class NavbarComponent implements OnInit {
               private router: ActivatedRoute,
               private loginSvc: LoginService,
               private cookieSvc: AppCookieService) { }
+
+  @ViewChild('nav')
+  elementView!: ElementRef
+
+  @Output()
+  navBarHeight = new Subject<number>();
 
   ngOnInit(): void {
 
@@ -36,6 +43,12 @@ export class NavbarComponent implements OnInit {
     
   routeLandingPage() {
     this.route.navigate(['/']);
+  }
+
+  ngAfterViewInit() {
+    let height = this.elementView.nativeElement.offsetHeight;
+    console.info(">>>> navbar height: " + height)
+    this.navBarHeight.next(height);
   }
 
 }

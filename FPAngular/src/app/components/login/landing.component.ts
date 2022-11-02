@@ -11,9 +11,11 @@ export class LandingComponent implements OnInit {
   constructor() { }
 
   slides: string[] = [
-    '/assets/1.png',
+    // '/assets/logo.png',
+    '/assets/posts.png',
     '/assets/search.png',
-    '/assets/recipe.png'
+    '/assets/recipe.png',
+    '/assets/savedRecipes.png'
   ]
 
   ngOnInit(): void {

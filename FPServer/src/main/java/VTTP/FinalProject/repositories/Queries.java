@@ -12,7 +12,7 @@ public interface Queries {
         "insert into posts(email, username, title, caption, recipe_id, recipe_label, likes, date, imageUUID) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
     public static final String SQL_GET_ALL_POSTS = 
-        "select posts.username, posts.recipe_label, posts.post_id, posts.title, posts.caption, posts.recipe_id, posts.likes, posts.imageUUID, posts.date, likedPosts.email as likedPostsEmail from posts left join (select * from likedPosts where email = ?) as likedPosts on posts.post_id = likedPosts.post_id where posts.date > NOW() - INTERVAL 60 DAY ORDER BY date DESC;";
+        "select posts.post_id, posts.username, posts.recipe_label, posts.post_id, posts.title, posts.caption, posts.recipe_id, posts.likes, posts.imageUUID, posts.date, likedPosts.email as likedPostsEmail from posts left join (select * from likedPosts where email = ?) as likedPosts on posts.post_id = likedPosts.post_id where posts.date > NOW() - INTERVAL 60 DAY ORDER BY post_id DESC;";
 
     public static final String SQL_ALTER_LIKES_BY_POST =
         "update posts set likes = ? where post_id = ?";

@@ -11,7 +11,8 @@ import { Subject, Subscription } from 'rxjs';
 export class ExploreComponent implements OnInit {
 
   constructor(private ar: ActivatedRoute,
-    private route: Router) { }
+              private route: Router) { }
+              
   profileTab = false
   tab!: string
   activeLink!: string
@@ -35,6 +36,7 @@ export class ExploreComponent implements OnInit {
 
   ngOnInit(): void {
     const page = window.location.href;
+
     if (page.includes("explore")) {
       this.links = [
         { label: 'Latest', path: '/masterKitchen/explore/latest' },

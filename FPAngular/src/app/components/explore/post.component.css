@@ -1,5 +1,5 @@
 mat-card {
-    width: 25%;
+    width: 400px;
     margin-bottom: 40px;
     box-shadow: 0 2px 2px 2px rgba(0,0,0,.2), 0 8px 8px 0 rgba(0,0,0,.14), 0 8px 8px 0 rgba(0,0,0,.12) !important;
     transform: translate3d(0,0,0);
@@ -26,6 +26,7 @@ mat-card {
     display: flex;
     align-items: center;
     justify-content: space-between;
+    height: 50px;
 }
 
 .date {
@@ -33,7 +34,8 @@ mat-card {
 }
 
 mat-card-content {
-    height: 80px;
+    /* border: 1px solid blue; */
+    height: 130px;
 }
 
 p {
@@ -70,4 +72,9 @@ h3 {
 .no-post-button {
     margin: 10px;
     padding: 0 20px;
+}
+
+mat-card-actions {
+    /* border: 1px solid purple; */
+    height: 25px;
 }

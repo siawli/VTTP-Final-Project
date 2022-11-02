@@ -1,13 +1,18 @@
 :host ::ng-deep .mat-tab-header {
     top: 80px;
-    z-index: 1000; 
+    z-index: 1000;
     position: sticky;
-    position: -webkit-sticky; /* macOS/iOS Safari */   
-    background-color: white; 
+    position: -webkit-sticky;
+    background-color: white;
 }
 
 .mat-tab-link {
     opacity: 1;
     /* color: grey; */
-  }
-  
+}
+
+div {
+    top: 80px;
+    border: 3px solid blue;
+    z-index: 10000;
+}

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { AfterContentInit, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { HostListener } from '@angular/core';
 
 @Component({
@@ -6,15 +6,26 @@ import { HostListener } from '@angular/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   title = 'FPAngular';
 
+  constructor(private cdref: ChangeDetectorRef) {}
+
   loggedIn = false;
+  navBarHeight!: number
 
+  @HostListener('window:scroll', ['$event'])
 
-@HostListener('window:scroll', ['$event'])
+  ngOnInit(): void {
+      this.navBarHeight = 0;
 
-onWindowScroll() {
+  }
+
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
+  }
+
+  onWindowScroll() {
     let element = document.querySelector('.nav') as HTMLElement;
     if (window.pageYOffset > 5) {
       element.classList.add('navbar-inverse');
@@ -22,4 +33,10 @@ onWindowScroll() {
       element.classList.remove('navbar-inverse');
     }
   }
+
+  // adjustNavBar(event: number) {
+  //   console.info(">>> event: " + event)
+  //   this.navBarHeight = event + 60;
+  //   console.info(">>> top: " + this.navBarHeight)
+  // }
 }

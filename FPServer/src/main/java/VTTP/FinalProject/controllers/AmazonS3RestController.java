@@ -74,8 +74,10 @@ public class AmazonS3RestController {
         S3Object s3Obj = null;
 
         try {
+            System.out.println(">>>> uuid of image: " + uuid);
             s3Obj = s3.getObject(getReq);
         } catch (Exception ex) {
+            ex.printStackTrace();
             return ResponseEntity.badRequest().build();
         }
 
