@@ -10,7 +10,8 @@ jobs:
     name: Build Angular app
     runs-on: ubuntu-latest
     defaults:
-      run: 'FPAngular'
+      run: 
+        working-directory: 'FPAngular'
     steps:
     - name: Checkout code in Angular
       uses: actions/checkout@v2
