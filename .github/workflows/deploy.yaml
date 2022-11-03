@@ -1,0 +1,29 @@
+name: deploy to heroku
+on:
+  push:
+    branches:
+    - 'main'
+    # have to change back to 'release' branch before final submission
+  
+jobs:
+  build:
+    name: Build Angular app
+    runs-on: ubuntu-latest
+    defaults:
+      run: 'FPAngular'
+    steps:
+    - name: Checkout code in Angular
+      uses: actions/checkout@v2
+    - name: Use Node 16.x
+      uses: actions/setup-node@v1
+        with:
+          node-version '16.x'
+    - name: NPM install
+      run: npm install
+    - name: NPM install Angular
+      run: npm install -g @angular/cli > /dev/null
+    - name: NPM build Angular Production
+      run: ng build --prod
+      
+      
+    

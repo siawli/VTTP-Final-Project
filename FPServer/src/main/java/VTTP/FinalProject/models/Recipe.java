@@ -3,10 +3,6 @@ package VTTP.FinalProject.models;
 import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.springframework.data.redis.core.RedisHash;
-import org.springframework.data.redis.core.TimeToLive;
 
 public class Recipe implements Serializable {
 

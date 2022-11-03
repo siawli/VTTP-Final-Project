@@ -1,14 +1,11 @@
 package VTTP.FinalProject.repositories;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.amqp.RabbitProperties.Template;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
 
 import static VTTP.FinalProject.repositories.Queries.*;
-
-import java.util.Optional;
 
 @Repository
 public class SavedRecipesRepository {
@@ -33,7 +30,6 @@ public class SavedRecipesRepository {
             .queryForRowSet(SQL_IS_RECIPE_SAVED, email, recipe_id);
 
         if (!result.next()) {
-            System.out.println(">>>>>> this post not saved");
             return false;
         } else {
             return true;

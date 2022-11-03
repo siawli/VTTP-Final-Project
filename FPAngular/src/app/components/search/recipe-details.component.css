@@ -14,7 +14,7 @@
 
 .section-one {
     width: 450px;
-    border: 1px solid red;
+    /* border: 1px solid red; */
     display: flex;
     flex-direction: column;
     justify-content: center;

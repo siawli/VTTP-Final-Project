@@ -22,6 +22,8 @@ img {
     flex-wrap: wrap;
     /* border: 3px solid blue; */
     justify-content: center;
+    align-content: center;
+    margin-top: 30px;
 }
 
 .sub-container {
@@ -29,7 +31,7 @@ img {
     /* flex-direction: column; */
     display: flex;
     flex-wrap: wrap;
-    width: 750px;
+    width: 600px;
     height: auto;
     align-items: center;
     justify-content: center;

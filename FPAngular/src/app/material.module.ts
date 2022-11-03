@@ -11,12 +11,13 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatTooltipModule } from '@angular/material/tooltip';
 // import { IvyCarouselModule } from 'angular-responsive-carousel';
 import { MatCarouselModule } from '@thouet/material-carousel'
+import { MatToolbarModule } from '@angular/material/toolbar'
 
 const matModules: any[] = [
     MatMenuModule, MatButtonModule, MatIconModule,
     MatFormFieldModule, MatInputModule, MatCardModule,
     MatDialogModule, MatTabsModule, MatProgressSpinnerModule,
-    MatTooltipModule, MatCarouselModule
+    MatTooltipModule, MatCarouselModule, MatToolbarModule
 ]
   
   @NgModule({

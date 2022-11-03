@@ -2,6 +2,13 @@
     font-size: 1rem;
 }
 
+.header {
+    min-width: 100%;
+    width: 100%;
+    flex-shrink: 0;
+    flex-grow: 0;
+}
+
 .notLoggedIn {
     /* border: 1px solid red; */
     height: auto;
@@ -14,8 +21,9 @@
 
 .left {
     display: flex;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
     align-items: center;
+    flex: 1 1 auto;
 }
 
 nav {
@@ -35,7 +43,7 @@ button {
     /* border: 1px solid red; */
     height: auto;
     display: flex;
-    /* flex-wrap: wrap; */
+    flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
     padding: 10px 48px 10px 35px;

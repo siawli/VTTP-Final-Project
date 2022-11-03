@@ -1,3 +1,4 @@
+<div class="header">
 <nav *ngIf="loggedIn()" class="loggedIn" #nav>
     <div class="left">
         <img src="/assets/logo.png" (click)="routeLandingPage()">
@@ -15,7 +16,8 @@
         <button mat-menu-item>My Recipes</button>
         <button mat-menu-item>Upload Recipe</button>
         </mat-menu> -->
-</nav>
+    </nav>
+</div>
 <nav *ngIf="!loggedIn()" class="notLoggedIn" #nav>
     <img src="/assets/logo.png" (click)="routeLandingPage()">
     <div>

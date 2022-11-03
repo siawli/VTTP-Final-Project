@@ -1,9 +1,20 @@
 :host ::ng-deep .mat-tab-header {
-    top: 80px;
     z-index: 1000;
     position: sticky;
     position: -webkit-sticky;
     background-color: white;
+}
+
+@media only screen and (min-width: 600px) {
+    .top {
+        top: 70px;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .top {
+        top: 200px;
+    }
 }
 
 .mat-tab-link {

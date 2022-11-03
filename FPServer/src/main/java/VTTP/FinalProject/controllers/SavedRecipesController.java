@@ -6,7 +6,6 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -32,7 +31,7 @@ public class SavedRecipesController {
     }
 
     @GetMapping("/alterSaved")
-    public ResponseEntity<?> alterSavedRecipe(
+    public ResponseEntity<String> alterSavedRecipe(
             @RequestParam String email, @RequestParam String recipe_label,
             @RequestParam String recipe_id, @RequestParam String alteration) {
 

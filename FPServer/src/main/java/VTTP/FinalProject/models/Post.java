@@ -1,8 +1,5 @@
 package VTTP.FinalProject.models;
 
-import java.util.Date;
-
-import org.springframework.jdbc.InvalidResultSetAccessException;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 
 public class Post {
@@ -13,7 +10,6 @@ public class Post {
     private String caption;
     private String recipe_label;
     private String recipe_id;
-    // private Float ratings;
     private int likes;
     private String date;
     private String imageUUID;
@@ -141,7 +137,6 @@ public class Post {
 
         if (result.getString("likedPostsEmail") != null) {
             post.likedPost();
-            System.out.println(">>>> post is liked: " + post.post_id + " " + post.isLiked());
         }
 
         return post;

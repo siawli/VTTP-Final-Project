@@ -12,7 +12,8 @@ img {
 
 mat-card {
     /* margin: auto 400px; */
-    width: 700px;
+    border: 2px solid red;
+    width: 100%;
     margin-top: 10px;
     margin-bottom: 30px;
 }
