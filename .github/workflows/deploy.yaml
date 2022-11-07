@@ -28,11 +28,11 @@ jobs:
     #   run: sudo sshpass -P 1234567890:D -v ssh -o StrictHostKeyChecking=no TSL@127.0.0.1 'rm -rf /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/*'
       run: sudo sshpass -P ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/*'
     - name: Compress and copy new file over to server
-      run: |
-      cd dist/fpAngular/
-      tar -czvf ../../fpAngular.tar.gz ./
-      cd ..
-      cd ..
-      sudo sshpass -P ${{ secrets.SSH_PASS }} scp -v -o StrictHostKeyChecking=no -r fpAngular.tar.gz ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/
+      run : |
+            cd dist/fpAngular/
+            tar -czvf ../../fpAngular.tar.gz ./
+            cd ..
+            cd ..
+            sudo sshpass -P ${{ secrets.SSH_PASS }} scp -v -o StrictHostKeyChecking=no -r fpAngular.tar.gz ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/
     - name: Uncompress new files
       run : sudo sshpass -P ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/ && tar -xzvf fpAngular.tar.gz && rm fpAngular.tar.gz'
