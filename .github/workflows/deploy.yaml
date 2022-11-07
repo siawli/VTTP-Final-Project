@@ -26,13 +26,6 @@ jobs:
       run: npm run build
     - name: Delete existing files in server folder
     #   run: sudo sshpass -P 1234567890:D -v ssh -o StrictHostKeyChecking=no TSL@127.0.0.1 'rm -rf /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/*'
-      run: sudo sshpass -P assword -p ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/*'
-    - name: Compress and copy new file over to server
-      run : |
-            cd dist/fpangular/
-            tar -czvf ../../fpangular.tar.gz ./
-            cd ..
-            cd ..
-            sudo sshpass -P ${{ secrets.SSH_PASS }} scp -v -o StrictHostKeyChecking=no -r fpangular.tar.gz ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }}:/Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/
-    - name: Uncompress new files
-      run : sudo sshpass -P ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'cd /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/ && tar -xzvf fpangular.tar.gz && rm fpangular.tar.gz'
+      run: sudo sshpass -p ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/*'
+    - name: Copy files over to server
+      run : cp -r /Users/tsl/documents/visa/finalproject/FPAngular/dist/fpangular/ /Users/tsl/documents/visa/finalproject/FPServer/src/main/resources/static
