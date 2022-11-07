@@ -49,9 +49,9 @@ jobs:
       #        cp -r './FPAngular/dist/fpangular/' './FPServer/src/main/resources/static'
   build_server_and_deploy:
     runs-on: ubuntu-latest
-    default:
+    defaults:
       run:
-        working-directory: FPServer
+        working-directory: 'FPServer'
     steps:
     - name: Checkout src
       uses: actions/checkout@v2
