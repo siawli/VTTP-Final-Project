@@ -24,7 +24,7 @@ jobs:
       run: npm install -g --legacy-peer-deps @angular/cli > /dev/null
     - name: NPM build
       run: npm run build
-    - name: Delete existing files in server folder
-      run: sudo sshpass -p 1234567890:D -v ssh -o StrictHostKeyChecking=no TSL@127.0.0.1 'rm -rf /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/*'
-      # run: sudo sshpass -p ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm -rf /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/*'
+    # - name: Delete existing files in server folder
+    #   run: sudo sshpass -P 1234567890:D -v ssh -o StrictHostKeyChecking=no TSL@127.0.0.1 'rm -rf /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/*'
+      run: sudo sshpass -P ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm -rf /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/*'
     
