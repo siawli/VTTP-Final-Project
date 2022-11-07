@@ -23,5 +23,10 @@ jobs:
     - name: NPM install Angular
       run: npm install -g --legacy-peer-deps @angular/cli > /dev/null
     - name: NPM build
-      run: npm build
+      run: npm run build
+    - name: Delete existing files in server folder
+      run: sudo sshpass -p ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_PASS }}@${{ secrets.SSH_HOST }} 'rm -rf /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/*'
+    # - name: Compress and copy new files to the server
+    #   run: |
+    #         cd dist/
     
