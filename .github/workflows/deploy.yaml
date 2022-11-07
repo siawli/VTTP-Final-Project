@@ -6,8 +6,7 @@ on:
     # have to change back to 'release' branch before final submission
 
 jobs:
-  build:
-  build_Angular_and_transfer_DIST_files_to_Server
+  build_Angular_and_transfer_DIST_files_to_Server:
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -48,7 +47,7 @@ jobs:
       #       working-directory: FinalProject
       # run :  |
       #        cp -r './FPAngular/dist/fpangular/' './FPServer/src/main/resources/static'
-  build_server_and_deploy
+  build_server_and_deploy:
     runs-on: ubuntu-latest
     default:
       run:
