@@ -38,4 +38,4 @@ jobs:
       #       ${{ secrets.SSH_PASS }}
     - name: Copy files over to server
       run :  |
-             cp -r "/dist/fpangular/" "../../FPServer/src/main/resources/static"
+             cp -r './dist/fpangular/' '../../FPServer/src/main/resources/static'
