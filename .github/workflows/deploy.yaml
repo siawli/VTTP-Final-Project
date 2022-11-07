@@ -7,7 +7,7 @@ on:
 
 jobs:
   build:
-    name: Build Angular and transfers to Server
+    name: Build Angular and transfer to Server
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -49,7 +49,7 @@ jobs:
       #       working-directory: FinalProject
       # run :  |
       #        cp -r './FPAngular/dist/fpangular/' './FPServer/src/main/resources/static'
-    name: Deploy to Heroku
+  Deploy to Heroku
     runs-on: ubuntu-latest
     default:
       run:
