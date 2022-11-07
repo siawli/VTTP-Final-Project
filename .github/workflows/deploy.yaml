@@ -1,4 +1,4 @@
-name: deploy to heroku
+name: Deploy to heroku
 on:
   push:
     branches:
@@ -7,6 +7,7 @@ on:
 
 jobs:
   build:
+    name: Build Angular and transfers to Server
     runs-on: ubuntu-latest
     defaults:
       run:
@@ -48,3 +49,35 @@ jobs:
       #       working-directory: FinalProject
       # run :  |
       #        cp -r './FPAngular/dist/fpangular/' './FPServer/src/main/resources/static'
+    name: Deploy to Heroku
+    runs-on: ubuntu-latest
+    default:
+      run:
+        working-directory: FPServer
+    steps:
+    - name: Checkout src
+      uses: actions/checkout@v2
+    - name: Deploy
+      uses: akhileshns/heroku-deploy@v3.12.12
+      with: 
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: "vttp-fp-masterkitchen"
+        heroku_email: ${{ secrets.email }}
+        branch: ${{ github.ref_name }}
+
+
+
+
+
+    #   deploy_to_heroku:
+    # runs-on: ubuntu-latest
+    # steps:
+    # - name: Checkout src
+    #   uses: actions/checkout@v2
+    # - name: Deploy
+    #   uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+    #   with:
+    #     heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+    #     heroku_app_name: "paf-revision1-1204" #Must be unique in Heroku
+    #     heroku_email: ${{secrets.email}}
+    #     branch: ${{github.ref_name}}
