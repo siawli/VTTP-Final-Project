@@ -37,4 +37,4 @@ jobs:
       #       sudo ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm -rf /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/'
       #       ${{ secrets.SSH_PASS }}
     - name: Copy files over to server
-      run : cp -r /Users/tsl/documents/visa/finalproject/FPAngular/dist/fpangular/ /Users/tsl/documents/visa/finalproject/FPServer/src/main/resources/static
+      run : cp -r "/Users/tsl/documents/visa/finalproject/FPAngular/dist/fpangular/" "/Users/tsl/documents/visa/finalproject/FPServer/src/main/resources/static"
