@@ -8,21 +8,22 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'FPAngular'
     steps:
     - name: Checkout Angular code
-      working-directory: 'FPAngular'
       uses: actions/checkout@v2
     - name: Setup node-version
-      working-directory: 'FPAngular'
       uses: actions/setup-node@v2
       with:
         node-version: '16.x'
-    - name: NPM Install & Build
-      working-directory: 'FPAngular'
-      run: |
-           npm install --legacy-peer-deps
-           npm install -g --legacy-peer-deps @angular/cli > /dev/null
-           npm run build
+    - name: NPM Install
+      run: npm install --legacy-peer-deps
+    - name: NPM install Angular
+      run: npm install -g --legacy-peer-deps @angular/cli > /dev/null
+    - name: NPM build
+      run: npm run build
     # - name: Delete existing files in server folder
       # uses: matheusvanzan/sshpass-action@v2
       # with:
@@ -36,6 +37,7 @@ jobs:
       #       sudo ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm -rf /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/'
       #       ${{ secrets.SSH_PASS }}
       name: Copying files to server
+      working-directory: 'VTTP-Final-Project'
       run :  |
              cp -r './FPAngular/dist/fpangular/' './FPServer/src/main/resources/static'
     # - name: Copy DIST files
