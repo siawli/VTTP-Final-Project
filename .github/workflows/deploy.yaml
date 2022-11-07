@@ -36,6 +36,8 @@ jobs:
       # run:  |
       #       sudo ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm -rf /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/'
       #       ${{ secrets.SSH_PASS }}
+    - name: Remove existing DIST files in server (if any)
+      run: rm -rf ../FPServer/src/main/resources/static/*
     - name: Copying files to server
       run : cp -r './dist/fpangular/' '../FPServer/src/main/resources/static'
     # - name: Copy DIST files
@@ -43,11 +45,6 @@ jobs:
     # - name: Move files to Server
     #   working-directory: 'FPServer'
     #   run: mv ./src/main/resources/static
-        
-
-      
-
-
       #       working-directory: FinalProject
       # run :  |
       #        cp -r './FPAngular/dist/fpangular/' './FPServer/src/main/resources/static'
