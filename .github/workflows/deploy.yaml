@@ -5,7 +5,7 @@ on:
     - 'main'
     # have to change back to 'release' branch before final submission
 
-jobs:
+# jobs:
   # build_Angular_and_transfer_DIST_files_to_Server:
   #   name: Build Angular and files to Server
   #   runs-on: ubuntu-latest
@@ -28,22 +28,17 @@ jobs:
   #     run: rm -rf ../FPServer/src/main/resources/static/*
   #   - name: Copying files to server
   #     run : cp -r './dist/fpangular/' '../FPServer/src/main/resources/static'
-
-  build_Server_and_deploy:
-    name: Build server and deploy
-    needs: build_Angular_and_transfer_DIST_files_to_Server
+jobs:
+  deploy_to_heroku:
     runs-on: ubuntu-latest
-    # defaults:
-    #   run:
-    #     working-directory: 'FPServer'
     steps:
     - name: Checkout src
       uses: actions/checkout@v2
     - name: Deploy
-      uses: akhileshns/heroku-deploy@v3.12.12
-      with: 
-        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-        heroku_app_name: "warm-basin-53580"
-        heroku_email: ${{ secrets.email }}
-        branch: ${{ github.ref_name }}
-        # appdir: 'FPServer'
+      uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "vttp-fp-masterkitchen" #Must be unique in Heroku
+        heroku_email: ${{secrets.email}}
+        branch: ${{github.ref_name}}
+        appdir: 'FPServer'
