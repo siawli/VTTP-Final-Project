@@ -55,9 +55,9 @@ jobs:
     name: Build server and deploy
     needs: build_Angular_and_transfer_DIST_files_to_Server
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 'FPServer'
+    # defaults:
+    #   run:
+    #     working-directory: 'FPServer'
     steps:
     - name: Checkout src
       uses: actions/checkout@v2
