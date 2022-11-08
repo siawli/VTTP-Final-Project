@@ -28,10 +28,10 @@ jobs:
   #     run: rm -rf ../FPServer/src/main/resources/static/*
   #   - name: Copying files to server
   #     run : cp -r './dist/fpangular/' '../FPServer/src/main/resources/static'
-      
+
   build_Server_and_deploy:
     name: Build server and deploy
-    # needs: build_Angular_and_transfer_DIST_files_to_Server
+    needs: build_Angular_and_transfer_DIST_files_to_Server
     runs-on: ubuntu-latest
     # defaults:
     #   run:
@@ -46,4 +46,4 @@ jobs:
         heroku_app_name: "warm-basin-53580"
         heroku_email: ${{ secrets.email }}
         branch: ${{ github.ref_name }}
-        appdir: 'FPServer'
+        # appdir: 'FPServer'
