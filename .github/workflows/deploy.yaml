@@ -6,54 +6,32 @@ on:
     # have to change back to 'release' branch before final submission
 
 jobs:
-  build_Angular_and_transfer_DIST_files_to_Server:
-    name: Build Angular and files to Server
-    runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: 'FPAngular'
-    steps:
-    - name: Checkout Angular code
-      uses: actions/checkout@v2
-    - name: Setup node-version
-      uses: actions/setup-node@v2
-      with:
-        node-version: '16.x'
-    - name: NPM Install & Build
-      run: |
-           npm install --legacy-peer-deps
-           npm install -g --legacy-peer-deps @angular/cli > /dev/null
-           npm run build
-    # - name: Delete existing files in server folder
-      # uses: matheusvanzan/sshpass-action@v2
-      # with:
-      #   host: ${{ secrets.SERVER_HOST }}
-      #   user: ${{ secrets.SERVER_USER }}
-      #   key: ${{ secrets.SERVER_KEY }}
-      #   run:  |
-      #         sudo sshpass -Password ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm -rf /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/'
-      # run: sudo sshpass -Password ${{ secrets.SSH_PASS }} -v ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm -rf /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/'
-      # run:  |
-      #       sudo ssh -o StrictHostKeyChecking=no ${{ secrets.SSH_USER }}@${{ secrets.SSH_HOST }} 'rm -rf /Users/TSL/documents/visa/finalProject/FPServer/src/main/resources/static/'
-      #       ${{ secrets.SSH_PASS }}
-    - name: Remove existing DIST files in server (if any)
-      run: rm -rf ../FPServer/src/main/resources/static/*
-    - name: Copying files to server
-      run : cp -r './dist/fpangular/' '../FPServer/src/main/resources/static'
-    # - name: Copy DIST files
-    #   run :  cp -r './dist/fpangular/'
-    # - name: Move files to Server
-    #   working-directory: 'FPServer'
-    #   run: mv ./src/main/resources/static
-      #       working-directory: FinalProject
-      # run :  |
-      #        cp -r './FPAngular/dist/fpangular/' './FPServer/src/main/resources/static'
-
-
+  # build_Angular_and_transfer_DIST_files_to_Server:
+  #   name: Build Angular and files to Server
+  #   runs-on: ubuntu-latest
+  #   defaults:
+  #     run:
+  #       working-directory: 'FPAngular'
+  #   steps:
+  #   - name: Checkout Angular code
+  #     uses: actions/checkout@v2
+  #   - name: Setup node-version
+  #     uses: actions/setup-node@v2
+  #     with:
+  #       node-version: '16.x'
+  #   - name: NPM Install & Build
+  #     run: |
+  #          npm install --legacy-peer-deps
+  #          npm install -g --legacy-peer-deps @angular/cli > /dev/null
+  #          npm run build
+  #   - name: Remove existing DIST files in server (if any)
+  #     run: rm -rf ../FPServer/src/main/resources/static/*
+  #   - name: Copying files to server
+  #     run : cp -r './dist/fpangular/' '../FPServer/src/main/resources/static'
       
   build_Server_and_deploy:
     name: Build server and deploy
-    needs: build_Angular_and_transfer_DIST_files_to_Server
+    # needs: build_Angular_and_transfer_DIST_files_to_Server
     runs-on: ubuntu-latest
     # defaults:
     #   run:
@@ -68,4 +46,4 @@ jobs:
         heroku_app_name: "warm-basin-53580"
         heroku_email: ${{ secrets.email }}
         branch: ${{ github.ref_name }}
-        # appdir: 'FPServer'
+        appdir: 'FPServer'
