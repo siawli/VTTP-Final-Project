@@ -23,8 +23,8 @@ public class RedisConfiguration {
     @Value("${spring.redis.port}")
     private Integer redisPort;
 
-    @Value("${spring.redis.password}")
-    private String redisPassword;
+    // @Value("${spring.redis.password}")
+    // private String redisPassword;
 
     // @Value("${spring.redis.username}")
     // private String redisUsername;
