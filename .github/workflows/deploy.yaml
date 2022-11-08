@@ -51,20 +51,21 @@ jobs:
 
 
       
-  # build_Server_and_deploy:
-  #   name: Build server and deploy
-  #   needs: build_Angular_and_transfer_DIST_files_to_Server
-  #   runs-on: ubuntu-latest
-  #   defaults:
-  #     run:
-  #       working-directory: 'FPServer'
-  #   steps:
-  #   - name: Checkout src
-  #     uses: actions/checkout@v2
-  #   - name: Deploy
-  #     uses: akhileshns/heroku-deploy@v3.12.12
-  #     with: 
-  #       heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-  #       heroku_app_name: "vttp-fp-masterkitchen"
-  #       heroku_email: ${{ secrets.email }}
-  #       branch: ${{ github.ref_name }}
+  build_Server_and_deploy:
+    name: Build server and deploy
+    needs: build_Angular_and_transfer_DIST_files_to_Server
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: 'FPServer'
+    steps:
+    - name: Checkout src
+      uses: actions/checkout@v2
+    - name: Deploy
+      uses: akhileshns/heroku-deploy@v3.12.12
+      with: 
+        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+        heroku_app_name: "vttp-fp-masterkitchen"
+        heroku_email: ${{ secrets.email }}
+        branch: ${{ github.ref_name }}
+        appdir: 'FPServer'
