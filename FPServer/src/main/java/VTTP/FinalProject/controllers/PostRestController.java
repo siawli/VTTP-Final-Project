@@ -25,10 +25,7 @@ public class PostRestController {
     @PostMapping("/upload")
     public ResponseEntity<String> uploadPost(@RequestBody Post post) {
 
-        System.out.println(">>>> in uploadPost controller");
-        System.out.println(">>>> post: " + post.toString());
         if (postSvc.uploadPostDatabase(post)) {
-            System.out.println(">>> successful upload of post!");
             return ResponseEntity.ok("\"Successful upload of post!\"");
         }
 

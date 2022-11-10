@@ -15,12 +15,13 @@ import { SnapComponent } from './components/upload/snap.component';
 import { AuthorizeGuard } from './services/authorizeguard.service';
 
 const routes: Routes = [
-  {path: '', component: LandingComponent},
-  {path: 'signUp', component: RegisterComponent},
-  {path: 'login', component: LoginComponent},
+  { path: '', component: LandingComponent, title: 'Welcome'},
+  { path: 'signUp', component: RegisterComponent, title: 'Register' },
+  { path: 'login', component: LoginComponent, title: 'Login'},
   {
     path: 'masterKitchen/explore',
     component: ExploreComponent,
+    title: 'Explore',
     canActivate: [AuthorizeGuard],
     children: [
       {
@@ -40,21 +41,18 @@ const routes: Routes = [
         component: PostComponent,
         canActivate: [AuthorizeGuard]
       },
-    ]},
-  
-  {path: 'masterKitchen/upload/snap', component: SnapComponent, canActivate: [AuthorizeGuard]},
-  {path: 'masterKitchen/upload/snap/:id', component: SnapComponent, canActivate: [AuthorizeGuard]},
-  {path: 'masterKitchen/upload/form', component: FormComponent, canActivate: [AuthorizeGuard]},
-  {path: 'masterKitchen/upload/form/:id', component: FormComponent, canActivate: [AuthorizeGuard]},
+    ]
+  },
+
+  { path: 'masterKitchen/upload/snap', component: SnapComponent, canActivate: [AuthorizeGuard], title: 'Snap post'},
+  { path: 'masterKitchen/upload/snap/:id', component: SnapComponent, canActivate: [AuthorizeGuard], title: 'Snap post' },
+  { path: 'masterKitchen/upload/form', component: FormComponent, canActivate: [AuthorizeGuard], title: 'Upload post' },
+  { path: 'masterKitchen/upload/form/:id', component: FormComponent, canActivate: [AuthorizeGuard], title: 'Upload post' },
   {
     path: 'masterKitchen/search',
     component: FindRecipesComponent,
+    title: 'Search Recipes',
     children: [
-      // {
-      //   path: '',
-      //   component: ListRecipesComponent,
-      //   canActivate: [AuthorizeGuard]
-      // },
       {
         path: ':query/:num',
         component: ListRecipesComponent,
@@ -62,10 +60,11 @@ const routes: Routes = [
       }
     ]
   },
-  {path: 'masterKitchen/search/:query/:num/:id', component: RecipeDetailsComponent, canActivate: [AuthorizeGuard]},
-  {path: 'masterKitchen/search/:id', component: RecipeDetailsComponent, canActivate: [AuthorizeGuard]},
+  { path: 'masterKitchen/search/:query/:num/:id', component: RecipeDetailsComponent, canActivate: [AuthorizeGuard], title: 'Recipe Details'},
+  { path: 'masterKitchen/search/:id', component: RecipeDetailsComponent, canActivate: [AuthorizeGuard],  title: 'Recipe Details' },
   {
     path: 'masterKitchen/profile',
+    title: 'My Profile',
     component: ExploreComponent,
     canActivate: [AuthorizeGuard],
     children: [
@@ -79,13 +78,13 @@ const routes: Routes = [
         component: PostComponent,
         canActivate: [AuthorizeGuard]
       }
-    ]}
-  
-  // {path: 'masterKitchen/explore/popular', component: PostComponent, canActivate: [AuthorizeGuard]}
+    ]
+  },
+  {path: "**", redirectTo: '/', pathMatch: 'full'}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes, {useHash: true})],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

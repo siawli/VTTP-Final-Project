@@ -46,7 +46,7 @@ public class AmazonS3RestController {
 
         try {
             PutObjectRequest putReq = new PutObjectRequest(
-                "siawli", "VTTP-Final-Project/%s".formatted(imageUUID), 
+                "siawli-vttp", "VTTP-Final-Project/%s".formatted(imageUUID), 
                 file.getInputStream(), metadata);
                 putReq = putReq.withCannedAcl(CannedAccessControlList.PublicRead);
                 s3.putObject(putReq);
@@ -68,7 +68,7 @@ public class AmazonS3RestController {
     public ResponseEntity<byte[]> getFileS3(@PathVariable String uuid) {
 
         GetObjectRequest getReq = new GetObjectRequest(
-            "siawli", "VTTP-Final-Project/%s".formatted(uuid));
+            "siawli-vttp", "VTTP-Final-Project/%s".formatted(uuid));
 
         S3Object s3Obj = null;
 

@@ -49,4 +49,5 @@ public interface Queries {
 
     public static final String SQL_GET_POSTS_BY_RECIPE_ID = 
         "select posts.username, posts.recipe_label, posts.post_id, posts.title, posts.caption, posts.recipe_id, posts.likes, posts.imageUUID, posts.date, likedPosts.email as likedPostsEmail from posts left join (select * from likedPosts where email = ?) as likedPosts on posts.post_id = likedPosts.post_id where recipe_id = ?";
+    
 }

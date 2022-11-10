@@ -37,7 +37,7 @@ public class SecurityConfiguration {
         .disable()
         .exceptionHandling().authenticationEntryPoint(unauthorizedHandler).and()
         .authorizeRequests()
-        .antMatchers("/assets/**", "/polyfills.b9005cfd1a54175e.js", "/main.7f8d6fecb80ce682.js", "/styles.43aecdfb5c9c28ca.css", "/runtime.e3f5fe3eca1bd5d1.js", "/favicon.ico", "/", "/login", "/signUp", "/authenticate", "/signUp") // routes indicated here is not protected
+        .antMatchers("/assets/**", "/polyfills.b9005cfd1a54175e.js", "/main.fe0d140384e5991f.js", "/styles.43aecdfb5c9c28ca.css", "/runtime.e3f5fe3eca1bd5d1.js", "/favicon.ico", "/", "/login", "/signUp", "/authenticate") // routes indicated here is not protected
         .permitAll()
         .anyRequest()
         .authenticated()

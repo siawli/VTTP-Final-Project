@@ -9,19 +9,17 @@ export class UploadService {
     constructor(private httpClient: HttpClient) {}
     
     dataUrl = ""
-    imageUUID!: string
 
     uploadPostSB(post: Post) {
-        this.imageUUID = post.imageUUID
         return firstValueFrom(
             this.httpClient.post<any>("/post/upload", post))
     }
 
-    uploadPostAmazon() {
+    uploadPostAmazon(imageUUID: string) {
         const blob = this.dataURIToBlob(this.dataUrl)
         let file = new File([blob], "postImage.jpeg", {type: "image/jpeg"})
         const formData = new FormData();
-        formData.set("imageUUID", this.imageUUID)
+        formData.set("imageUUID", imageUUID)
         formData.append("file", file)
 
         return firstValueFrom(this.httpClient.post("/amazonS3", formData))

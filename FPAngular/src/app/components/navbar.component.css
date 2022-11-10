@@ -32,6 +32,9 @@ nav {
 
 img {
     width: 250px;
+}
+
+.not-logged-in {
     cursor: pointer;
 }
 

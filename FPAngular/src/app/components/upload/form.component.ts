@@ -9,6 +9,7 @@ import { AppCookieService } from 'src/app/services/cookie.service';
 import { MatDialog, MatDialogConfig } from '@angular/material/dialog';
 import { UploadSuccessComponent } from './success.component';
 import { Subscription } from 'rxjs';
+import { UnsuccessfulComponent } from './unsuccessful.component';
 
 @Component({
   selector: 'app-form',
@@ -100,34 +101,34 @@ export class FormComponent implements OnInit {
     post.recipe_label = this.placeholder;
     post.username = this.cookieSvc.get("username")
     console.info(">>>> post recipe label: " + post.recipe_label)
-    // console.info(">>>> imageUUID: " + imageUUID)
     post.email = this.cookieSvc.get("email")
     console.info("post.email: " + post.email)
-    // console.info("date: " + post.date)
-    this.uploadSvc.uploadPostSB(post)
+    this.uploadSvc.uploadPostAmazon(post.imageUUID)
       .then(result => {
-        console.info("Success!")
-        console.info("Result of uploadPostSB: " + result)
-        this.uploadImgAmazon()
-        this.openDialog();
-        this.form.reset();
-      })
-      .catch(error => {
-        console.info("error in uploadPostSB: " + error)
-      })
-  }
-
-  uploadImgAmazon() {
-    this.uploadSvc.uploadPostAmazon()
-      .then(result => {
+        this.uploadToDatabase(post)
         console.info("Result of uploadPostAmazon: " + result)
       })
       .catch(error => {
+        this.openDialog(false);
         console.info("error in uploadPostAmazon" + error)
       })
   }
 
-  openDialog() {
+  uploadToDatabase(post: Post) {
+    this.uploadSvc.uploadPostSB(post)
+    .then(result => {
+      console.info("Success!")
+      console.info("Result of uploadPostSB: " + result)
+      this.openDialog(true);
+      this.form.reset();
+    })
+    .catch(error => {
+      this.openDialog(false);
+      console.info("error in uploadPostSB: " + error)
+    })
+  }
+
+  openDialog(uploaded: boolean) {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.disableClose = true;
@@ -135,8 +136,11 @@ export class FormComponent implements OnInit {
     dialogConfig.height = '300px';
     dialogConfig.width = '800px'
     dialogConfig.hasBackdrop = true;
-
-    this.dialog.open(UploadSuccessComponent, dialogConfig);
+    if (uploaded) {
+      this.dialog.open(UploadSuccessComponent, dialogConfig);
+    } else {
+      this.dialog.open(UnsuccessfulComponent, dialogConfig);
+    }
   }
 
 }

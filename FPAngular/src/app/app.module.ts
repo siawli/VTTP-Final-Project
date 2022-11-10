@@ -32,6 +32,7 @@ import { PostComponent } from './components/explore/post.component';
 import { IdComponent } from './components/explore/id.component';
 import { UploadSuccessComponent } from './components/upload/success.component';
 import { SavedRecipesService } from './services/savedrecipes.service';
+import { UnsuccessfulComponent } from './components/upload/unsuccessful.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { SavedRecipesService } from './services/savedrecipes.service';
     PostComponent,
     IdComponent,
     UploadSuccessComponent,
+    UnsuccessfulComponent,
   ],
   imports: [
     BrowserModule,

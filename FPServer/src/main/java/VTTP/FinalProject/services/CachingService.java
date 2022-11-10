@@ -2,13 +2,8 @@ package VTTP.FinalProject.services;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.redis.core.RedisHash;
-import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.TimeToLive;
 import org.springframework.stereotype.Service;
 
 import VTTP.FinalProject.models.Recipe;
@@ -19,9 +14,6 @@ import jakarta.json.JsonValue;
 
 @Service
 public class CachingService {
-
-    @Autowired
-    private RedisTemplate<String, Object> redisTemplate;
 
     // @RedisHash(timeToLive = 60*15)
     /*

@@ -20,6 +20,13 @@
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+			<version>2.6.7</version>
+			<exclusions>
+				<exclusion>
+					<groupId>io.lettuce</groupId>
+					<artifactId>lettuce-core</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -46,7 +53,6 @@
 			<artifactId>javax.mail</artifactId>
 			<version>1.6.2</version>
 		</dependency>
-
 
 				<!-- https://mvnrepository.com/artifact/org.glassfish/jakarta.json -->
 		<dependency>
@@ -78,6 +84,13 @@
 		<dependency>  
 			<groupId>org.springframework.boot</groupId>  
 			<artifactId>spring-boot-starter-cache</artifactId>  
+			<version>2.7.5</version>
+			<!-- <exclusions>
+				<exclusion>
+					<groupId>io.lettuce</groupId>
+					<artifactId>lettuce-core</artifactId>
+				</exclusion>
+			</exclusions> -->
 		</dependency>   
 
 				<!-- https://mvnrepository.com/artifact/javax.xml.bind/jaxb-api -->

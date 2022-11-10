@@ -1,6 +1,5 @@
 package VTTP.FinalProject.services;
 
-import java.io.UnsupportedEncodingException;
 import java.util.Date;
 import java.util.Properties;
 
@@ -80,17 +79,6 @@ public class EmailService {
 
     private String getEmailMessage() {
 
-        // String sb = "<head>" +
-        //             "<style type=\"text/css\">" +
-        //             "  .red { color: #f00; }" +
-        //             "</style>" +
-        //             "</head>" +
-        //             "<h1 class=\"red\">" + message.getSubject() + "</h1>" +
-        //             "<p>" +
-        //             "Lorem ipsum dolor sit amet, <em>consectetur</em> adipisicing elit, " +
-        //             "sed do eiusmod tempor incididunt ut labore et dolore magna <strong>" +
-        //             "aliqua</strong>.</p>";
-
         String message = """
             <head>
                 <style type=\"text/css\">
@@ -107,16 +95,10 @@ public class EmailService {
             </head>
             <div class=\"body\">
                 <h1> Welcome to Master Kitchen </h1>
-                <img src=\"https://siawli.sgp1.digitaloceanspaces.com/MasterKitchenLogo.png\"/>
+                <img src=\"https://siawli-vttp.sgp1.digitaloceanspaces.com/MasterKitchenLogo.png\"/>
                 <p> With a thousand over recipes, you will never run out of food to cook! Search for recipes and share your cooks! </p>
             </div> 
         """;
-
-        // .container {
-        //     display: flex;
-        //     flex-direction: column;
-        //     align-items: center;
-        // }
 
         return message;
     }

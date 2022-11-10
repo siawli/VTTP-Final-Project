@@ -3,29 +3,20 @@ package VTTP.FinalProject.services;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
-import java.io.UnsupportedEncodingException;
-import java.lang.StackWalker.Option;
-import java.math.BigDecimal;
 import java.net.URL;
-import java.net.URLEncoder;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import VTTP.FinalProject.models.Recipe;
 import VTTP.FinalProject.models.RecipeListResponse;
 import jakarta.json.Json;
-import jakarta.json.JsonArray;
 import jakarta.json.JsonObject;
 import jakarta.json.JsonReader;
-import jakarta.json.JsonValue;
 
 @Service
 public class EdamamService implements Serializable {

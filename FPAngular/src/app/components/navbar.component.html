@@ -1,7 +1,7 @@
 <div class="header">
 <nav *ngIf="loggedIn()" class="loggedIn" #nav>
     <div class="left">
-        <img src="/assets/logo.png" (click)="routeLandingPage()">
+        <img src="/assets/logo.png">
         <button mat-button [routerLink]="['/masterKitchen/explore/latest']">Explore</button>
         <button mat-button [routerLink]="['/masterKitchen/search']">Search Recipes</button>
         <button mat-button [routerLink]="['/masterKitchen/upload/snap']">Upload Post</button>
@@ -19,7 +19,7 @@
     </nav>
 </div>
 <nav *ngIf="!loggedIn()" class="notLoggedIn" #nav>
-    <img src="/assets/logo.png" (click)="routeLandingPage()">
+    <img class="not-logged-in"src="/assets/logo.png" (click)="routeLandingPage()">
     <div>
         <button mat-button [routerLink]="['/login']">Login</button>
         <button mat-flat-button color="primary" [routerLink]="['/signUp']">Sign Up</button>

@@ -23,14 +23,11 @@ public class RedisConfiguration {
     @Value("${spring.redis.port}")
     private Integer redisPort;
 
-    // @Value("${spring.redis.password}")
-    // private String redisPassword;
+    @Value("${spring.redis.password}")
+    private String redisPassword;
 
-    // @Value("${spring.redis.username}")
-    // private String redisUsername;
-
-    // @Value("{spring.redis.database}")
-    // private String redisDatabase;
+    @Value("${spring.redis.username}")
+    private String redisUsername;
 
     @Bean
     public RedisCacheConfiguration cacheConfiguration() {
@@ -47,8 +44,8 @@ public class RedisConfiguration {
         final RedisStandaloneConfiguration config = new RedisStandaloneConfiguration();
         config.setPort(redisPort);
         config.setHostName(redisHost);
-        // config.setPassword(redisPassword);
-        // config.setUsername(redisUsername);
+        config.setPassword(redisPassword);
+        config.setUsername(redisUsername);
         // config.setDatabase(Integer.parseInt(redisDatabase));
 
         final JedisClientConfiguration jedisClient = 
