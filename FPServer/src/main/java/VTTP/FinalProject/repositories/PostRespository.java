@@ -28,6 +28,7 @@ public class PostRespository {
         int likes = result.getInt("likes");
         if (alteration.contains("add")) {
             likes++;
+            System.out.println(">>> likes: " + likes);
         } else {
             likes--;
         }
