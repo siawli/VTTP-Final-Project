@@ -57,7 +57,8 @@ public class PostRestController {
             postSvc.alterLikes(alteration, post_id, email);
             return ResponseEntity.ok("\"Likes updated successfully\"");
         } catch (Exception ex) {
-            return ResponseEntity.internalServerError().body("\"Failed to update likes on post\"");
+            ex.printStackTrace();
+            return ResponseEntity.internalServerError().body(ex.getMessage());
         }
     }
 

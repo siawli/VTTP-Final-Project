@@ -49,11 +49,12 @@ public class PostService {
 
     @Transactional(rollbackFor = Exception.class)
     public void alterLikes(String alteration, int post_id, String email) throws Exception {
-        if (!postRepo.updateLikesOnPost(post_id, alteration)) {
-            throw new Exception("Failed to update likes");
-        }
         if (!postRepo.alterPostInLikedPost(post_id, email, alteration)) {
             throw new Exception("Failed to remove/add post from likedPosts");
+        }
+        if (!postRepo.updateLikesOnPost(post_id, alteration)) {
+            // System.out.println(">>> service alter likes error");
+            throw new Exception("Failed to update likes");
         }
     }
 
@@ -66,7 +67,7 @@ public class PostService {
         List<Post> allPosts = new LinkedList<>();
         while (result.next()) {
             Post post = Post.createPost(result);
-            System.out.println(">>>> post date: " + post.getDate());
+            // System.out.println(">>>> post date: " + post.getDate());
             allPosts.add(post);
         }
         return Optional.of(allPosts);

@@ -144,25 +144,27 @@ export class PostComponent implements OnInit {
 
     likedPost(post: Post) {
       if (post.liked) {
+        console.info(">>> post likes unlike: " + post.likes)
         this.postSvc.updateLikesOnPost(post.post_id, "unlike")
-          .then(result => {
-            post.likes -= 1
+        .then(result => {
             post.liked = false
+            post.likes -= 1
             console.info(">>> unliked: " + result)
           })
-          .catch(error => {
-            console.info(">>> error unliked: " + error)
-          })
+          // .catch(error => {
+          //   console.info(">>> error unliked: " + error)
+          // })
       } else {
+        console.info(">>> post likes like: " + post.likes)
         this.postSvc.updateLikesOnPost(post.post_id, "add")
-          .then(result => {
-            post.likes += 1
+        .then(result => {
             post.liked = true
+            post.likes += 1
             console.info(">>> liked: " + result)
           })
-          .catch(error => {
-            console.info(">>> error liked: " + error)
-          })
+          // .catch(error => {
+          //   console.info(">>> error liked: " + error)
+          // })
       }
     }
 

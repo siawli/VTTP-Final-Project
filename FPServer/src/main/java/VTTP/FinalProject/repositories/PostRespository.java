@@ -23,6 +23,7 @@ public class PostRespository {
     }
 
     public boolean updateLikesOnPost(int post_id, String alteration) {
+        
         SqlRowSet result = template.queryForRowSet(SQL_GET_LIKES_BY_POST, post_id);
         result.next();
         int likes = result.getInt("likes");
@@ -31,17 +32,30 @@ public class PostRespository {
             System.out.println(">>> likes: " + likes);
         } else {
             likes--;
+            System.out.println(">>> unlikes: " + likes);
         }
-        int added = template.update(SQL_ALTER_LIKES_BY_POST, likes, post_id);
 
-        return added == 1;
+        try {
+            template.update(SQL_ALTER_LIKES_BY_POST, likes, post_id);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return false;
+        }
+        // int added = template.update(SQL_ALTER_LIKES_BY_POST, likes, post_id);
+        // return added == 1;
+
+        return true;
+
     }
 
     public boolean alterPostInLikedPost(int post_id, String email, String alteration) {
         int added = 0;
         if (alteration.contains("add")) {
+            System.out.println(">>> adding");
             added = template.update(SQL_ADD_LIKED_POST, email, post_id);
         } else {
+            System.out.println(">>> deleting");
+
             added = template.update(SQL_DELETE_LIKED_POST, post_id, email);
         }
         return added == 1;
@@ -54,12 +68,12 @@ public class PostRespository {
 
     public boolean uploadPost(Post post) {
         int added = template.update(SQL_NEW_POST,
-            post.getEmail(), post.getUsername(),
-            post.getTitle(), post.getCaption(), post.getRecipe_id(),
-            post.getRecipe_label(), 0,
-            post.getDate(), post.getImageUUID());
-            // email, title, caption, recipe_id, ratings, likes, date, imageUUID
-        
+                post.getEmail(), post.getUsername(),
+                post.getTitle(), post.getCaption(), post.getRecipe_id(),
+                post.getRecipe_label(), 0,
+                post.getDate(), post.getImageUUID());
+        // email, title, caption, recipe_id, ratings, likes, date, imageUUID
+
         return added == 1;
     }
 
@@ -74,8 +88,7 @@ public class PostRespository {
     }
 
     public Optional<SqlRowSet> getPostByRecipeId(String email, String recipe_id) {
-        SqlRowSet result = template.queryForRowSet
-            (SQL_GET_POSTS_BY_RECIPE_ID, email, recipe_id);
+        SqlRowSet result = template.queryForRowSet(SQL_GET_POSTS_BY_RECIPE_ID, email, recipe_id);
         return getResultFromDatabase(result);
     }
 
