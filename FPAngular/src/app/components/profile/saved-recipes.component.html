@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<div class="body" *ngIf="savedRecipes.length == 0">
+<div class="body" *ngIf="savedRecipes.length == 0 && noRecipesSaved">
     <div class="none">
         <h3>No recipes saved</h3>
         <button mat-raised-button color="primary" [routerLink]="['/masterKitchen/search']">
@@ -14,3 +14,8 @@
         </button>
     </div>
 </div>
+
+<div class="body" *ngIf="savedRecipes.length == 0 && !noRecipesSaved">
+    <mat-spinner></mat-spinner>
+</div>
+

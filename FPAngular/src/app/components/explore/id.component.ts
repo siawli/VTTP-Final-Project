@@ -30,5 +30,4 @@ export class IdComponent implements OnInit {
       this.route.navigate(['/masterKitchen/explore/byRecipeId', id])
     }
   }
-
 }

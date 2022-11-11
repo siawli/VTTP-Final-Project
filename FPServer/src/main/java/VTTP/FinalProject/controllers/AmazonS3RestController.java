@@ -64,14 +64,14 @@ public class AmazonS3RestController {
         }
     }
 
-    @GetMapping("{uuid}")
+    @GetMapping("/{uuid}")
     public ResponseEntity<byte[]> getFileS3(@PathVariable String uuid) {
 
         GetObjectRequest getReq = new GetObjectRequest(
             "siawli-vttp", "VTTP-Final-Project/%s".formatted(uuid));
 
         S3Object s3Obj = null;
-
+        System.out.println(">>> getting image");
         try {
             System.out.println(">>>> uuid of image: " + uuid);
             s3Obj = s3.getObject(getReq);

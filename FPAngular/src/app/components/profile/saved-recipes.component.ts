@@ -14,6 +14,7 @@ export class SavedRecipesComponent implements OnInit {
               private route: Router) { }
 
   savedRecipes: SavedRecipe[] = []
+  noRecipesSaved = false
 
   ngOnInit(): void {
     this.savedRecipesSvc.getAllSavedRecipes()
@@ -21,6 +22,10 @@ export class SavedRecipesComponent implements OnInit {
         console.info("result of getting saved recipes: " + result)
         this.savedRecipes = result;
         console.info("savedRecipes length: " + this.savedRecipes.length)
+      })
+      .catch(error => {
+        this.noRecipesSaved = true;
+        console.info(">>>> failed to obtain saved recipes: " + error)
       })
   }
 

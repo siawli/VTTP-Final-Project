@@ -11,11 +11,29 @@
     }
 }
 
-@media only screen and (max-width: 600px) {
+@media only screen and (max-width: 481px) {
     .top {
         top: 200px;
     }
 }
+
+@media only screen and (min-width: 482px) and (max-width: 827px) {
+    .top {
+        top: 165px;
+    }
+}
+
+@media only screen and (min-width: 828px) and (max-width: 919px) {
+    .top {
+        top: 128px;
+    }
+}
+
+/* @media only screen and (min-width: 601px) and (max-width: 827px) {
+    .top {
+        top: 150px;
+    }
+} */
 
 .mat-tab-link {
     opacity: 1;

@@ -58,8 +58,10 @@ export class PostComponent implements OnInit {
       this.postSvc.getPostsByRecipeId(recipe_id)
         .then(result => {
           console.info(">>>>> result from getPostsByRecipeId: " + result.length)
-          this.allPosts = result
           this.getImageFromS3(this.allPosts)
+          setTimeout(() => {
+            this.allPosts = result
+          }, 800);
         })
         .catch(error => {
           this.noPosts = true;
@@ -70,8 +72,10 @@ export class PostComponent implements OnInit {
     getMyPosts() {
       this.postSvc.getMyPost()
         .then(result => {
-          this.allPosts = result
-          this.getImageFromS3(this.allPosts)
+          this.getImageFromS3(result)
+          setTimeout(() => {
+            this.allPosts = result
+          }, 800);
         })
         .catch(error => {
           this.noPosts = true;
@@ -82,8 +86,10 @@ export class PostComponent implements OnInit {
     getLikedPosts() {
       this.postSvc.getAllLikedPost()
         .then(result => {
-          this.allPosts = result
-          this.getImageFromS3(this.allPosts)
+          this.getImageFromS3(result)
+          setTimeout(() => {
+            this.allPosts = result
+          }, 800);
         })
         .catch(error => {
           this.noPosts = true;
@@ -94,8 +100,10 @@ export class PostComponent implements OnInit {
     getAllPosts() {
       this.postSvc.getAllPost()
       .then(result => {
-        this.allPosts = result
-        this.getImageFromS3(this.allPosts)
+        this.getImageFromS3(result)
+        setTimeout(() => {
+          this.allPosts = result
+        }, 800);
       })
       .catch(error => {
         this.noPosts = true;
@@ -106,8 +114,10 @@ export class PostComponent implements OnInit {
     getPopularPosts() {
       this.postSvc.getPopularPost()
       .then(result => {
-        this.allPosts = result;
-        this.getImageFromS3(this.allPosts)
+        this.getImageFromS3(result)
+        setTimeout(() => {
+          this.allPosts = result
+        }, 800);
       })
       .catch(error => {
         this.noPosts = true;
