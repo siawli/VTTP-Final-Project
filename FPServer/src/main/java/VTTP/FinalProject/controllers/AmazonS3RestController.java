@@ -86,6 +86,7 @@ public class AmazonS3RestController {
 
         try {
             buff = IOUtils.toByteArray(s3Obj.getObjectContent());
+            System.out.println(">>> in amazonS3 getting image");
         } catch (IOException ex) {
             ex.printStackTrace();
             return ResponseEntity.badRequest().build();

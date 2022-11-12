@@ -18,6 +18,18 @@ public class PostService {
     @Autowired
     private PostRespository postRepo;
 
+    @Transactional(rollbackFor = Exception.class)
+    public void deletePost(String email, int post_id) throws Exception {
+        if (!postRepo.deletePost(post_id, email)) {
+            throw new Exception("Failed to delete post");
+        }
+        try {
+            postRepo.deleteLikedPostsById(post_id);
+        } catch (Exception ex) {
+            throw new Exception("Failed to delete from likedPosts");
+        }
+    }
+
     public boolean uploadPostDatabase(Post post) {
         return postRepo.uploadPost(post);
     }

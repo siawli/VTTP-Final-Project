@@ -126,7 +126,7 @@ public class Post {
         post.setTitle(result.getString("title"));
         post.setCaption(result.getString("caption"));
         post.setDate(result.getString("date"));
-        // post.setEmail(result.getString("email"));
+        post.setEmail(result.getString("email"));
         post.setImageUUID(result.getString("imageUUID"));
         post.setLikes(result.getInt("likes"));
         post.setPost_id(result.getInt("post_id"));

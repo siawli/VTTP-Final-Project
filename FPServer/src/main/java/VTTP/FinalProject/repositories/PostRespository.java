@@ -17,6 +17,20 @@ public class PostRespository {
     @Autowired
     private JdbcTemplate template;
 
+    public boolean deletePost(int post_id, String email) {
+        int deleted = template.update(SQL_DELETE_POST, email, post_id);
+        return deleted == 1;
+    }
+
+    public void deleteLikedPostsById(int post_id) {
+        try {
+            template.update(SQL_DELETE_LIKED_POSTS_BY_POSTS_ID_STRING, post_id);
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
     public Optional<SqlRowSet> getAllPostsDateAsc(String email) {
         SqlRowSet result = template.queryForRowSet(SQL_GET_ALL_POSTS, email);
         return getResultFromDatabase(result);

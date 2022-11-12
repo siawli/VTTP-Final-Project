@@ -19,5 +19,23 @@
 
 .navbar-inverse {
     /* background-color: #C1E1C1; */
+    /* z-index: 1000; */
     border-bottom: 1px solid gainsboro;
 }
+
+
+/* .nav {
+    position: fixed;
+    width: 100%;
+    background-color: white;
+    z-index: 1000;
+}
+
+.body {
+    padding-top: 100px;
+}
+
+.navbar-inverse {
+    background-color: #C1E1C1;
+    border-bottom: 1px solid gainsboro;
+} */

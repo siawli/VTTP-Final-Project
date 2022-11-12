@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import VTTP.FinalProject.models.Post;
+import VTTP.FinalProject.models.PostDelete;
 import VTTP.FinalProject.services.PostService;
 
 @RestController()
@@ -107,5 +108,19 @@ public class PostRestController {
         }
 
         return ResponseEntity.ok(postsByRecipeIdOpt.get());
+    }
+
+    @PostMapping("/deletePost")
+    public ResponseEntity<String> deletePostById(@RequestBody PostDelete postDelete) {
+        System.out.println(">>>> in postdelete");
+        System.out.println(">>> postdelete email: " + postDelete.getEmail());
+        System.out.println(">>> postdelete post_id: " + postDelete.getPost_id());
+        try {
+            postSvc.deletePost(postDelete.getEmail(), postDelete.getPost_id());
+            return ResponseEntity.ok().body("\"Post deleted from database\"");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.internalServerError().body("\"Failed to delete post\"");
+        }
     }
 }

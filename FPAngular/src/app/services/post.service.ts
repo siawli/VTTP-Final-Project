@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { firstValueFrom } from "rxjs";
+import { PostDelete } from "../models";
 import { AppCookieService } from "./cookie.service";
 
 @Injectable()
@@ -67,5 +68,15 @@ export class PostService {
             this.httpClient.get<any>("/post/updateLikes", {params}) 
         )
         // @GetMapping("/updateLikes/{post_id}/{alteration}")
+    }
+
+    deletePost(post_id: number) {
+        const postDelete: PostDelete = {
+            post_id: post_id,
+            email: this.email
+        }
+        return firstValueFrom(
+            this.httpClient.post<string>("/post/deletePost", postDelete)
+        )
     }
 }

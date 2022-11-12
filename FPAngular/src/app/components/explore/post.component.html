@@ -21,12 +21,17 @@
                     <mat-icon *ngIf="!post.liked">favorite_border</mat-icon>
                     <mat-icon *ngIf="post.liked">favorite</mat-icon>
                 </button>
-                <span>{{ post.likes }} 
+                <span>{{ post.likes }}
                     <span *ngIf="post.likes == 1">like</span>
                     <span *ngIf="post.likes != 1">likes</span>
                 </span>
             </mat-card-actions>
+            <div class="right-bottom">
                 <p class="date">{{ post.date }}</p>
+                <button *ngIf="post.ownPost" mat-button matSuffix mat-icon-button color="primary" aria-label="search" (click)="deletePost(post)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
         </div>
     </mat-card>
 </div>

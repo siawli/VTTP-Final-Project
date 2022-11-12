@@ -10,12 +10,6 @@
     <div>
         <button mat-flat-button color="primary" (click)="logout()">Logout</button>
     </div>
-    <!-- <button mat-button [matMenuTriggerFor]="profile">My Profile</button>
-        <mat-menu #profile="matMenu">
-        <button mat-menu-item>Saved Recipes</button>
-        <button mat-menu-item>My Recipes</button>
-        <button mat-menu-item>Upload Recipe</button>
-        </mat-menu> -->
     </nav>
 </div>
 <nav *ngIf="!loggedIn()" class="notLoggedIn" #nav>
@@ -23,11 +17,5 @@
     <div>
         <button mat-button [routerLink]="['/login']">Login</button>
         <button mat-flat-button color="primary" [routerLink]="['/signUp']">Sign Up</button>
-        <!-- <button mat-button [matMenuTriggerFor]="profile">My Profile</button>
-            <mat-menu #profile="matMenu">
-            <button mat-menu-item>Saved Recipes</button>
-            <button mat-menu-item>My Recipes</button>
-            <button mat-menu-item>Upload Recipe</button>
-            </mat-menu> -->
     </div>
 </nav>

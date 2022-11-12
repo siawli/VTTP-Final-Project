@@ -39,9 +39,15 @@ export interface Post {
     imageUUID: string,
     // file
     liked: boolean
+    ownPost: boolean
 }
 
 export interface SavedRecipe {
     recipe_label: string,
     recipe_id: string
+}
+
+export interface PostDelete {
+    post_id: number,
+    email: string
 }

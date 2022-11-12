@@ -16,14 +16,8 @@ export class NavbarComponent implements OnInit {
               private loginSvc: LoginService,
               private cookieSvc: AppCookieService) { }
 
-  @ViewChild('nav')
-  elementView!: ElementRef
-
-  @Output()
-  navBarHeight = new Subject<number>();
 
   ngOnInit(): void {
-
   }
 
   loggedIn(): boolean {
@@ -44,11 +38,4 @@ export class NavbarComponent implements OnInit {
   routeLandingPage() {
     this.route.navigate(['/']);
   }
-
-  ngAfterViewInit() {
-    let height = this.elementView.nativeElement.offsetHeight;
-    console.info(">>>> navbar height: " + height)
-    this.navBarHeight.next(height);
-  }
-
 }
