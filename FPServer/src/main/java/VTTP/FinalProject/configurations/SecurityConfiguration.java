@@ -46,13 +46,9 @@ public class SecurityConfiguration {
         .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     
         http.addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-        // http.authenticationProvider(authenticationProvider());
 
         return http.build();
 
-        /*
-         "/assets/**", "/polyfills.b9005cfd1a54175e.js", "/main.7f8d6fecb80ce682.js", "/styles.43aecdfb5c9c28ca.css", "/runtime.e3f5fe3eca1bd5d1.js", "/favicon.ico", "/", "/login", "/signUp",
-         */
     }
 
 
