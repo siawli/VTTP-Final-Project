@@ -1,6 +1,6 @@
 ## VTTP - Final Project: Master Kitchen
 
-This app is both web and mobile friendly, and provide users with the following fucntions:
+<a href="https://vttp-fp-masterkitchen.herokuapp.com/" target="_blank">Master Kitchen</a> is both web and mobile friendly, and provide users with the following fucntions:
 1) Search for a recipe
 2) Save recipes for future references
 3) Snap and share a picture of their own cooks after trying out a recipe
@@ -18,7 +18,7 @@ Landing page of the application: Welcome to Master Kitchen
 Users can explore the cooks snapped and uploaded by the community. Posts can be filtered according to date (latest first), popularity and by recipe ID. The default landing page shows posts filtered by latest first.
 ![Explore/Latest page](/FPServer/src/main/resources/static/LatestPage.png)
 
-*Post*
+<p align="center">**Post**</p>
 ![Post](/FPServer/src/main/resources/static/Post.png)
 * Each post contains of a title, recipe label, photo snapped, a short description, and the recipe ID. 
 * Users are able to like the post by clicking on the heart icon.
@@ -29,7 +29,7 @@ Users can explore the cooks snapped and uploaded by the community. Posts can be 
 Users can search for recipes. Entering a query into the search bar would return a list of recipes. Each page consists of 20 pages. Clicking on a recipe would navigate the user to the details of the recipe.
 ![Recipe list](/FPServer/src/main/resources/static/SearchRecipes.png)
 
-*Recipe details*
+<p align="center">**Recipe details**</p>
 ![recipe details](/FPServer/src/main/resources/static/RecipeDetails.png)
 * Each recipe detail states the number of servings, calories, ingredients required, recipe ID and the recipe instructions link.
 * Clicking onto the recipe instructions link would open a browser tab that redirects to an external link with the recipe instructions.
@@ -47,20 +47,27 @@ a) Via recipe details 'Snap a cook' button
 b) Via 'Snap a cook' menu button
 
 If entered via a), recipe ID and label fields would be disabled and filled up for you. 
+<div align="center">
 ![a) entry via recipe details](/FPServer/src/main/resources/static/SearchDetails.png)
+</div>
 
 If entered via b), recipe label field disabled and would be filled upon entering the recipe label.
+<div align="center">
 ![b) entry via menu button](/FPServer/src/main/resources/static/SearchMenuTab.png)
+</div>
 
 Upon successful post submission, users can either choose to submit another post or be redirected back to the explore page.
 
 ### 4) My Profile
 Users are able to see their own posts, liked posts as well as saved recipes.
+<div align="center">
 ![My Profile/My Posts](/FPServer/src/main/resources/static/ProfileMyPosts.png)
 ![My Profile/Saved recipes](/FPServer/src/main/resources/static/SavedRecipes.png)
+</div>
 
 ### Logout
 Upon logging out, user is returned back to the landing page.
+
 ---
 
 ### Features
