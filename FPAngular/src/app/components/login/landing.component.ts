@@ -11,7 +11,6 @@ export class LandingComponent implements OnInit {
   constructor() { }
 
   slides: string[] = [
-    // '/assets/logo.png',
     '/assets/posts.png',
     '/assets/search.png',
     '/assets/recipe.png',

@@ -71,9 +71,7 @@ public class AmazonS3RestController {
             "siawli-vttp", "VTTP-Final-Project/%s".formatted(uuid));
 
         S3Object s3Obj = null;
-        System.out.println(">>> getting image");
         try {
-            System.out.println(">>>> uuid of image: " + uuid);
             s3Obj = s3.getObject(getReq);
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -86,7 +84,6 @@ public class AmazonS3RestController {
 
         try {
             buff = IOUtils.toByteArray(s3Obj.getObjectContent());
-            System.out.println(">>> in amazonS3 getting image");
         } catch (IOException ex) {
             ex.printStackTrace();
             return ResponseEntity.badRequest().build();

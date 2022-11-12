@@ -49,7 +49,6 @@ export class ExploreComponent implements OnInit {
         { label: 'Liked Posts', path: '/masterKitchen/profile/likedPosts' },
         { label: 'Saved Recipes', path: '/masterKitchen/profile/savedRecipes' }
       ]
-      // this.links = ['My Posts', 'Liked Posts', 'Saved Recipes']
     }
   }
 }

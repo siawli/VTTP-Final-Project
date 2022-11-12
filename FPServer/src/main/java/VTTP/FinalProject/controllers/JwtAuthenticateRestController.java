@@ -40,7 +40,6 @@ public class JwtAuthenticateRestController {
         String password = jwtRequest.getPassword();
 
         try {
-            System.out.println(">>>>> in /authenticate");
             authenticate(email, password);
         } catch (Exception e) {
             e.printStackTrace();
@@ -52,16 +51,11 @@ public class JwtAuthenticateRestController {
 
         final String token = jwtUtil.generateToken(userDetails);
 
-        System.out.println(">>> jwtToken: " + token);
-        System.out.println(">>> jwtTokenExpiryDate: " + jwtUtil.getExpirationDateFromToken(token));
-
         return ResponseEntity.ok(new JwtResponse(token, userSvc.getUser(email).get().getUsername()));
     }
 
     private void authenticate(String email, String password) throws Exception {
         try {
-            // System.out.println(">>>>> bcrypt password? " +
-            // passwordEncoder.encode(password));
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(email, password));
         } catch (DisabledException e) {
             throw new Exception("USER_DISABLED", e);

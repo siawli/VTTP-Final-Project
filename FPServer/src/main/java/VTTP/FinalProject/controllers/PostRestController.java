@@ -112,9 +112,6 @@ public class PostRestController {
 
     @PostMapping("/deletePost")
     public ResponseEntity<String> deletePostById(@RequestBody PostDelete postDelete) {
-        System.out.println(">>>> in postdelete");
-        System.out.println(">>> postdelete email: " + postDelete.getEmail());
-        System.out.println(">>> postdelete post_id: " + postDelete.getPost_id());
         try {
             postSvc.deletePost(postDelete.getEmail(), postDelete.getPost_id());
             return ResponseEntity.ok().body("\"Post deleted from database\"");

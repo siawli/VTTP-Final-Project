@@ -30,15 +30,11 @@ public class EdamamService implements Serializable {
     @Autowired
     private CachingService cacheSvc;
 
-    // @Autowired
-    // private RecipesCacheRepository recipesCacheRepo;
-
     private final String DEFAULT_URL = "https://api.edamam.com/api/recipes/v2";
 
     public Optional<?> getRecipesId(String query, int pageNum, String contValue) {
         
         String url = null;
-        System.out.println(">>> contValue in EdaSvc: " + contValue);
         if (contValue == null) {
             url = buildUrl(DEFAULT_URL)
                 .queryParam("q", query)

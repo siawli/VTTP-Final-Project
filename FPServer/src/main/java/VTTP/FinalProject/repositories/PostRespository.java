@@ -43,10 +43,8 @@ public class PostRespository {
         int likes = result.getInt("likes");
         if (alteration.contains("add")) {
             likes++;
-            System.out.println(">>> likes: " + likes);
         } else {
             likes--;
-            System.out.println(">>> unlikes: " + likes);
         }
 
         try {
@@ -65,11 +63,8 @@ public class PostRespository {
     public boolean alterPostInLikedPost(int post_id, String email, String alteration) {
         int added = 0;
         if (alteration.contains("add")) {
-            System.out.println(">>> adding");
             added = template.update(SQL_ADD_LIKED_POST, email, post_id);
         } else {
-            System.out.println(">>> deleting");
-
             added = template.update(SQL_DELETE_LIKED_POST, post_id, email);
         }
         return added == 1;

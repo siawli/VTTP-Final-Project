@@ -13,14 +13,19 @@ export class IdComponent implements OnInit {
               private route: Router) { }
 
   form!: FormGroup
+  queryLink!: string
 
   ngOnInit(): void {
+    const href = window.location.href.split("/")
+    if (href.length > 7) {
+      this.queryLink = href[7].split("%20").join(" ")
+    }
     this.form = this.createForm()
   }
 
   createForm() {
     return this.fb.group({
-      id: this.fb.control<string>('')
+      id: this.fb.control<string>(this.queryLink || '')
     })
   }
 

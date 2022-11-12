@@ -30,10 +30,6 @@ public class EdamamRestController {
             @PathVariable("numPage") int numPage, 
             @RequestParam(required = false) String _contValue) {
 
-        System.out.println(">>> query obtained: " + query);
-        System.out.println(">>> numPage obtained: " + numPage);
-        System.out.println(">>>> _contValue in controller: " + _contValue);
-
         Optional<?> getRecipesOtp = edaSvc.getRecipesId(query, numPage, _contValue);
 
         if (getRecipesOtp.isEmpty()) {
@@ -49,8 +45,6 @@ public class EdamamRestController {
     public ResponseEntity<?> getRecipeDetails(@PathVariable("id") String id,
             @RequestParam String email) {
 
-        // System.out.println(">>> recipeId: " + id);
-
         Optional<?> getRecipeDetailOpt = edaSvc.getRecipeDetails(id);
         if (getRecipeDetailOpt.isEmpty()) {
             return ResponseEntity.badRequest().body("No results found");
@@ -60,10 +54,7 @@ public class EdamamRestController {
             RecipeDetailsResponse recipeDetResp = new RecipeDetailsResponse();
             recipeDetResp.setRecipe((Recipe)getRecipeDetailOpt.get());
             Boolean isSaved = savedRecipesSvc.isRecipeSaved(email, id);
-            System.out.println(">>>> controller isSaved: " + isSaved);
             recipeDetResp.setSaved(isSaved);
-            System.out.println(">>>> recipeDetResp isSaved: " + recipeDetResp.isSaved());
-            System.out.println(">>>>> recipeDetResp: " + recipeDetResp.toString());
             return ResponseEntity.ok(recipeDetResp); 
         }
     }
@@ -74,10 +65,8 @@ public class EdamamRestController {
         if (getRecipeLabelOpt.isEmpty()) {
             return ResponseEntity.badRequest().body("No results found");
         } else if (getRecipeLabelOpt.get().toString().contains("error")) {
-            // System.out.println(">>>> internal error");
             return ResponseEntity.internalServerError().body("Internal error!");
         } else {
-            // System.out.println(">>>> success!   ");
             String label = getRecipeLabelOpt.get().toString();
             return ResponseEntity.ok(label); 
         }

@@ -31,7 +31,6 @@ public class ProfileService {
         if (userRepo.createNewUser(user)) {
             return Optional.of("User created");
         } else {
-            System.out.println(">>>> in failed");
             return Optional.of("Internal error! User not created. Please try again.");
         }
     }

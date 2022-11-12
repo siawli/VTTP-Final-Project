@@ -39,9 +39,7 @@ export class RegisterComponent implements OnInit {
   }
 
   processForm() {
-    console.info(">>>>> processing new sign up");
     const user: User = this.form.value as User;
-    console.info("username: " + user.username);
     this.loginSvc.createUser(user)
       .then(response => {
         this.userAlrExists = false;

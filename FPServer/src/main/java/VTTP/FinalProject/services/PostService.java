@@ -65,7 +65,6 @@ public class PostService {
             throw new Exception("Failed to remove/add post from likedPosts");
         }
         if (!postRepo.updateLikesOnPost(post_id, alteration)) {
-            // System.out.println(">>> service alter likes error");
             throw new Exception("Failed to update likes");
         }
     }
@@ -79,7 +78,6 @@ public class PostService {
         List<Post> allPosts = new LinkedList<>();
         while (result.next()) {
             Post post = Post.createPost(result);
-            // System.out.println(">>>> post date: " + post.getDate());
             allPosts.add(post);
         }
         return Optional.of(allPosts);

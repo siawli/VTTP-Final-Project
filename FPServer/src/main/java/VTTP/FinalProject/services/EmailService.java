@@ -29,7 +29,6 @@ public class EmailService {
     private String password;
 
     public void sendEmailUponSignUp(String toEmail) {
-        // System.out.println(">>> Sending email out >>>");
         Properties props =  new Properties();
         props.put("mail.smtp.host", "smtp.gmail.com"); // SMPT HOST
         props.put("mail.smtp.socketFactory.port", "465"); //SSL Port
@@ -44,8 +43,6 @@ public class EmailService {
                 return new PasswordAuthentication(fromEmail, password);
             }
         });
-
-        // System.out.println(">>> Session created");
 
         try {
             MimeMessage msg = new MimeMessage(session);
@@ -71,7 +68,6 @@ public class EmailService {
             msg.setContent(multipart);
 
             Transport.send(msg);
-            // System.out.println(">>> email successfully sent out");
         } catch (MessagingException ex) {
             ex.printStackTrace();
         }

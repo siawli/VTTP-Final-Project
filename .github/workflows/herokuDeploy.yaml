@@ -2,8 +2,24 @@ name: Deploy to heroku
 on:
   push:
     branches:
-    - 'main'
+    - 'release'
     # have to change back to 'release' branch before final submission
+
+jobs:
+  deploy_to_heroku:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout src
+      uses: actions/checkout@v2
+    - name: Deploy
+      uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
+      with:
+        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
+        heroku_app_name: "vttp-fp-masterkitchen" #Must be unique in Heroku
+        heroku_email: ${{secrets.email}}
+        branch: ${{github.ref_name}}
+        appdir: 'FPServer'
+
 
 # jobs:
   # build_Angular_and_transfer_DIST_files_to_Server:
@@ -28,17 +44,3 @@ on:
   #     run: rm -rf ../FPServer/src/main/resources/static/*
   #   - name: Copying files to server
   #     run : cp -r './dist/fpangular/' '../FPServer/src/main/resources/static'
-jobs:
-  deploy_to_heroku:
-    runs-on: ubuntu-latest
-    steps:
-    - name: Checkout src
-      uses: actions/checkout@v2
-    - name: Deploy
-      uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
-      with:
-        heroku_api_key: ${{secrets.HEROKU_API_KEY}}
-        heroku_app_name: "vttp-fp-masterkitchen" #Must be unique in Heroku
-        heroku_email: ${{secrets.email}}
-        branch: ${{github.ref_name}}
-        appdir: 'FPServer'

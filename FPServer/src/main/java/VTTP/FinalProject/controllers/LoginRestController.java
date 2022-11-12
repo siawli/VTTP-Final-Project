@@ -28,16 +28,12 @@ public class LoginRestController {
 
     @GetMapping("/explore")
     public ResponseEntity<String> login() {
-        System.out.println(">>>>> in /explore controller");
         return ResponseEntity.ok(null);
     }
 
     @PostMapping(path="/signUp", produces=MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<String> createUser(@RequestBody FoodieUser user) 
             throws UserNotCreatedException {
-
-        System.out.println(">>> user: " 
-            + user.getUsername() + user.getEmail() + user.getPassword());
         
         Optional<String> userCreatedMsgOpt;
         try {
@@ -62,7 +58,6 @@ public class LoginRestController {
 
     @ExceptionHandler(UserNotCreatedException.class)
     ResponseEntity<String> createUserError(final UserNotCreatedException e) {
-        System.out.println(">>> e: " + e.getMessage());
         if (e.getMessage().contains("exists")) {
             return new ResponseEntity<String>(e.getMessage(), HttpStatus.CONFLICT);
         } else {

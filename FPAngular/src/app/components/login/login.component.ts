@@ -38,10 +38,7 @@ export class LoginComponent implements OnInit {
   }
 
   processForm() {
-    console.info(">>>>> processing login form");
     const user: User = this.form.value as User;
-    // console.info(">>>> email: " + user.email);
-    // console.info(">>>> password: " + user.password);
     this.loginSvc.authenticateUser(user)
       .then(response => {
         let token = response.body?.token as string

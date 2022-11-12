@@ -15,30 +15,6 @@ import jakarta.json.JsonValue;
 @Service
 public class CachingService {
 
-    // @RedisHash(timeToLive = 60*15)
-    /*
-     * @Cacheable(value="query", key = "#query.toString() + #pageNum.toString()")
-     * public List<Recipe> getListOfRecipesId(JsonObject data, String query, int
-     * pageNum) {
-     * 
-     * List<Recipe> recipes = new LinkedList<>();
-     * 
-     * JsonArray hits = data.getJsonArray("hits");
-     * for (JsonValue jsonObj : hits) {
-     * JsonObject recipe = jsonObj.asJsonObject().getJsonObject("recipe");
-     * 
-     * recipes.add(EdamamService.getSimilarData(recipe));
-     * }
-     * System.out.println(">>>> key: " + "query::%s%d".formatted(query, pageNum));
-     * System.out.println(">>> value?: " + redisTemplate.keys("query"));
-     * redisTemplate.expire("query::%s%d".formatted(query, pageNum), 60*15,
-     * TimeUnit.SECONDS);
-     * 
-     * return recipes;
-     * 
-     * }
-     */
-
     @Cacheable(value = "query", key = "#query.toString() + #pageNum.toString()")
     public RecipeListResponse getListOfRecipesId(String url, String query, int pageNum) throws Exception {
         RecipeListResponse recipeResponse = new RecipeListResponse();
@@ -54,12 +30,10 @@ public class CachingService {
             throw new Exception("No recipes found");
         }
 
-        System.out.println(">>> calling API:");
         String NEXT_URL = data.getJsonObject("_links")
                 .getJsonObject("next")
                 .getString("href");
         String _contValue = NEXT_URL.split("&")[2].substring(6);
-        // System.out.println(">>> _cont: " + _contValue);
         recipeResponse.setNextURL(_contValue);
 
         List<Recipe> recipes = new LinkedList<>();

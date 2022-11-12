@@ -51,7 +51,6 @@ export class PostComponent implements OnInit {
       this.idSub$ = this.ar.params.subscribe(b => {
         console.info('>subscribe: ', b)
         // @ts-ignore
-        console.info(">>>>> under search")
         this.getPostsByRecipeId(b['id'])
       })
     }
@@ -131,7 +130,6 @@ export class PostComponent implements OnInit {
 
   getImgFromS3AndCheckOwnPost(posts: Post[]) {
     for (let post of posts) {
-      console.info(post.imageUUID)
       this.postSvc.getImageFromS3(post.imageUUID)
         .then(result => {
           const reader = new FileReader();
@@ -177,9 +175,9 @@ export class PostComponent implements OnInit {
           post.likes -= 1
           console.info(">>> unliked: " + result)
         })
-      // .catch(error => {
-      //   console.info(">>> error unliked: " + error)
-      // })
+      .catch(error => {
+        console.info(">>> error unliked: " + error)
+      })
     } else {
       console.info(">>> post likes like: " + post.likes)
       this.postSvc.updateLikesOnPost(post.post_id, "add")
@@ -188,9 +186,9 @@ export class PostComponent implements OnInit {
           post.likes += 1
           console.info(">>> liked: " + result)
         })
-      // .catch(error => {
-      //   console.info(">>> error liked: " + error)
-      // })
+      .catch(error => {
+        console.info(">>> error liked: " + error)
+      })
     }
   }
 
