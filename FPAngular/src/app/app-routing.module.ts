@@ -16,7 +16,7 @@ import { AuthorizeGuard } from './services/authorizeguard.service';
 
 const routes: Routes = [
   { path: '', component: LandingComponent, title: 'Welcome'},
-  { path: 'signUp', component: RegisterComponent, title: 'Register' },
+  { path: 'signUp', component: RegisterComponent, title: 'Sign Up' },
   { path: 'login', component: LoginComponent, title: 'Login'},
   {
     path: 'masterKitchen/explore',
