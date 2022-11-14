@@ -80,3 +80,17 @@ The recipe API has a restricted number of calls/minute, and hence, caching had t
 1) Allow a user to edit own post after posting
 2) Cache the post images (static) so that they load faster after the first call
 3) Fetch more posts only after the user has scrolled down a certain amount -> reduces loading time and data not used
+
+---
+
+### Technologies Used
+* Languages: 
+  - HTML & CSS
+  - Java
+  - Typescript
+* Springboot for backend
+* Angular for frontend
+* Databases:
+  - MySQL to store data
+  - Redis for cahching of fata
+* RESTful API
