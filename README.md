@@ -6,6 +6,10 @@
 3) Snap and share a picture of their own cooks after trying out a recipe
 4) Explore cooks by people who have tried out a recipe
 
+*Test account*
+- Email: fred@gmail.com
+- Password: fred
+
 Landing page of the application: Welcome to Master Kitchen
 ![Landing page](/FPServer/src/main/resources/static/LandingPage.png)
 
