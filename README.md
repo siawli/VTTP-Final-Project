@@ -6,6 +6,10 @@
 3) Snap and share a picture of their own cooks after trying out a recipe
 4) Explore cooks by people who have tried out a recipe
 
+*Test account*
+- Email: fred@gmail.com
+- Password: fred
+
 Landing page of the application: Welcome to Master Kitchen
 ![Landing page](/FPServer/src/main/resources/static/LandingPage.png)
 
@@ -47,7 +51,7 @@ There are 2 entry points to this page:
 a) Via recipe details 'Snap a cook' button
 b) Via 'Snap a cook' menu button
 
-If entered via a), recipe ID and label fields would be disabled and filled up for you. 
+If entered via a), recipe ID and label fields would be disabled and filled up for you.
 ![a) entry via recipe details](/FPServer/src/main/resources/static/SearchDetails.png)
 
 If entered via b), recipe label field disabled and would be filled upon entering the recipe label.
@@ -76,3 +80,17 @@ The recipe API has a restricted number of calls/minute, and hence, caching had t
 1) Allow a user to edit own post after posting
 2) Cache the post images (static) so that they load faster after the first call
 3) Fetch more posts only after the user has scrolled down a certain amount -> reduces loading time and data not used
+
+---
+
+### Technologies Used
+* Languages: 
+  - HTML & CSS
+  - Java
+  - Typescript
+* Springboot for backend
+* Angular for frontend
+* Databases:
+  - MySQL to store data
+  - Redis for cahching of fata
+* RESTful API
