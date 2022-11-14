@@ -51,7 +51,7 @@ There are 2 entry points to this page:
 a) Via recipe details 'Snap a cook' button
 b) Via 'Snap a cook' menu button
 
-If entered via a), recipe ID and label fields would be disabled and filled up for you. 
+If entered via a), recipe ID and label fields would be disabled and filled up for you.
 ![a) entry via recipe details](/FPServer/src/main/resources/static/SearchDetails.png)
 
 If entered via b), recipe label field disabled and would be filled upon entering the recipe label.
