@@ -1,6 +1,6 @@
 ## VTTP - Final Project: Master Kitchen
 
-<a href="https://vttp-fp-masterkitchen.herokuapp.com/" target="_blank">Master Kitchen</a> is both web and mobile friendly, and provide users with the following functions:
+Master Kitchen is both web and mobile friendly, and provide users with the following functions:
 1) Search for a recipe
 2) Save recipes for future references
 3) Snap and share a picture of their own cooks after trying out a recipe
@@ -70,10 +70,10 @@ Upon logging out, user is returned back to the landing page.
 ---
 
 ### Features
-1) Jwt Authentication
+1) Jwt Authentication: 
 This app uses Jwt Authentication to ensure that the app functionalities can only be used when the user is logged in. The jwt token has an expiry of 30 mins, so any call to the server side > 30 mins will throw the user back to the landing page and the user has to log in again. 
 
-2) Caching of API call
+2) Caching of API call: 
 The recipe API has a restricted number of calls/minute, and hence, caching had to be done to minimize calls to the API. I cached the list of recipes by pagination (e.g. cake1, cake2), as well as the recipe details that the user clicks into. The API images hosted on Amazon each has a secret key that expires within a certain time limit, and hence, I set my cache time to live (expiry) of 15 minutes.
 
 ### Improvement / Further development
@@ -92,5 +92,5 @@ The recipe API has a restricted number of calls/minute, and hence, caching had t
 * Angular for frontend
 * Databases:
   - MySQL to store data
-  - Redis for cahching of fata
+  - Redis for cahching of data
 * RESTful API
